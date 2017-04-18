@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.sql.Connection;
 
 public class NewUserCommand implements Command {
-    private final String passExc = "passwords are not equals!!!";
-    private final String loginExc = "such login already registered!";
-    private final String emailExc = "such email already registered!";
+    private final String PASS_EXC = "passwords are not equals!!!";
+    private final String LOGIN_EXC = "such login already registered!";
+    private final String EMAIL_EXC = "such email already registered!";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,7 +28,15 @@ public class NewUserCommand implements Command {
         String surname = request.getParameter("surname");
 
         if ( !password.equals(passwordRepeat) ) {
-            request.setAttribute("password_exc", "");
+            request.setAttribute("password_exc", PASS_EXC);
+        }
+
+        if ( !userDao.isSuchLogin(login) ) {
+            request.setAttribute("login_exc", LOGIN_EXC);
+        }
+
+        if ( userDao.isSuchEmail(email) ) {
+            request.setAttribute("email_exc", EMAIL_EXC);
         }
 
         request.getRequestDispatcher("/jsp/registration.jsp").forward(request, response);

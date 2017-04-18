@@ -19,7 +19,6 @@
                         <br>
                         <input type="submit" class="submit" value="Enter" method="post"/>
                     </form>
-                    <p> TTTTTTTTTTTT </p>
                 </div>
             </div>
         </main>

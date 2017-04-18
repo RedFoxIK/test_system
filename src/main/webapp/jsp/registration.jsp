@@ -28,6 +28,7 @@
             <p>Name: </p><input type="text" name="name">
             <p>Surname: </p><input type="text" name="surname">
             <p>Email: </p><input type="text" name="email">
+            <span class="error"><c:out value="${email_exc}"/></span>
             <br>
             <input type="submit" value="Registration">
         </form>

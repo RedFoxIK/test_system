@@ -103,11 +103,11 @@ public class UserDao {
         }
     }
 
-    boolean isSuchEmail(String email) {
+    public boolean isSuchEmail(String email) {
         return isSuchRecord(email, CHECK_UNIQUE_EMAIL);
     }
 
-    boolean isSuchLogin(String login) {
+    public boolean isSuchLogin(String login) {
         return isSuchRecord(login, CHECK_UNIQUE_LOGIN);
     }
 
