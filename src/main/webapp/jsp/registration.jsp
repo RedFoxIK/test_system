@@ -14,16 +14,21 @@
         <form class="registration" method="post" action="/testing_system/new_user">
             <div class="EnterData">
                 <p>Login: </p>
-                <input type="text" name="login">  <c:out value="${login_exc}"/>
+                <input type="text" name="login">
+                <span class="error"><c:out value="${login_exc}"/></span>
+
                 <p>Password:</p>
                 <input type="password" name="password">
+
                 <p>Repeat password:</p>
-                <input type="password" name="password_repeat"> <c:out value="${password_exc}"/>
+                <input type="password" name="password_repeat">
+                <span class="error"><c:out value="${password_exc}"/></span>
             </div>
 
             <p>Name: </p><input type="text" name="name">
             <p>Surname: </p><input type="text" name="surname">
-            <p>Email: </p><input type="text" name="email"> <br> <c:out value="${email_exc}"/>
+            <p>Email: </p><input type="text" name="email">
+            <br>
             <input type="submit" value="Registration">
         </form>
     </main>

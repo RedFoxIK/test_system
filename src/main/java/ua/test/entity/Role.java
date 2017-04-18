@@ -1,29 +1,24 @@
 package ua.test.entity;
 
-public enum Role {
-    TUTOR(1), STUDENT(2);
+public class Role {
+    private int id;
+    private String role;
 
-    private int num;
+    public Role() {}
 
-    Role(int num) {
-        this.num = num;
+    public int getId() {
+        return id;
     }
 
-    public int getNum() {
-        return this.num;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static Role getRole(int num) {
-        for ( Role role: Role.values() ) {
-            if ( role.num == num ) {
-                return role;
-            }
-        }
-        return null;
+    public String getRole() {
+        return role;
     }
 
-    @Override
-    public String toString() {
-        return this.name().toLowerCase();
+    public void setRole(String role) {
+        this.role = role;
     }
 }

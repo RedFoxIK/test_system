@@ -26,7 +26,6 @@ public class CommandFactory {
     }
 
     public Command getCommand(HttpServletRequest request) throws IOException {
-        System.out.println(request.getRequestURI());
         return commands.get(request.getRequestURI());
     }
 }

@@ -31,7 +31,7 @@ public class UserDao {
             statement.setString(3, user.getName());
             statement.setString(4, user.getSurname());
             statement.setString(5, user.getEmail());
-            statement.setInt(6, user.getRole().getNum());
+            statement.setInt(6, user.getRole().getId());
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -49,19 +49,9 @@ public class UserDao {
         List<User> users = new ArrayList<>();
 
         try ( Statement statement = conn.createStatement();
-              ResultSet result = statement.executeQuery(SELECT_ALL) ) {
-
-            while ( result.next() ) {
-                User user = new User();
-                user.setId(result.getInt("id_user"));
-                user.setLogin(result.getString("login"));
-                user.setPassword(result.getString("password"));
-                user.setName(result.getString("name"));
-                user.setSurname(result.getString("surname"));
-                user.setEmail(result.getString("email"));
-                Role role = Role.getRole(result.getInt("id_role"));
-                user.setRole(role);
-                users.add(user);
+              ResultSet rs = statement.executeQuery(SELECT_ALL) ) {
+            while ( rs.next() ) {
+                users.add(getUserFromRS(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -144,7 +134,8 @@ public class UserDao {
         user.setName(rs.getString("name"));
         user.setSurname(rs.getString("surname"));
         user.setEmail(rs.getString("email"));
-        user.setRole(Role.getRole(rs.getInt("id_role")));
+        Role role = (new RoleDao(conn)).findById(rs.getInt("id_role"));
+        user.setRole(role);
         return user;
     }
 }
