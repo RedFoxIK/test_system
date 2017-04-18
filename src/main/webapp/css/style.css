@@ -1,0 +1,176 @@
+/*MAIN STYLES*/
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+}
+.content {
+    width: 100%;
+    max-width: 1200px;
+    margin:0 auto;
+}
+img {
+    max-width: 100%;
+}
+header {
+    height: 73px;
+    background: #fff;
+    border-bottom: 1px solid #ececec;
+}
+.logo {
+    width: 50%;
+}
+.logo span {
+    font-size: 26px;
+    color: #7c7c7c;
+}
+.logo img {
+    width: 120px;
+    vertical-align: middle;
+}
+body {
+    background: #f7f7f7;
+}
+main {
+    display: block;
+    min-height: 65vw;
+}
+.right {
+    float: right;
+    margin-left: 10px;
+}
+.left {
+    float: left;
+    margin-right: 10px;
+}
+
+/*END MAIN STYLES*/
+
+/*LOG-IN STYLES*/
+.log_in {
+    padding: 20px;
+    margin:70px auto 0;
+    max-width: 35vw;
+    text-align: center;
+    background-color: #4682B4;
+    border-radius: 20px;
+    border: solid #4682B4;
+}
+
+.log_in label p {
+    width: 100px;
+    display: inline-block;
+    font-size: 20px;
+}
+
+.log_in #login, .log_in #password{
+    width:200px;
+    display: inline-block;
+}
+
+.log_in input {
+    margin: 5px 0;
+    border-radius: 10px;
+    width:200px;
+    height:35px;
+}
+
+.text_log_in {
+    font-size: 20px;
+    margin: 10px;
+    background-color: yellow;
+    border-radius: 10px;
+}
+
+.log_in form {
+    width:100%;
+}
+
+form input:focus {
+    border-color: #0088cc;
+    outline:none;
+}
+
+/*END LOG-IN STYLES*/
+
+/*START REGISTRATION STYLES*/
+
+/*END REGISTRATION STYLES*/
+
+/*START TEST STYLES*/
+.info {
+    text-align: center;
+    line-height: 10vh;
+}
+.info p {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.results {
+    display: inline-block;
+}
+
+.tests {
+    color: white;
+    font-weight: bold;
+    padding: 20px;
+    min-height: 70vh;
+    background-color: lightyellow;
+    border: white solid;
+    border-radius: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
+    text-align: center;
+}
+
+.test {
+    background-color: #539cd4;
+    border: outset #539cd4 2px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 60px;
+    margin: 5px 10px 50px;
+    display: inline-block;
+    width: 320px;
+    height: 150px;
+    cursor: pointer;
+}
+
+.test:nth-child(5n-3) {
+    background-color: #28aa67;
+    border: outset #28aa67 2px;
+}
+
+.test:nth-child(5n-2) {
+     background-color: #d6633c;
+     border: outset #d6633c 2px;
+}
+
+.test:nth-child(5n-1) {
+    background-color: #7cedff;
+    border: outset #7cedff  2px;
+}
+
+.test:nth-child(5n) {
+    background-color: #ffa93a;
+    border: outset #ffa93a  2px;
+}
+
+.test:hover {
+    position: relative;
+    bottom: 5px;
+    border-color: black;
+}
+
+.test .author {
+    color: black;
+    font-weight: normal;
+    display: inline-block;
+    background-color: white;
+    font-size: 12px;
+    height: 40px;
+    width: 100%;
+    margin: 0px;
+}
+/*END TEST STYLES*/
