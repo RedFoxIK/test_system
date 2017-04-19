@@ -5,11 +5,11 @@
 
 <html>
 <head>
-    <%@ include file="main/head.jsp"%>
+    <%@ include file="../head.jsp"%>
     <title>Registration</title>
 </head>
 <body>
-    <%@ include file="main/header.jsp"%>
+    <%@ include file="../header.jsp"%>
     <main>
         <form class="registration" method="post" action="/testing_system/new_user">
             <div class="EnterData">

@@ -4,23 +4,22 @@
 
 <html>
 <head>
-    <%@ include file="../main/head.jsp"%>
+    <%@ include file="../../head.jsp"%>
     <title>tests</title>
 </head>
 <body>
-    <%@ include file="../main/header.jsp"%>
+    <%@ include file="../../header.jsp"%>
     <main>
         <div class="info">
             <p>
                 Dear, student please choose!
             </p>
-            <form class="results"  method = "get" action="">
-                <input type="submit" name="results" value="results">
+            <form class="results"  method = "get" action="/testing_system/results">
+                <input type="submit" value="results">
             </form>
         </div>
             <div class="tests">
                 <c:forEach items="${tests}" var="test">
-                <a href="/testing_system/test">
                     <div class="test">
                         <p> <c:out value="${test.caption}"/> </p>
                         <div class="author">
@@ -28,7 +27,6 @@
                             <c:out value="${test.author.surname}"/>
                         </div>
                     </div>
-                </a>
                 </c:forEach>
             </div>
     </main>

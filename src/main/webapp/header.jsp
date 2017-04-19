@@ -3,7 +3,7 @@
 <header>
     <div class="content">
         <div class="logo">
-            <img src="img/logo.jpg" alt="" />
+            <img src="img/logo.jpg">
             <span>Test yourself!</span>
         </div>
     </div>

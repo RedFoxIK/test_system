@@ -22,7 +22,10 @@ public class ServletDispatcher extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Command command = CommandFactory.getInstance().getCommand(request);
-        System.out.println(command);
+        if ( command == null ) {
+            request.getRequestDispatcher("/jsp/errors/404.jsp").forward(request, response);
+            return;
+        }
         command.execute(request, response);
     }
 }

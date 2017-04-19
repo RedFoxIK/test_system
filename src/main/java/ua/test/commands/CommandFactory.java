@@ -22,6 +22,7 @@ public class CommandFactory {
         tempMap.put("/testing_system/test", new TestsCommand());
         tempMap.put("/testing_system/registration", new RegistrationCommand());
         tempMap.put("/testing_system/new_user", new NewUserCommand());
+        tempMap.put("/testing_system/results", new ResultCommand());
 
         commands = Collections.unmodifiableMap(tempMap);
     }

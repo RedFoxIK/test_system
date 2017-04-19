@@ -7,23 +7,27 @@ public class DaoFactory {
 
     private DaoFactory() {}
 
-    public static DaoFactory getInstance() {
+    public DaoFactory getInstance() {
         return instance;
     }
 
-    public static UserDao getUserDao(Connection conn) {
+    public UserDao getUserDao(Connection conn) {
         return new UserDao(conn);
     }
 
-    public static TestDao getTestDao(Connection conn) {
+    public TestDao getTestDao(Connection conn) {
         return new TestDao(conn);
     }
 
-    public static QuestionDao getQuestionDao(Connection conn) {
+    public QuestionDao getQuestionDao(Connection conn) {
         return new QuestionDao(conn);
     }
 
-    public static AnswerDao getAnswerDao(Connection conn) {
+    public AnswerDao getAnswerDao(Connection conn) {
         return new AnswerDao(conn);
+    }
+
+    public ResultDao getresultDao(Connection conn) {
+        return new ResultDao(conn);
     }
 }

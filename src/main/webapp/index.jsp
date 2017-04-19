@@ -4,11 +4,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <%@ include file="jsp/main/head.jsp"%>
+        <%@ include file="head.jsp"%>
         <title>Login</title>
     </head>
     <body>
-        <%@ include file="jsp/main/header.jsp"%>
+        <%@ include file="header.jsp"%>
         <main>
             <div class="content">
                 <div class="log_in">
