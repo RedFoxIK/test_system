@@ -26,8 +26,4 @@ public class DaoFactory {
     public static AnswerDao getAnswerDao(Connection conn) {
         return new AnswerDao(conn);
     }
-
-    public static RoleDao getRoleDao(Connection conn) {
-        return new RoleDao(conn);
-    }
 }

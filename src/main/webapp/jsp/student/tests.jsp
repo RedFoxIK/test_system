@@ -11,8 +11,8 @@
             <p>
                 Dear, student please choose!
             </p>
-            <form class="results">
-                <input type="submit" name="results" value="My results" method = "post">
+            <form class="results"  method = "get" action="">
+                <input type="submit" name="results" value="results">
             </form>
         </div>
         <div class="tests">

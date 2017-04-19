@@ -3,6 +3,7 @@ package ua.test.commands;
 import ua.test.connection.DataSource;
 import ua.test.dao.DaoFactory;
 import ua.test.dao.UserDao;
+import ua.test.entity.Role;
 import ua.test.entity.User;
 
 import javax.servlet.ServletException;
@@ -25,7 +26,7 @@ public class LoginCommand implements Command {
             request.getRequestDispatcher("/jsp/index4.jsp").forward(request, response);
             return;
         }
-        if ( user.getRole().getRole().equals("student") ) {
+        if ( user.getRole() == Role.STUDENT ) {
             request.getRequestDispatcher("/jsp/student/tests.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/jsp/index2.jsp").forward(request, response);

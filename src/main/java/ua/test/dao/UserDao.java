@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
-    private final String ADD_ONE = "INSERT INTO users(`login`, `password`, `name`, `surname`, `email`, `id_role`) VALUES(?, ?, ?, ?, ?, ?)";
-    private final String SELECT_ALL = "SELECT id_user, login, password, name, surname, email, id_role FROM users";
+    private final String ADD_ONE = "INSERT INTO users(`login`, `password`, `name`, `surname`, `email`, `role`) VALUES(?, ?, ?, ?, ?, ?)";
+    private final String SELECT_ALL = "SELECT id_user, login, password, name, surname, email, ole FROM users";
     private final String DELETE_BY_ID = "DELETE FROM users WHERE id_user = ?";
-    private final String FIND_BY_ID = "SELECT id_user, login, password, name, surname, email, id_role FROM users WHERE id_user = ?";
-    private final String FIND_BY_LOGIN = "SELECT id_user, login, password, name, surname, email, id_role FROM users WHERE login = ? AND password = ?";
+    private final String FIND_BY_ID = "SELECT id_user, login, password, name, surname, email, role FROM users WHERE id_user = ?";
+    private final String FIND_BY_LOGIN = "SELECT id_user, login, password, name, surname, email, role FROM users WHERE login = ? AND password = ?";
     private final String CHECK_UNIQUE_LOGIN = "SELECT login FROM users WHERE login = ?";
     private final String CHECK_UNIQUE_EMAIL = "SELECT email FROM users WHERE email = ?";
 
@@ -31,7 +31,7 @@ public class UserDao {
             statement.setString(3, user.getName());
             statement.setString(4, user.getSurname());
             statement.setString(5, user.getEmail());
-            statement.setInt(6, user.getRole().getId());
+            statement.setString(6, user.getRole().name());
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -134,8 +134,7 @@ public class UserDao {
         user.setName(rs.getString("name"));
         user.setSurname(rs.getString("surname"));
         user.setEmail(rs.getString("email"));
-        Role role = (new RoleDao(conn)).findById(rs.getInt("id_role"));
-        user.setRole(role);
+        user.setRole(Role.valueOf(rs.getString("role")));
         return user;
     }
 }

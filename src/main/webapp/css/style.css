@@ -94,7 +94,9 @@ form input:focus {
 /*END LOG-IN STYLES*/
 
 /*START REGISTRATION STYLES*/
-
+.error {
+    color: red;
+}
 /*END REGISTRATION STYLES*/
 
 /*START TEST STYLES*/
