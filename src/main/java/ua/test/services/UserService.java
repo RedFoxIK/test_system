@@ -2,13 +2,13 @@ package ua.test.services;
 
 import ua.test.connection.DataSource;
 import ua.test.dao.UserDao;
+import ua.test.entity.Role;
 import ua.test.entity.User;
 
 import java.sql.Connection;
 import java.util.Map;
 
 public class UserService {
-    Map<String, String> userErrors;
     Connection conn = DataSource.getInstance().getConnection();
     UserDao userDao = new UserDao(conn);
 
@@ -22,7 +22,13 @@ public class UserService {
         user.setEmail(userData.get("email"));
         user.setName(userData.get("name"));
         user.setSurname(userData.get("surname"));
-//        user.setRole(Role.UserRole.STUDENT);
+        user.setRole(Role.STUDENT);
+        userDao.addOne(user);
+    }
+
+    public boolean hasRegisteredUser(String login, String email) {
+        User user = userDao.findByLogin(login, email);
+        return user != null;
     }
 
     public boolean isSuchEmail(String email) {

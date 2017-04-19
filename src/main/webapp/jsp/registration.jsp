@@ -14,7 +14,7 @@
         <form class="registration" method="post" action="/testing_system/new_user">
             <div class="EnterData">
                 <p>Login: </p>
-                <input type="text" name="login">
+                <input type="text" name="login" value="<c:out value="${login}"/>">
                 <span class="error"><c:out value="${login_exc}"/></span>
 
                 <p>Password:</p>
@@ -25,9 +25,12 @@
                 <span class="error"><c:out value="${password_exc}"/></span>
             </div>
 
-            <p>Name: </p><input type="text" name="name">
-            <p>Surname: </p><input type="text" name="surname">
-            <p>Email: </p><input type="text" name="email">
+            <p>Name: </p>
+            <input type="text" name="name" value="<c:out value="${name}"/>">
+            <p>Surname: </p>
+            <input type="text" name="surname" value="<c:out value="${surname}"/>">
+            <p>Email: </p>
+            <input type="text" name="email" value="<c:out value="${email}"/>">
             <span class="error"><c:out value="${email_exc}"/></span>
             <br>
             <input type="submit" value="Registration">

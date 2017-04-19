@@ -44,6 +44,13 @@ main {
     margin-right: 10px;
 }
 
+.error {
+    color: red;
+}
+
+p.error {
+    text-align: center;
+}
 /*END MAIN STYLES*/
 
 /*LOG-IN STYLES*/
@@ -94,9 +101,7 @@ form input:focus {
 /*END LOG-IN STYLES*/
 
 /*START REGISTRATION STYLES*/
-.error {
-    color: red;
-}
+
 /*END REGISTRATION STYLES*/
 
 /*START TEST STYLES*/

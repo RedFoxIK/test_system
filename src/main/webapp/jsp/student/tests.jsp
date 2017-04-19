@@ -1,4 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored ="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <%@ include file="../main/head.jsp"%>
@@ -15,44 +18,19 @@
                 <input type="submit" name="results" value="results">
             </form>
         </div>
-        <div class="tests">
-            <div class="test">
-                <p>Java</p>
-                <div class= "author"><p>Yaroslava Kalashnyk</p></div>
+            <div class="tests">
+                <c:forEach items="${tests}" var="test">
+                <a href="/testing_system/test">
+                    <div class="test">
+                        <p> <c:out value="${test.caption}"/> </p>
+                        <div class="author">
+                            <c:out value="${test.author.name}"/>
+                            <c:out value="${test.author.surname}"/>
+                        </div>
+                    </div>
+                </a>
+                </c:forEach>
             </div>
-            <div class="test">
-                <p>Algorithm</p>
-                <div class= "author"><p>Yaroslava Kalashnyk</p></div>
-            </div>
-            <div class="test">
-                <p>C#</p>
-                <div class= "author"><p>Vasyl Pupkin</p></div>
-            </div>
-            <div class="test">
-                <p>AJAX</p>
-                <div class= "author"><p>Vasyl Pupkin</p></div>
-            </div>
-            <div class="test">
-                <p>CSS</p>
-                <div class= "author"><p>Vasyl Pupkin</p></div>
-            </div>
-            <div class="test">
-                <p>CSS</p>
-                <div class= "author"><p>Vasyl Pupkin</p></div>
-            </div>
-            <div class="test">
-                <p>CSS</p>
-                <div class= "author"><p>Vasyl Pupkin</p></div>
-            </div>
-            <div class="test">
-                <p>C#</p>
-                <div class= "author"><p>Vasyl Pupkin</p></div>
-            </div>
-            <div class="test">
-                <p>AJAX</p>
-                <div class= "author"><p>Vasyl Pupkin</p></div>
-            </div>
-        </div>
     </main>
 </body>
 </html>

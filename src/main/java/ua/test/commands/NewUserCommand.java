@@ -1,6 +1,7 @@
 package ua.test.commands;
 
 import ua.test.services.ServiceFactory;
+import ua.test.services.TestService;
 import ua.test.services.UserService;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import java.util.Map;
 
 public class NewUserCommand implements Command {
     private final UserService userService = ServiceFactory.getUserService();
+    private final TestService testService = ServiceFactory.getTestService();
+
     private final String PASS_EXC = "*passwords are not equals!!!";
     private final String LOGIN_EXC = "*such login already registered!";
     private final String EMAIL_EXC = "*such email already registered!";
@@ -29,9 +32,14 @@ public class NewUserCommand implements Command {
         userData.put("surname", request.getParameter("surname"));
 
         if ( outputError(request, userData) ) {
+            request.setAttribute("login", userData.get("login"));
+            request.setAttribute("name", userData.get("name"));
+            request.setAttribute("surname", userData.get("surname"));
+            request.setAttribute("email", userData.get("email"));
             request.getRequestDispatcher("/jsp/registration.jsp").forward(request, response);
         } else {
             userService.createUser(userData);
+            request.setAttribute("tests", testService.getAllTests());
             request.getRequestDispatcher("/jsp/student/tests.jsp").forward(request, response);
         }
     }
@@ -39,7 +47,7 @@ public class NewUserCommand implements Command {
     private boolean outputError(HttpServletRequest request, Map<String, String> userData) {
         boolean result = false;
 
-        if ( userData.get("password").equals(userData.get("passwordRepeat")) ) {
+        if ( !userData.get("password").equals(userData.get("passwordRepeat")) ) {
             request.setAttribute("password_exc", PASS_EXC);
             result = true;
         }

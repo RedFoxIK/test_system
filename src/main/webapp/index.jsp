@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored ="false" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -23,6 +26,7 @@
                         <input type="submit"  value="Registration"/>
                     </form>
                 </div>
+                <p class="error"> <c:out value="${error}"/> </p>
             </div>
         </main>
     </body>
