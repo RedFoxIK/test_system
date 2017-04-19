@@ -4,11 +4,11 @@
 
 <html>
 <head>
-    <%@ include file="../../head.jsp"%>
+    <%@ include file="../main/head.jsp"%>
     <title>tests</title>
 </head>
 <body>
-    <%@ include file="../../header.jsp"%>
+    <%@ include file="../main/header.jsp"%>
     <main>
         <div class="info">
             <p>
