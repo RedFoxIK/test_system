@@ -3,7 +3,6 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-
     <!--<filter>-->
         <!--<filter-name>UriFilter</filter-name>-->
         <!--<filter-class>ua.test.filters.UriFilter</filter-class>-->
@@ -25,18 +24,27 @@
         <servlet-name>Servlet</servlet-name>
         <servlet-class>ua.test.servlet.ServletDispatcher</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>Servlet</servlet-name>
-        <url-pattern>/tests</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
-        <servlet-name>Servlet</servlet-name>
-        <url-pattern>/registration</url-pattern>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.css</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
-        <servlet-name>Servlet</servlet-name>
-        <url-pattern>/new_user</url-pattern>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.jpg</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.png</url-pattern>
+    </servlet-mapping>
+
     <error-page>
     <error-code>404</error-code>
     <location>/jsp/errors/404.jsp</location>
