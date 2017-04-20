@@ -3,23 +3,18 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <!--<filter>-->
-        <!--<filter-name>UriFilter</filter-name>-->
-        <!--<filter-class>ua.test.filters.UriFilter</filter-class>-->
-
-        <!--<init-param>-->
-            <!--<param-name>validURI</param-name>-->
-            <!--<param-value>-->
-                <!--/ | /tests-->
-            <!--</param-value>-->
-        <!--</init-param>-->
-    <!--</filter>-->
-
-    <!--<filter-mapping>-->
-        <!--<filter-name>UriFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
-    <!--</filter-mapping>-->
-
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>ua.test.filters.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>Servlet</servlet-name>
         <servlet-class>ua.test.servlet.ServletDispatcher</servlet-class>

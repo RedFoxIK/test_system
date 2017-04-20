@@ -12,6 +12,7 @@ public class QuestionDao {
     private final String SELECT_ALL = "SELECT id_question, text, id_test FROM questions";
     private final String DELETE_BY_ID = "DELETE FROM questions WHERE id_question = ?";
     private final String FIND_BY_ID = "SELECT id_question, text, id_test FROM questions WHERE id_question = ?";
+    private final String FIND_BY_TEST_ID = "SELECT id_question, text FROM questions WHERE id_test = ?";
 
     Connection conn;
 
@@ -31,6 +32,7 @@ public class QuestionDao {
             if ( rs.next() ) {
                 idGenerated = rs.getInt(1);
             }
+            rs.close();
         } catch ( SQLException e ) {
             e.printStackTrace();
         }
@@ -40,7 +42,7 @@ public class QuestionDao {
     public Question findById(int id) {
         Question question = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(FIND_BY_ID) ) {
+        try ( PreparedStatement statement = conn.prepareStatement(FIND_BY_TEST_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if ( rs.next() ) {
@@ -50,6 +52,7 @@ public class QuestionDao {
                 Test test = (new TestDao(conn)).findById(rs.getInt("id_test"));
                 question.setTest(test);
             }
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -73,6 +76,29 @@ public class QuestionDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return questions;
+    }
+
+    public List<Question> selectByTestId(int id) {
+        List<Question> questions = new ArrayList<>();
+
+        try ( PreparedStatement statement = conn.prepareStatement(FIND_BY_TEST_ID) ) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while ( rs.next() ) {
+                Question question = new Question();
+
+                question.setId(rs.getInt("id_question"));
+                question.setText(rs.getString("text"));
+                question.setTest(new Test());
+                question.getTest().setId(id);
+                questions.add(question);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return questions;
     }
 

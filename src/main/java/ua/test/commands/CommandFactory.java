@@ -19,7 +19,7 @@ public class CommandFactory {
         Map<String, Command> tempMap = new HashMap<>();
 
         tempMap.put("/testing_system/tests", new LoginCommand());
-        tempMap.put("/testing_system/test", new TestsCommand());
+        tempMap.put("/testing_system/test", new TestCommand());
         tempMap.put("/testing_system/registration", new RegistrationCommand());
         tempMap.put("/testing_system/new_user", new NewUserCommand());
         tempMap.put("/testing_system/results", new ResultCommand());
