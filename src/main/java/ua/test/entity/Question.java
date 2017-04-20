@@ -1,9 +1,11 @@
 package ua.test.entity;
 
+import java.util.List;
+
 public class Question {
     private int id;
     private String text;
-    private Test test;
+    List<Answer> answers;
 
     public Question() {}
 
@@ -23,12 +25,16 @@ public class Question {
         this.text = text;
     }
 
-    public Test getTest() {
-        return test;
+    public void addAnswers(List<Answer> answers ) {
+        this.answers = answers;
     }
 
-    public void setTest(Test test) {
-        this.test = test;
+    public void addAnswer(Answer answer) {
+        answers.add(answer);
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
     @Override
@@ -36,7 +42,6 @@ public class Question {
         return "Question{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", test=" + test +
                 '}';
     }
 }

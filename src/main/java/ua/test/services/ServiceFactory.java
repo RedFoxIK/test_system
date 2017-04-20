@@ -20,4 +20,8 @@ public class ServiceFactory {
     public static  ResultService getResultService() {
         return new ResultService();
     }
+
+    public static QuestionService getQuestionService() {
+        return new QuestionService();
+    }
 }

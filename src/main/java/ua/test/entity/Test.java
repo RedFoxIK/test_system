@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Test {
     private int id;
+    int size;
+    boolean activated;
     private String caption;
     private String description;
     private User author;
@@ -20,6 +22,22 @@ public class Test {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public String getCaption() {

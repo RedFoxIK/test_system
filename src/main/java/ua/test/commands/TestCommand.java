@@ -1,5 +1,6 @@
 package ua.test.commands;
 
+import ua.test.entity.Answer;
 import ua.test.entity.Question;
 import ua.test.services.ServiceFactory;
 import ua.test.services.TestService;
@@ -32,6 +33,10 @@ public class TestCommand implements Command {
 
         for ( Question question: questions ) {
             System.out.println(question);
+            List<Answer> answers = question.getAnswers();
+            for ( Answer answer: answers ) {
+                System.out.println(answer);
+            }
         }
         System.out.println(questions.size());
         request.getRequestDispatcher("/jsp/student/test.jsp").forward(request, response);

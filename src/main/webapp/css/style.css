@@ -184,4 +184,11 @@ form input:focus {
 #hidden_form {
     visibility: hidden;
 }
+
+.spoiler_hide {
+    display: none;
+}
+.spoiler_show {
+    display: block;
+}
 /*END TEST STYLES*/

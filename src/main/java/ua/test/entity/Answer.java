@@ -3,8 +3,7 @@ package ua.test.entity;
 public class Answer {
     private int id;
     private String text;
-    boolean rigth;
-    Question question;
+    private boolean right;
 
     public Answer() {}
 
@@ -25,19 +24,11 @@ public class Answer {
     }
 
     public boolean isRigth() {
-        return rigth;
+        return right;
     }
 
-    public void setRigth(boolean rigth) {
-        this.rigth = rigth;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setRight(boolean right) {
+        this.right = right;
     }
 
     @Override
@@ -45,8 +36,6 @@ public class Answer {
         return "Answer{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", rigth=" + rigth +
-                ", question=" + question +
-                '}';
+                ", right=" + right + "}";
     }
 }

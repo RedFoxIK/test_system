@@ -4,11 +4,14 @@ import ua.test.entity.Answer;
 import ua.test.entity.Question;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnswerDao {
-    private final String ADD_ONE = "INSERT INTO answers(`text`, `right`, `id_question`) VALUES(?, ?, ?)";
+    private final String ADD_ONE = "INSERT INTO answers(`text`, `right`) VALUES(?, ?)";
     private final String DELETE_BY_ID = "DELETE FROM answers WHERE id_answer = ?";
     private final String FIND_BY_ID = "SELECT id_answer, text, right, id_question FROM answers WHERE id_answer = ?";
+    private final String FIND_BY_QUESTION_ID = "SELECT `id_answer`, `text`, `right` FROM answers WHERE `id_question` = ?";
 
     Connection conn;
 
@@ -23,7 +26,6 @@ public class AnswerDao {
         try ( PreparedStatement statement = conn.prepareStatement(ADD_ONE, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, answer.getText());
             statement.setBoolean(2, answer.isRigth());
-            statement.setInt(3, answer.getQuestion().getId());
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -48,12 +50,33 @@ public class AnswerDao {
                 answer.setText(rs.getString("text"));
                 System.out.println(rs.getByte("right"));
                 Question question = (new QuestionDao(conn)).findById(rs.getInt("id_question"));
-                answer.setQuestion(question);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return answer;
+    }
+
+    public List<Answer> selectByQuestionId(int id) {
+        List<Answer> answers = new ArrayList<>();
+
+        try ( PreparedStatement statement = conn.prepareStatement(FIND_BY_QUESTION_ID) ) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while ( rs.next() ) {
+                Answer answer = new Answer();
+
+                answer.setId(rs.getInt("id_answer"));
+                answer.setText(rs.getString("text"));
+                answer.setRight(rs.getBoolean("right"));
+                answers.add(answer);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return answers;
     }
 
     public void deleteById(int id) {
