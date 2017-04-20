@@ -180,4 +180,8 @@ form input:focus {
     width: 100%;
     margin: 0px;
 }
+
+#hidden_form {
+    visibility: hidden;
+}
 /*END TEST STYLES*/

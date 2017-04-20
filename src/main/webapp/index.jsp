@@ -14,11 +14,11 @@
                 <div class="log_in">
                     <form class="form_login" action="/testing_system/tests" method="post">
                         <p class="text_log_in">PLEASE, LOG IN!</p>
-                        <label class="label" for="login"><p>Login:</p></label>
-                        <input type="text" id="login" name="login" class="login" />
+                        <label class="label" for="login" maxlength="16"><p>Login:</p></label>
+                        <input type="text" id="login" name="login" class="login" required/>
                         <br>
                         <label class="label" for="password"><p>Password:</p></label>
-                        <input type="password" id="password" name="password" class="password" />
+                        <input type="password" id="password" name="password" class="password" maxlength="10" required/>
                         <br>
                         <input type="submit" class="submit" value="Enter"/>
                     </form>

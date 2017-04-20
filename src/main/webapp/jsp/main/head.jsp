@@ -5,5 +5,6 @@
 
 <meta charset="utf-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<link rel="icon" type="${pageContext.request.contextPath}/image/png" href="img/favicon.png">
+<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
+<script src="${pageContext.request.contextPath}/js/script.js"></script>
 

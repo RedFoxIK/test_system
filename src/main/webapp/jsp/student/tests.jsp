@@ -17,10 +17,10 @@
             <form class="results"  method = "get" action="/testing_system/results">
                 <input type="submit" value="results">
             </form>
-        </div>
+            </div>
             <div class="tests">
                 <c:forEach items="${tests}" var="test">
-                    <div class="test">
+                    <div class="test" id="<c:out value='${test.id}'/>" onclick="showTest(this.id)">
                         <p> <c:out value="${test.caption}"/> </p>
                         <div class="author">
                             <c:out value="${test.author.name}"/>
@@ -29,6 +29,9 @@
                     </div>
                 </c:forEach>
             </div>
+        <form id="hidden_form" method="get" action="/testing_system/test">
+            <input name="id_test" type="hidden" value="" id="id_test"/>
+        </form>
     </main>
 </body>
 </html>
