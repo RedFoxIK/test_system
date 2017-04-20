@@ -9,7 +9,6 @@
 <head>
     <%@ include file="../main/head.jsp"%>
     <script src="${pageContext.request.contextPath}/js/test.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <title> <c:out value="${test_name}"/> </title>
 </head>
 <body>
@@ -18,20 +17,17 @@
     <c:set var="count" value="0" scope="page" />
     
     <div class="content">
-
-        <form method="post">
-
+        <form method="post" action="/testing_system/test_result">
             <c:forEach items="${questions}" var="question">
-
                 <c:set var="count" value="${count + 1}" scope="page"/>
 
-                <div class="question" data-name="block${count}">
+                <div data-name="block${count}">
                     <h1><c:out value="${question.text}"/> </h1>
-                    <c:forEach items="${question.answers}" var="answer">
-                        <input type="checkbox" name="${count}" value="${count}">
-                        <c:out value="${answer.text}"/>
-                        <br>
-                    </c:forEach>
+                        <c:forEach items="${question.answers}" var="answer">
+                                <input type="checkbox" name="${question.id}" value="${answer.id}">
+                                <c:out value="${answer.text}"/>
+                                <br>
+                        </c:forEach>
                 </div>
             </c:forEach>
 
@@ -40,7 +36,8 @@
             <c:forEach begin="1" end="${number_questions}" varStatus="loop">
                 <input type="button" value="<c:out value="${loop.count}"/>" data-target="block${loop.count}">
             </c:forEach>
-            <input type="submit" value="SEND"/>
+
+            <input type="submit" value="SEND" onclick="sendTestForms()"/>
         </form>
     </div>
 </main>

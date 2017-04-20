@@ -20,10 +20,4 @@ window.onload = function() {
     }
 };
 
-$('html').bind('keypress', function(e) {
-    if(e.keyCode == 9)
-    {
-        return false;
-    }
-});
 
