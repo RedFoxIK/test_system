@@ -32,7 +32,7 @@ public class TestResultCommand implements Command {
         Integer idTest = Integer.parseInt(request.getParameter("test"));
         mark = ServiceFactory.getResultService().giveMark(testResult);
         request.setAttribute("mark", mark);
-        ServiceFactory.getResultService().addResult(user.getId(), idTest, mark);
+//        ServiceFactory.getResultService().addResult(user.getId(), idTest, mark);
         //not forget to add result to DB
 
         request.getRequestDispatcher("/jsp/student/testresult.jsp").forward(request, response);

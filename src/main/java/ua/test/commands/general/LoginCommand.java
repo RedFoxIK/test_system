@@ -1,5 +1,6 @@
-package ua.test.commands;
+package ua.test.commands.general;
 
+import ua.test.commands.Command;
 import ua.test.entity.Role;
 import ua.test.entity.User;
 import ua.test.services.ServiceFactory;
@@ -33,7 +34,7 @@ public class LoginCommand implements Command {
             }
         } else {
             request.setAttribute("error", errorMess);
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("/signIn.jsp").forward(request, response);
         }
     }
 }

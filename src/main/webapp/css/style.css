@@ -51,6 +51,15 @@ main {
 p.error {
     text-align: center;
 }
+
+.profile_button {
+    display: inline-block;
+    float: right;
+}
+
+.buttons {
+    float: right;
+}
 /*END MAIN STYLES*/
 
 /*LOG-IN STYLES*/

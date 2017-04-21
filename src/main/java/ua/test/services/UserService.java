@@ -26,6 +26,10 @@ public class UserService {
         return userDao.addOne(user);
     }
 
+    public User getUserById(int id) {
+        return userDao.findById(id);
+    }
+
     public User getByLoginAndPassword(String login, String email) {
         return userDao.findByLogin(login, email);
     }

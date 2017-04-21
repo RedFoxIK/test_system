@@ -1,5 +1,7 @@
 package ua.test.commands;
 
+import ua.test.commands.general.LoginCommand;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Collections;
@@ -18,11 +20,13 @@ public class CommandFactory {
     private CommandFactory(){
         Map<String, Command> tempMap = new HashMap<>();
 
+        tempMap.put("/testing_system/", new FirstCommand());
         tempMap.put("/testing_system/tests", new LoginCommand());
         tempMap.put("/testing_system/test", new TestCommand());
         tempMap.put("/testing_system/new_user", new NewUserCommand());
         tempMap.put("/testing_system/results", new ResultCommand());
         tempMap.put("/testing_system/test_result", new TestResultCommand());
+        tempMap.put("/testing_system/log_out", new LogOut());
 
         commands = Collections.unmodifiableMap(tempMap);
     }
