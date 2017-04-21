@@ -25,13 +25,12 @@ public class TestService {
 
         for ( Question question: questions ) {
             int id = question.getId();
-           question.addAnswers(answerDao.selectByQuestionId(id));
+            question.addAnswers(answerDao.selectByQuestionId(id));
         }
         return questions;
     }
 
-    public String getTestCaptionById(int testId) {
-        Test test = testDao.findById(testId);
-        return test.getCaption();
+    public Test getTestById(int testId) {
+        return testDao.findById(testId);
     }
 }

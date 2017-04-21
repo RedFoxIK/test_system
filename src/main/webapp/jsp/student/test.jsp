@@ -9,7 +9,7 @@
 <head>
     <%@ include file="../main/head.jsp"%>
     <script src="${pageContext.request.contextPath}/js/test.js"></script>
-    <title> <c:out value="${test_name}"/> </title>
+    <title> <c:out value="${test.caption}"/> </title>
 </head>
 <body>
 <%@ include file="../main/header.jsp"%>
@@ -37,8 +37,10 @@
                 <input type="button" value="<c:out value="${loop.count}"/>" data-target="block${loop.count}">
             </c:forEach>
 
-            <input type="submit" value="SEND" onclick="sendTestForms()"/>
+            <input type="hidden" name="idQuestions" value="${idQuestions}" />
+            <input type="submit" value="SEND"/>
         </form>
+
     </div>
 </main>
 </body>

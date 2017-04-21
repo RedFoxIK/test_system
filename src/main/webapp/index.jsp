@@ -22,7 +22,7 @@
                         <br>
                         <input type="submit" class="submit" value="Enter"/>
                     </form>
-                    <form class="registration" action="/testing_system/registration" method="get">
+                    <form class="registration" action="${pageContext.request.contextPath}/jsp/registration.jsp" method="get">
                         <input type="submit"  value="Registration"/>
                     </form>
                 </div>
