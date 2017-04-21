@@ -3,15 +3,14 @@ package ua.test.dao;
 import ua.test.entity.Result;
 import ua.test.entity.Test;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ResultDao {
     private final String SELECT_BY_USER_ID = "SELECT `id_result`, `id_test`, `result`, `date` FROM results WHERE `id_user`  = ?";
+    private final String ADD_ONE = "INSERT INTO results(`id_user`, `id_test`, 'result`, `date`) VALUES(?, ?, ?, ?)";
+
     Connection conn;
 
     public ResultDao(Connection conn) {
@@ -40,6 +39,27 @@ public class ResultDao {
             e.printStackTrace();
         }
         return results;
+    }
+
+    public int addOne(Result result) {
+        int idGenerated = -1;
+
+        try ( PreparedStatement statement = conn.prepareStatement(ADD_ONE, Statement.RETURN_GENERATED_KEYS) ) {
+            statement.setInt(1, result.getUser().getId());
+            statement.setInt(2, result.getTest().getId());
+            statement.setDouble(3, result.getResult());
+            statement.setDate(4, (Date) result.getDate());
+            statement.executeUpdate();
+
+            ResultSet rs = statement.getGeneratedKeys();
+            if ( rs.next() ) {
+                idGenerated = rs.getInt(1);
+            }
+            rs.close();
+        } catch ( SQLException e ) {
+            e.printStackTrace();
+        }
+        return idGenerated;
     }
 
 }

@@ -8,8 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class NewUserCommand implements Command {
     private final UserService userService = ServiceFactory.getUserService();
@@ -22,40 +20,40 @@ public class NewUserCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, String> userData = new HashMap<>();
+        String password = request.getParameter("password");
+        String passwordRe = request.getParameter("password_repeat");
+        String login = request.getParameter("login");
+        String email = request.getParameter("email");
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
 
-        userData.put("password", request.getParameter("password"));
-        userData.put("passwordRepeat", request.getParameter("password_repeat"));
-        userData.put("login", request.getParameter("login"));
-        userData.put("email", request.getParameter("email"));
-        userData.put("name", request.getParameter("name"));
-        userData.put("surname", request.getParameter("surname"));
-
-        if ( outputError(request, userData) ) {
-            request.setAttribute("login", userData.get("login"));
-            request.setAttribute("name", userData.get("name"));
-            request.setAttribute("surname", userData.get("surname"));
-            request.setAttribute("email", userData.get("email"));
+        if ( outputError(request, password, passwordRe, login, email) ) {
+            request.setAttribute("login", login);
+            request.setAttribute("name", name);
+            request.setAttribute("surname", surname);
+            request.setAttribute("email", email);
             request.getRequestDispatcher("/jsp/registration.jsp").forward(request, response);
         } else {
-            userService.createUser(userData);
+            int idUser = userService.createUser(login, password, name, surname, email);
+            request.getSession().setAttribute("idUser", idUser);
             request.setAttribute("tests", testService.getAllTests());
             request.getRequestDispatcher("/jsp/student/tests.jsp").forward(request, response);
         }
     }
 
-    private boolean outputError(HttpServletRequest request, Map<String, String> userData) {
+    private boolean outputError(HttpServletRequest request, String password, String passwordRe,
+                                String login, String email) {
         boolean result = false;
 
-        if ( !userData.get("password").equals(userData.get("passwordRepeat")) ) {
+        if ( !password.equals(passwordRe) ) {
             request.setAttribute("password_exc", PASS_EXC);
             result = true;
         }
-        if ( userService.isSuchLogin(userData.get("login") ) ) {
+        if ( userService.isSuchLogin(login) ) {
             request.setAttribute("login_exc", LOGIN_EXC);
             result = true;
         }
-        if ( userService.isSuchEmail(userData.get("email")) ) {
+        if ( userService.isSuchEmail(email) ) {
             request.setAttribute("email_exc", EMAIL_EXC);
             result = true;
         }

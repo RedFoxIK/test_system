@@ -10,7 +10,11 @@
 <body>
     <%@ include file="../main/header.jsp"%>
     <main>
-        <p> results </p>
+
+        <c:if test="${empty results}">
+            <h2>You don't have any test results yet( </h2>
+        </c:if>
+
         <c:set var="count" value="0" scope="page" />
         <table>
             <c:forEach items="${results}" var="result">

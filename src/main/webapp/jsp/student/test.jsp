@@ -37,7 +37,8 @@
                 <input type="button" value="<c:out value="${loop.count}"/>" data-target="block${loop.count}">
             </c:forEach>
 
-            <input type="hidden" name="idQuestions" value="${idQuestions}" />
+            <input type="hidden" name="idQuestions" value="<c:out value="${idQuestions}"/>" />
+            <input type="hidden" name="test" value="<c:out value="${test.id}"/>" />
             <input type="submit" value="SEND"/>
         </form>
 

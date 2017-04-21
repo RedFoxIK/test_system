@@ -1,5 +1,7 @@
 package ua.test.commands;
 
+import ua.test.entity.Role;
+import ua.test.entity.User;
 import ua.test.services.ServiceFactory;
 import ua.test.services.TestService;
 import ua.test.services.UserService;
@@ -19,9 +21,16 @@ public class LoginCommand implements Command {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        if ( userService.hasRegisteredUser(login, password) ) {
-            request.setAttribute("tests", testService.getAllTests());
-            request.getRequestDispatcher("/jsp/student/tests.jsp").forward(request, response);
+        User user = userService.getByLoginAndPassword(login, password);
+        if ( user != null ) {
+            request.getSession().setAttribute("idUser", user.getId());
+
+            if ( user.getRole() == Role.STUDENT ) {
+                request.setAttribute("tests", testService.getAllTests());
+                request.getRequestDispatcher("/jsp/student/tests.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("/jsp/tutor/tests.jsp").forward(request, response);
+            }
         } else {
             request.setAttribute("error", errorMess);
             request.getRequestDispatcher("/index.jsp").forward(request, response);

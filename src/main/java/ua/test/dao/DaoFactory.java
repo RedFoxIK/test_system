@@ -7,7 +7,7 @@ public class DaoFactory {
 
     private DaoFactory() {}
 
-    public DaoFactory getInstance() {
+    public static DaoFactory getInstance() {
         return instance;
     }
 

@@ -1,34 +1,33 @@
 package ua.test.services;
 
 import ua.test.connection.DataSource;
+import ua.test.dao.DaoFactory;
 import ua.test.dao.UserDao;
 import ua.test.entity.Role;
 import ua.test.entity.User;
 
 import java.sql.Connection;
-import java.util.Map;
 
 public class UserService {
     Connection conn = DataSource.getInstance().getConnection();
-    UserDao userDao = new UserDao(conn);
+    UserDao userDao = DaoFactory.getInstance().getUserDao(conn);
 
     public UserService() {}
 
-    public void createUser(Map<String, String> userData) {
+    public int createUser(String login, String password, String name, String surname, String email ) {
         User user = new User();
 
-        user.setLogin(userData.get("login"));
-        user.setPassword(userData.get("password"));
-        user.setEmail(userData.get("email"));
-        user.setName(userData.get("name"));
-        user.setSurname(userData.get("surname"));
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setName(name);
+        user.setSurname(surname);
         user.setRole(Role.STUDENT);
-        userDao.addOne(user);
+        return userDao.addOne(user);
     }
 
-    public boolean hasRegisteredUser(String login, String email) {
-        User user = userDao.findByLogin(login, email);
-        return user != null;
+    public User getByLoginAndPassword(String login, String email) {
+        return userDao.findByLogin(login, email);
     }
 
     public boolean isSuchEmail(String email) {

@@ -13,7 +13,11 @@ public class ResultCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("results", resultService.getResultsBuUserId(4));
+        Integer userId = (int) request.getSession().getAttribute("idUser");
+
+        if ( userId != null ) {
+            request.setAttribute("results", resultService.getResultsBuUserId(userId));
+        }
         request.getRequestDispatcher("/jsp/student/results.jsp").forward(request, response);
     }
 }

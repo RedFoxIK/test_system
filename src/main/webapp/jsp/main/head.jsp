@@ -3,7 +3,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<meta charset="utf-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/favicon.png">
 <script src="${pageContext.request.contextPath}/js/main.js"></script>

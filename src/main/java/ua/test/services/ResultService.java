@@ -2,6 +2,7 @@ package ua.test.services;
 
 import ua.test.connection.DataSource;
 import ua.test.dao.AnswerDao;
+import ua.test.dao.DaoFactory;
 import ua.test.dao.ResultDao;
 import ua.test.dao.TestDao;
 import ua.test.entity.Answer;
@@ -14,9 +15,9 @@ import java.util.Map;
 
 public class ResultService {
     Connection conn = DataSource.getInstance().getConnection();
-    ResultDao resultDao = new ResultDao(conn);
-    TestDao testDao = new TestDao(conn);
-    AnswerDao answerDao = new AnswerDao(conn);
+    ResultDao resultDao = DaoFactory.getInstance().getresultDao(conn);
+    TestDao testDao = DaoFactory.getInstance().getTestDao(conn);
+    AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao(conn);
 
 
     public ResultService() {}
@@ -44,6 +45,11 @@ public class ResultService {
         }
         return getPercent(rightAnswers, testResult.size());
     }
+
+    public void addResult(int idUser, int idTest, double mark) {
+//        resultDao.addOne();
+    }
+
 
     private boolean isRightAnswer(List<String> userAnswers, List<Answer> answers) {
         if ( userAnswers == null || answers == null ) {
