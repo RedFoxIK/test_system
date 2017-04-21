@@ -7,7 +7,7 @@
         <%@ include file="main/head.jsp"%>
         <title>Login</title>
         <style>
-            .profile_button {
+            .profile_button, .logout_button {
                 display: none;
             }
         </style>

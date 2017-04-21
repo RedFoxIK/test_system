@@ -3,6 +3,11 @@
 <head>
     <%@ include file="main/head.jsp"%>
     <title>My profile</title>
+    <style>
+        .profile_button {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <%@ include file="main/header.jsp"%>
@@ -23,6 +28,11 @@
         <form method="post">
             <input type="password" value="${user.password}">
             <input type="submit" value="change" name="password">
+        </form>
+    </div>
+    <div>
+        <form method="post" action="/testing_system/">
+            <input type="submit" value="On main page">
         </form>
     </div>
 

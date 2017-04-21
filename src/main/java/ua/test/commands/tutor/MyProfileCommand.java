@@ -1,6 +1,8 @@
 package ua.test.commands.tutor;
 
 import ua.test.commands.Command;
+import ua.test.entity.User;
+import ua.test.services.ServiceFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,9 @@ import java.io.IOException;
 public class MyProfileCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Integer idUser = (Integer) request.getSession().getAttribute("idUser");
+        User user = ServiceFactory.getUserService().getUserById(idUser);
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("/jsp/myProfile.jsp").forward(request, response);
     }
 }

@@ -1,6 +1,7 @@
 package ua.test.commands;
 
 import ua.test.commands.general.LoginCommand;
+import ua.test.commands.tutor.MyProfileCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -26,7 +27,8 @@ public class CommandFactory {
         tempMap.put("/testing_system/new_user", new NewUserCommand());
         tempMap.put("/testing_system/results", new ResultCommand());
         tempMap.put("/testing_system/test_result", new TestResultCommand());
-        tempMap.put("/testing_system/log_out", new LogOut());
+        tempMap.put("/testing_system/log_out", new LogOutCommand());
+        tempMap.put("/testing_system/my_profile", new MyProfileCommand());
 
         commands = Collections.unmodifiableMap(tempMap);
     }
