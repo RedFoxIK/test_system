@@ -12,6 +12,7 @@ public class AnswerDao {
     private final String DELETE_BY_ID = "DELETE FROM answers WHERE id_answer = ?";
     private final String FIND_BY_ID = "SELECT id_answer, text, right, id_question FROM answers WHERE id_answer = ?";
     private final String FIND_BY_QUESTION_ID = "SELECT `id_answer`, `text`, `right` FROM answers WHERE `id_question` = ?";
+    private final String FIND_RIGHT_ANSWERS_BY_QUESTION_ID = "SELECT `id_answer`, `text` FROM answers WHERE `id_question` = ? AND `right` = 1";
 
     Connection conn;
 
@@ -75,7 +76,27 @@ public class AnswerDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return answers;
+    }
 
+    public List<Answer> selectRightAnswersByQuestionId(int id) {
+        List<Answer> answers = new ArrayList<>();
+
+        try ( PreparedStatement statement = conn.prepareStatement(FIND_RIGHT_ANSWERS_BY_QUESTION_ID) ) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while ( rs.next() ) {
+                Answer answer = new Answer();
+
+                answer.setId(rs.getInt("id_answer"));
+                answer.setText(rs.getString("text"));
+                answer.setRight(true);
+                answers.add(answer);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return answers;
     }
 

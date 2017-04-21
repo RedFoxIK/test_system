@@ -36,39 +36,35 @@ public class ResultService {
 
         for ( Integer questionId: testResult.keySet() ) {
             List<String> userAnswers = testResult.get(questionId);
-            List<Answer> answers = answerDao.selectByQuestionId(questionId);
+            List<Answer> answers = answerDao.selectRightAnswersByQuestionId(questionId);
 
             if ( isRightAnswer(userAnswers, answers) ) {
                 rightAnswers += 1;
             }
         }
-        System.out.println(rightAnswers);
-        System.out.println(testResult.size());
-        return (rightAnswers / testResult.size()) * 100;
+        return getPercent(rightAnswers, testResult.size());
     }
 
     private boolean isRightAnswer(List<String> userAnswers, List<Answer> answers) {
         if ( userAnswers == null || answers == null ) {
             return userAnswers == null && answers == null;
         }
-
+        if ( userAnswers.size() != answers.size() ) {
+            return false;
+        }
         for (Answer answer: answers) {
-            int id = answer.getId();
-            boolean right = answer.isRigth();
-            System.out.println(id + "= " + right);
+            Integer id = answer.getId();
 
-            if ( !isRightAnswerInAnswers(userAnswers, id, right) ) {
+            if ( !userAnswers.contains(id.toString()) ) {
                 return false;
             }
         }
         return true;
     }
 
-    private boolean isRightAnswerInAnswers(List<String> userAnswers, Integer id, boolean right) {
-        if ( right ) {
-            return userAnswers.contains(id.toString());
-        }
-        return !userAnswers.contains(id.toString());
+    private double getPercent(double rightAnswers, int answers) {
+        double result = (rightAnswers / answers) * 100;
+        return Math.round(result * 100.0) / 100.0;
     }
 
 }
