@@ -24,13 +24,20 @@ function changeType() {
 function add() {
     var input = document.getElementsByClassName("type_answer");
     var type = input[0].type;
-    var answer = '<div class="test_item"><input type="' + type + '" class="type_answer"  name="group"> ' +
-        '<input type="text" class="answer"></div>';
+    var index = input.length;
+    var answer = '<div class="test_item"><input type="' + type + '" value="'+index+'" class="type_answer"  name="group"> ' +
+        '<input type="text" class="answer" name="'+index+'"></div>';
     document.getElementById('other_answers').innerHTML += answer;
 };
 
 function remove() {
-    var test_items = document.getElementsByClassName("a");
+    var test_items = document.getElementsByClassName("test_item");
     var last = test_items.length - 1;
     test_items[last].remove();
 };
+
+function count_answers() {
+    var input = document.getElementsByClassName("answer");
+    var size = input.length;
+    document.getElementById("number_answers").value = size;
+}

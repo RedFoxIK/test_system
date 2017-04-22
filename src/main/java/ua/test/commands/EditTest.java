@@ -15,6 +15,6 @@ public class EditTest implements Command {
         Test test = ServiceFactory.getTestService().getTestById(testId);
         System.out.println(test);
         request.setAttribute("test", test);
-        request.getRequestDispatcher("/jsp/tutor/test.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/tutor/newQuestion.jsp").forward(request, response);
     }
 }

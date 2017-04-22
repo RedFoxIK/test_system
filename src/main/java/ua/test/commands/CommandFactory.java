@@ -2,6 +2,7 @@ package ua.test.commands;
 
 import ua.test.commands.general.*;
 import ua.test.commands.student.NewStudent;
+import ua.test.commands.tutor.AddQuestion;
 import ua.test.commands.tutor.MyProfileCommand;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +33,8 @@ public class CommandFactory {
         tempMap.put("/testing_system/my_profile", new MyProfileCommand());
         tempMap.put("/testing_system/update_pass", new ChangeUserPassword());
         tempMap.put("/testing_system/update_email", new ChangeUserEmail());
-
         tempMap.put("/testing_system/test_edit", new EditTest());
+        tempMap.put("/testing_system/add_test", new AddQuestion());
 
 
         commands = Collections.unmodifiableMap(tempMap);

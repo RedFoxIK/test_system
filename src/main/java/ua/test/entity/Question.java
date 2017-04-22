@@ -1,5 +1,6 @@
 package ua.test.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
@@ -7,7 +8,9 @@ public class Question {
     private String text;
     List<Answer> answers;
 
-    public Question() {}
+    public Question() {
+        this.answers = new ArrayList<>();
+    }
 
     public int getId() {
         return id;

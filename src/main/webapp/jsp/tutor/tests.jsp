@@ -12,7 +12,7 @@
     <main>
         <div class="info">
             <p>
-                Dear, tutor good luck!
+                Dear tutor, good luck!
             </p>
             <form class="results"  method = "get" action="/testing_system/results">
                 <input type="submit" value="results">

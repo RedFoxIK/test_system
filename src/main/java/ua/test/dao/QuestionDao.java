@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDao {
-    private final String ADD_ONE = "INSERT INTO questions(`text`) VALUES(?)";
+    private final String ADD_ONE = "INSERT INTO questions(`text`, `id_test`) VALUES(?, ?)";
     private final String SELECT_ALL = "SELECT `id_question`, `text` FROM questions";
     private final String DELETE_BY_ID = "DELETE FROM questions WHERE `id_question` = ?";
     private final String FIND_BY_ID = "SELECT `text` FROM questions WHERE `id_question` = ?";
@@ -19,11 +19,12 @@ public class QuestionDao {
         this.conn = conn;
     }
 
-    public int addOne(Question question) {
+    public int addOne(Question question, int idTest) {
         int idGenerated = -1;
 
         try ( PreparedStatement statement = conn.prepareStatement(ADD_ONE, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, question.getText());
+            statement.setInt(2, idTest);
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -90,7 +91,6 @@ public class QuestionDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return questions;
     }
 
