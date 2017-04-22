@@ -3,7 +3,7 @@ package ua.test.commands;
 import ua.test.commands.general.*;
 import ua.test.commands.student.NewStudent;
 import ua.test.commands.tutor.AddQuestion;
-import ua.test.commands.tutor.MyProfileCommand;
+import ua.test.commands.general.MyProfile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class CommandFactory {
         tempMap.put("/testing_system/results", new ResultCommand());
         tempMap.put("/testing_system/test_result", new TestResultCommand());
         tempMap.put("/testing_system/log_out", new SignOut());
-        tempMap.put("/testing_system/my_profile", new MyProfileCommand());
+        tempMap.put("/testing_system/my_profile", new MyProfile());
         tempMap.put("/testing_system/update_pass", new ChangeUserPassword());
         tempMap.put("/testing_system/update_email", new ChangeUserEmail());
         tempMap.put("/testing_system/test_edit", new EditTest());

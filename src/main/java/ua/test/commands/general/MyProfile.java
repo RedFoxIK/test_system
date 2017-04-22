@@ -1,4 +1,4 @@
-package ua.test.commands.tutor;
+package ua.test.commands.general;
 
 import ua.test.commands.Command;
 import ua.test.entity.User;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class MyProfileCommand implements Command {
+public class MyProfile implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer idUser = (Integer) request.getSession().getAttribute("idUser");
