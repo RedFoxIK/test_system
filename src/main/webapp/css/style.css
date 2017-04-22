@@ -82,6 +82,11 @@ p.error {
     color: white;
 }
 
+.answer, .type_answer {
+    display: inline-block;
+    float: top;
+}
+
 .buttons form input:hover {
     background: #66AAFF;
     cursor:pointer;

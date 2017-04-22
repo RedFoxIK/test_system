@@ -22,14 +22,14 @@
                 <c:forEach items="${tests}" var="test">
                     <div class="test" id="<c:out value='${test.id}'/>" onclick="showTest(this.id)">
                         <p> <c:out value="${test.caption}"/> </p>
-                        <%--<div class="author">--%>
-                            <%--<c:out value="${test.author.name}"/>--%>
-                            <%--<c:out value="${test.author.surname}"/>--%>
-                        <%--</div>--%>
+                        <div class="author">
+                            <c:out value="${test.author.name}"/>
+                            <c:out value="${test.author.surname}"/>
+                        </div>
                     </div>
                 </c:forEach>
             </div>
-        <form id="hidden_form" method="get" action="/testing_system/test">
+        <form id="hidden_form" method="get" action="/testing_system/test_edit">
             <input name="id_test" type="hidden" value="" id="id_test"/>
         </form>
     </main>

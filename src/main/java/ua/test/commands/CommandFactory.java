@@ -33,6 +33,9 @@ public class CommandFactory {
         tempMap.put("/testing_system/update_pass", new ChangeUserPassword());
         tempMap.put("/testing_system/update_email", new ChangeUserEmail());
 
+        tempMap.put("/testing_system/test_edit", new EditTest());
+
+
         commands = Collections.unmodifiableMap(tempMap);
     }
 
