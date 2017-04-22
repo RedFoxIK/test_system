@@ -9,7 +9,6 @@ import ua.test.entity.Question;
 import ua.test.entity.Test;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.util.List;
 
 public class TestService {
@@ -32,11 +31,11 @@ public class TestService {
         return questions;
     }
 
-    public void addResult(int idUser, int idTest, double result, Date date) {
-
-    }
-
     public Test getTestById(int testId) {
         return testDao.findById(testId);
+    }
+
+    public List<Test> getTestsByUserId(int id) {
+        return testDao.selectByUserId(id);
     }
 }

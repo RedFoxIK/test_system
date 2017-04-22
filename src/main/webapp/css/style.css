@@ -4,21 +4,30 @@
     margin: 0;
     font-size: 20px;
 }
+
+.big_margin_top {margin-top:100px;}
+
+.big_font_size {font-size:30px;}
+
 .content {
     width: 100%;
     max-width: 1200px;
     margin:0 auto;
 }
+.center {
+    text-align:center;
+}
 img {
     max-width: 100%;
 }
 header {
-    height: 73px;
+    height: auto;
     background: #fff;
     border-bottom: 1px solid #ececec;
 }
 .logo {
     width: 50%;
+    display:inline-block;
 }
 .logo span {
     font-size: 26px;
@@ -33,7 +42,7 @@ body {
 }
 main {
     display: block;
-    min-height: 65vw;
+    min-height: 65vh;
 }
 .right {
     float: right;
@@ -52,13 +61,46 @@ p.error {
     text-align: center;
 }
 
-.profile_button {
-    display: inline-block;
+.buttons {
     float: right;
 }
 
-.buttons {
-    float: right;
+.buttons form {
+    display: inline-block;
+    margin:20px;
+}
+
+.profile_button {float:none;}
+
+.buttons form input {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.buttons form input:hover {
+    background: #66AAFF;
+    cursor:pointer;
+}
+
+.main_page {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    margin-top:50px;
+}
+
+.main_page:hover {
+    background: #66AAFF;
+    cursor:pointer;
 }
 /*END MAIN STYLES*/
 
@@ -201,3 +243,34 @@ form input:focus {
     display: block;
 }
 /*END TEST STYLES*/
+
+/*PROFILE STYLES*/
+.profile_image IMG {
+    height: 200px;
+}
+ /*PROFILE STYLES*/
+
+header {height: auto;}
+
+.logo {
+    display:inline-block;
+}
+
+.buttons form {
+    display: inline-block;
+    margin:20px;
+}
+
+.profile_button {float:none;}
+
+.buttons form input {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.buttons form input:hover {
+    background: #66AAFF;
+}

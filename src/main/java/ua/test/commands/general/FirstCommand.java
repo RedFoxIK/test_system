@@ -1,5 +1,6 @@
-package ua.test.commands;
+package ua.test.commands.general;
 
+import ua.test.commands.Command;
 import ua.test.entity.Role;
 import ua.test.entity.User;
 import ua.test.services.ServiceFactory;
@@ -14,7 +15,6 @@ public class FirstCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer userId = (Integer) request.getSession().getAttribute("idUser");
 
-        System.out.println("FIRST COMMAND");
         if ( userId == null ) {
             request.getRequestDispatcher("/jsp/signIn.jsp").forward(request, response);
             return;

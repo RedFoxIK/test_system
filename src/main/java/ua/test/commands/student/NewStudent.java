@@ -1,5 +1,6 @@
-package ua.test.commands;
+package ua.test.commands.student;
 
+import ua.test.commands.Command;
 import ua.test.services.ServiceFactory;
 import ua.test.services.TestService;
 import ua.test.services.UserService;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class NewUserCommand implements Command {
+public class NewStudent implements Command {
     private final UserService userService = ServiceFactory.getUserService();
     private final TestService testService = ServiceFactory.getTestService();
 

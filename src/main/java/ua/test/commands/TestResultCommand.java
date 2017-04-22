@@ -1,13 +1,13 @@
 package ua.test.commands;
 
 import ua.test.entity.Question;
-import ua.test.entity.User;
 import ua.test.services.ServiceFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +20,7 @@ public class TestResultCommand implements Command {
         List<Question> questions = (List<Question>) request.getSession().getAttribute(idQuestions);
         request.getSession().removeAttribute(idQuestions);
         Map<Integer, List<String>> testResult = new HashMap<>();
-        User user = (User) request.getSession().getAttribute("user");
+        Integer idUser = (Integer) request.getSession().getAttribute("idUser");
         double mark;
 
         for ( Question question: questions ) {
@@ -32,8 +32,8 @@ public class TestResultCommand implements Command {
         Integer idTest = Integer.parseInt(request.getParameter("test"));
         mark = ServiceFactory.getResultService().giveMark(testResult);
         request.setAttribute("mark", mark);
-//        ServiceFactory.getResultService().addResult(user.getId(), idTest, mark);
-        //not forget to add result to DB
+        System.out.println(mark);
+        ServiceFactory.getResultService().addResult(idUser, idTest, mark, LocalDateTime.now());
 
         request.getRequestDispatcher("/jsp/student/testresult.jsp").forward(request, response);
     }

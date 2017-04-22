@@ -108,16 +108,15 @@ id_question</ColNames>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="29" parent="8" name="result">
-      <Position>4</Position>
-      <DataType>decimal(5,2)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="30" parent="8" name="date">
+    <column id="29" parent="8" name="date">
       <Position>5</Position>
-      <DataType>datetime|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>timestamp(6)|0</DataType>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <column id="30" parent="8" name="mark">
+      <Position>4</Position>
+      <DataType>decimal(5,2) unsigned|0</DataType>
+      <NotNull>1</NotNull>
     </column>
     <index id="31" parent="8" name="test_id_idx">
       <ColNames>id_test</ColNames>

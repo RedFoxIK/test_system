@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultDao {
-    private final String SELECT_BY_USER_ID = "SELECT `id_result`, `id_test`, `result`, `date` FROM results WHERE `id_user`  = ?";
-    private final String ADD_ONE = "INSERT INTO results(`id_user`, `id_test`, 'result`, `date`) VALUES(?, ?, ?, ?)";
+    private final String SELECT_BY_USER_ID = "SELECT `id_result`, `id_test`, `mark`, `date` FROM results WHERE `id_user`  = ?";
+    private final String ADD_ONE = "INSERT INTO results(`id_user`, `id_test`, `mark`, `date`) VALUES(?, ?, ?, ?)";
 
     Connection conn;
 
@@ -28,8 +28,8 @@ public class ResultDao {
                 Result result = new Result();
 
                 result.setId(rs.getInt("id_result"));
-                result.setResult(rs.getDouble("result"));
-                result.setDate(rs.getDate("date"));
+                result.setMark(rs.getDouble("mark"));
+                result.setDateTime(rs.getTimestamp("date").toLocalDateTime());
                 Test test = new Test();
                 test.setId(rs.getInt("id_test"));
                 result.setTest(test);
@@ -47,14 +47,17 @@ public class ResultDao {
         try ( PreparedStatement statement = conn.prepareStatement(ADD_ONE, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setInt(1, result.getUser().getId());
             statement.setInt(2, result.getTest().getId());
-            statement.setDouble(3, result.getResult());
-            statement.setDate(4, (Date) result.getDate());
+            System.out.println("ATTENTION MARK = " + result.getMark() + " !!!!!");
+            statement.setDouble(3, result.getMark());
+            statement.setTimestamp(4, Timestamp.valueOf(result.getDateTime()));
+
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
             if ( rs.next() ) {
                 idGenerated = rs.getInt(1);
             }
+            System.out.println("id = " + idGenerated);
             rs.close();
         } catch ( SQLException e ) {
             e.printStackTrace();

@@ -22,11 +22,18 @@
                 <tr>
                     <td><c:out value="${count}" /> </td>
                     <td><c:out value="${result.test.caption}"/></td>
-                    <td><c:out value="${result.result}"/></td>
-                    <td><c:out value="${result.date}"/></td>
+                    <td><c:out value="${result.mark}"/></td>
+                    <td><c:out value="${result.dateTime}"/></td>
                 </tr>
             </c:forEach>
         </table>
+
+        <div>
+            <form method="get" action="/testing_system/">
+                <input type="submit" value="On main page">
+            </form>
+        </div>
+
     </main>
 </body>
 </html>

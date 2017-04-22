@@ -1,16 +1,15 @@
 package ua.test.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Result {
     private int id;
-    private double result;
+    private double mark;
     private User user;
     private Test test;
-    private Date date;
+    private LocalDateTime dateTime;
 
-    public Result() {
-    }
+    public Result() {}
 
     public int getId() {
         return id;
@@ -20,12 +19,12 @@ public class Result {
         this.id = id;
     }
 
-    public double getResult() {
-        return result;
+    public double getMark() {
+        return mark;
     }
 
-    public void setResult(double result) {
-        this.result = result;
+    public void setMark(double mark) {
+        this.mark = mark;
     }
 
     public User getUser() {
@@ -44,11 +43,11 @@ public class Result {
         this.test = test;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

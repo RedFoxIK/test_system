@@ -27,7 +27,7 @@ public class DaoFactory {
         return new AnswerDao(conn);
     }
 
-    public ResultDao getresultDao(Connection conn) {
+    public ResultDao getResultDao(Connection conn) {
         return new ResultDao(conn);
     }
 }

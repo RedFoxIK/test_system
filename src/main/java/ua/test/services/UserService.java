@@ -42,4 +42,11 @@ public class UserService {
         return userDao.isSuchLogin(login);
     }
 
+    public boolean changePassword(int idUser, String password) {
+        return userDao.updatePassword(idUser, password);
+    }
+
+    public boolean changeEmail(Integer idUser, String email) {
+        return userDao.updateEmail(idUser, email);
+    }
 }

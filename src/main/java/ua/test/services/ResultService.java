@@ -8,14 +8,16 @@ import ua.test.dao.TestDao;
 import ua.test.entity.Answer;
 import ua.test.entity.Result;
 import ua.test.entity.Test;
+import ua.test.entity.User;
 
 import java.sql.Connection;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 public class ResultService {
     Connection conn = DataSource.getInstance().getConnection();
-    ResultDao resultDao = DaoFactory.getInstance().getresultDao(conn);
+    ResultDao resultDao = DaoFactory.getInstance().getResultDao(conn);
     TestDao testDao = DaoFactory.getInstance().getTestDao(conn);
     AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao(conn);
 
@@ -46,8 +48,20 @@ public class ResultService {
         return getPercent(rightAnswers, testResult.size());
     }
 
-    public void addResult(int idUser, int idTest, double mark) {
-//        resultDao.addOne();
+    public void addResult(int idUser, int idTest, double mark, LocalDateTime dateTime) {
+        Result result = new Result();
+        User user = ServiceFactory.getUserService().getUserById(idUser);
+        Test test = ServiceFactory.getTestService().getTestById(idTest);
+        int id;
+
+        result.setUser(user);
+        result.setTest(test);
+        result.setMark(mark);
+        System.out.println("ATTENTION MARK = 0.0 !!!!!" + mark);
+        System.out.println("ATTENTION MARK = 1.0 !!!!!" + result.getMark());
+        result.setDateTime(dateTime);
+        id = DaoFactory.getInstance().getResultDao(conn).addOne(result);
+        result.setId(id);
     }
 
 

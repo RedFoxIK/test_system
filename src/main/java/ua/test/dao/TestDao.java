@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDao {
-    private final String ADD_ONE = "INSERT INTO tests(`caption`, `description`, `size`, `activated` `author`) VALUES(?, ?, ?)";
+    private final String ADD_ONE = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `author`) VALUES(?, ?, ?, ?, ?)";
     private final String SELECT_ALL = "SELECT id_test, caption, description, size, activated, author FROM tests";
+    private final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated` FROM tests where author = ?";
     private final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
     private final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, author FROM tests WHERE id_test = ?";
 
@@ -92,5 +93,28 @@ public class TestDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Test> selectByUserId(int id) {
+        List<Test> tests = new ArrayList<>();
+
+        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_USER_ID) ) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+
+            while ( rs.next() ) {
+                Test test = new Test();
+                test.setId(rs.getInt("id_test"));
+                test.setCaption(rs.getString("caption"));
+                test.setDescription(rs.getString("description"));
+                test.setSize(rs.getInt("size"));
+                test.setActivated(rs.getBoolean("activated"));
+                tests.add(test);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tests;
     }
 }

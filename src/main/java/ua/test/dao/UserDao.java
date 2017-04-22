@@ -12,9 +12,11 @@ public class UserDao {
     private final String SELECT_ALL = "SELECT id_user, login, password, name, surname, email, ole FROM users";
     private final String DELETE_BY_ID = "DELETE FROM users WHERE id_user = ?";
     private final String FIND_BY_ID = "SELECT id_user, login, password, name, surname, email, role FROM users WHERE id_user = ?";
-    private final String FIND_BY_LOGIN = "SELECT id_user, login, password, name, surname, email, role FROM users WHERE login = ? AND password = ?";
-    private final String CHECK_UNIQUE_LOGIN = "SELECT login FROM users WHERE login = ?";
-    private final String CHECK_UNIQUE_EMAIL = "SELECT email FROM users WHERE email = ?";
+    private final String FIND_BY_LOGIN = "SELECT `id_user`, `login`, `password`, `name`, `surname`, `email`, `role` FROM users WHERE login = ? AND password = ?";
+    private final String CHECK_UNIQUE_LOGIN = "SELECT `login` FROM users WHERE login = ?";
+    private final String CHECK_UNIQUE_EMAIL = "SELECT `email` FROM users WHERE email = ?";
+    private final String UPDATE_PASSWORD = "UPDATE users set `password` = ? WHERE `id_user` = ?";
+    private final String UPDATE_EMAIL = "UPDATE users set `email` = ? WHERE `id_user` = ?";
 
     Connection conn;
 
@@ -136,5 +138,32 @@ public class UserDao {
         user.setEmail(rs.getString("email"));
         user.setRole(Role.valueOf(rs.getString("role")));
         return user;
+    }
+
+    public boolean updatePassword(int id, String password) {
+        int result = 0;
+
+        try ( PreparedStatement statement = conn.prepareStatement(UPDATE_PASSWORD) ) {
+            statement.setString(1, password);
+            statement.setInt(2, id);
+            result = statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (result == 1) ;
+    }
+
+    public boolean updateEmail(Integer id, String email) {
+        int result = 0;
+
+        try ( PreparedStatement statement = conn.prepareStatement(UPDATE_EMAIL) ) {
+            statement.setString(1, email);
+            statement.setInt(2, id);
+            result = statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("result = " + result);
+        return (result == 1) ;
     }
 }

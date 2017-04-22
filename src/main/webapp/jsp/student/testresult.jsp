@@ -14,5 +14,10 @@
     <c:if test="${mark > 99.99 }">
         <h3> Well done! ☺</h3>
     </c:if>
+    <div>
+        <form method="get" action="/testing_system/">
+            <input type="submit" value="On main page">
+        </form>
+    </div>
 </body>
 </html>
