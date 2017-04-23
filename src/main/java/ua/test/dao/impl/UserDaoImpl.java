@@ -1,5 +1,6 @@
-package ua.test.dao;
+package ua.test.dao.impl;
 
+import ua.test.dao.interfaces.UserDao;
 import ua.test.entity.Role;
 import ua.test.entity.User;
 
@@ -7,27 +8,28 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao {
-    private static final String ADD_ONE = "INSERT INTO users(`login`, `password`, `name`, `surname`, `email`, `role`) VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String SELECT_ALL = "SELECT id_user, login, password, name, surname, email, ole FROM users";
-    private static final String DELETE_BY_ID = "DELETE FROM users WHERE id_user = ?";
-    private static final String FIND_BY_ID = "SELECT id_user, login, password, name, surname, email, role FROM users WHERE id_user = ?";
-    private static final String FIND_BY_LOGIN = "SELECT `id_user`, `login`, `password`, `name`, `surname`, `email`, `role` FROM users WHERE login = ? AND password = ?";
+public class UserDaoImpl implements UserDao {
+    private static final String ADD_USER = "INSERT INTO users(`login`, `password`, `name`, `surname`, `email`, `role`) VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_BY_ID = "SELECT `id_user`, `login`, `password`, `name`, `surname`, `email`, `role` FROM users WHERE `id_user` = ?";
+    private static final String SELECT_BY_LOGIN = "SELECT `id_user`, `login`, `password`, `name`, `surname`, `email`, `role` FROM users WHERE `login` = ? AND `password` = ?";
+    private static final String SELECT_ALL = "SELECT `id_user`, `login`, `password`, `name`, `surname`, `email`, `role` FROM users";
     private static final String CHECK_UNIQUE_LOGIN = "SELECT `login` FROM users WHERE login = ?";
     private static final String CHECK_UNIQUE_EMAIL = "SELECT `email` FROM users WHERE email = ?";
     private static final String UPDATE_PASSWORD = "UPDATE users set `password` = ? WHERE `id_user` = ?";
     private static final String UPDATE_EMAIL = "UPDATE users set `email` = ? WHERE `id_user` = ?";
+    private static final String DELETE_BY_ID = "DELETE FROM users WHERE `id_user` = ?";
 
     Connection conn;
 
-    public UserDao(Connection conn) {
+    public UserDaoImpl(Connection conn) {
         this.conn = conn;
     }
 
-    public int addOne(User user) {
-        int idGenerated = -1;
+    @Override
+    public Integer addUser(User user) {
+        Integer idGenerated = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(ADD_ONE, Statement.RETURN_GENERATED_KEYS) ) {
+        try ( PreparedStatement statement = conn.prepareStatement(ADD_USER, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getName());
@@ -45,33 +47,35 @@ public class UserDao {
         } catch ( SQLException e ) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 
-    public List<User> selectALL() {
-        List<User> users = new ArrayList<>();
-
+    @Override
+    public List<User> selectAll() {
         try ( Statement statement = conn.createStatement();
               ResultSet rs = statement.executeQuery(SELECT_ALL) ) {
+            List<User> users = new ArrayList<>();
+
             while ( rs.next() ) {
-                users.add(getUserFromRS(rs));
+                users.add(getUser(rs));
             }
+            rs.close();
+            return users;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return users;
+        return null;
     }
 
+    @Override
     public User findByLogin(String login, String password) {
-        User user = null;
-
-        try ( PreparedStatement statement = conn.prepareStatement(FIND_BY_LOGIN) ) {
+        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_LOGIN) ) {
             statement.setString(1, login);
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
-
+            User user = null;
             if ( rs.next() ) {
-                user = getUserFromRS(rs);
+                user = getUser(rs);
             }
             rs.close();
             return user;
@@ -81,23 +85,24 @@ public class UserDao {
         return null;
     }
 
-
+    @Override
     public User findById(int id) {
-        User user = null;
-
-        try ( PreparedStatement statement = conn.prepareStatement(FIND_BY_ID) ) {
+        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
+            User user = null;
             if ( rs.next() ) {
-                user = getUserFromRS(rs);
+                user = getUser(rs);
             }
             rs.close();
+            return user;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
+    @Override
     public void deleteById(int id) {
         try ( PreparedStatement statement = conn.prepareStatement(DELETE_BY_ID) ) {
             statement.setInt(1, id);
@@ -107,12 +112,50 @@ public class UserDao {
         }
     }
 
+    @Override
     public boolean isSuchEmail(String email) {
         return isSuchRecord(email, CHECK_UNIQUE_EMAIL);
     }
 
+    @Override
     public boolean isSuchLogin(String login) {
         return isSuchRecord(login, CHECK_UNIQUE_LOGIN);
+    }
+
+    @Override
+    public boolean updatePassword(int id, String password) {
+        return updateUser(id, password, UPDATE_PASSWORD);
+    }
+
+    @Override
+    public boolean updateEmail(Integer id, String email) {
+       return updateUser(id, email, UPDATE_EMAIL);
+    }
+
+    private User getUser(ResultSet rs) throws SQLException {
+        User user = new User();
+        user.setId(rs.getInt("id_user"));
+        user.setLogin(rs.getString("login"));
+        user.setPassword(rs.getString("password"));
+        user.setName(rs.getString("name"));
+        user.setSurname(rs.getString("surname"));
+        user.setEmail(rs.getString("email"));
+        user.setRole(Role.valueOf(rs.getString("role")));
+        return user;
+    }
+
+    private boolean updateUser(int id, String key, String sql) {
+        try ( PreparedStatement statement = conn.prepareStatement(UPDATE_PASSWORD) ) {
+            int result;
+
+            statement.setString(1, key);
+            statement.setInt(2, id);
+            result = statement.executeUpdate();
+            return result == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private boolean isSuchRecord(String key, String sql) {
@@ -127,45 +170,5 @@ public class UserDao {
             e.printStackTrace();
         }
         return result;
-    }
-
-    private User getUserFromRS(ResultSet rs) throws SQLException {
-        User user = new User();
-
-        user.setId(rs.getInt("id_user"));
-        user.setLogin(rs.getString("login"));
-        user.setPassword(rs.getString("password"));
-        user.setName(rs.getString("name"));
-        user.setSurname(rs.getString("surname"));
-        user.setEmail(rs.getString("email"));
-        user.setRole(Role.valueOf(rs.getString("role")));
-        return user;
-    }
-
-    public boolean updatePassword(int id, String password) {
-        int result = 0;
-
-        try ( PreparedStatement statement = conn.prepareStatement(UPDATE_PASSWORD) ) {
-            statement.setString(1, password);
-            statement.setInt(2, id);
-            result = statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return (result == 1) ;
-    }
-
-    public boolean updateEmail(Integer id, String email) {
-        int result = 0;
-
-        try ( PreparedStatement statement = conn.prepareStatement(UPDATE_EMAIL) ) {
-            statement.setString(1, email);
-            statement.setInt(2, id);
-            result = statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println("result = " + result);
-        return (result == 1) ;
     }
 }

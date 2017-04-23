@@ -1,10 +1,10 @@
 package ua.test.services;
 
 import ua.test.connection.DataSource;
-import ua.test.dao.AnswerDao;
+import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.DaoFactory;
-import ua.test.dao.ResultDao;
-import ua.test.dao.TestDao;
+import ua.test.dao.impl.ResultDaoImpl;
+import ua.test.dao.impl.TestDaoImpl;
 import ua.test.entity.Answer;
 import ua.test.entity.Result;
 import ua.test.entity.Test;
@@ -17,15 +17,15 @@ import java.util.Map;
 
 public class ResultService {
     Connection conn = DataSource.getInstance().getConnection();
-    ResultDao resultDao = DaoFactory.getInstance().getResultDao(conn);
-    TestDao testDao = DaoFactory.getInstance().getTestDao(conn);
-    AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao(conn);
+    ResultDaoImpl resultDao = DaoFactory.getInstance().getResultDao(conn);
+    TestDaoImpl testDao = DaoFactory.getInstance().getTestDao(conn);
+    AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao(conn);
 
 
     public ResultService() {}
 
     public List<Result> getResultsBuUserId(int id) {
-        List<Result> results = resultDao.getByUserId(id);
+        List<Result> results = resultDao.findByUserId(id);
 
         for ( Result result: results ) {
             Test test = testDao.findById(result.getTest().getId());
@@ -39,7 +39,7 @@ public class ResultService {
 
         for ( Integer questionId: testResult.keySet() ) {
             List<String> userAnswers = testResult.get(questionId);
-            List<Answer> answers = answerDao.selectRightAnswersByQuestionId(questionId);
+            List<Answer> answers = answerDao.findRightByQuestionId(questionId);
 
             if ( isRightAnswer(userAnswers, answers) ) {
                 rightAnswers += 1;
@@ -60,7 +60,7 @@ public class ResultService {
         System.out.println("ATTENTION MARK = 0.0 !!!!!" + mark);
         System.out.println("ATTENTION MARK = 1.0 !!!!!" + result.getMark());
         result.setDateTime(dateTime);
-        id = DaoFactory.getInstance().getResultDao(conn).addOne(result);
+        id = DaoFactory.getInstance().getResultDao(conn).addResult(result);
         result.setId(id);
     }
 

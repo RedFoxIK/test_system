@@ -1,5 +1,7 @@
 package ua.test.dao;
 
+import ua.test.dao.impl.*;
+
 import java.sql.Connection;
 
 public class DaoFactory {
@@ -11,23 +13,23 @@ public class DaoFactory {
         return instance;
     }
 
-    public UserDao getUserDao(Connection conn) {
-        return new UserDao(conn);
+    public UserDaoImpl getUserDao(Connection conn) {
+        return new UserDaoImpl(conn);
     }
 
-    public TestDao getTestDao(Connection conn) {
-        return new TestDao(conn);
+    public TestDaoImpl getTestDao(Connection conn) {
+        return new TestDaoImpl(conn);
     }
 
-    public QuestionDao getQuestionDao(Connection conn) {
-        return new QuestionDao(conn);
+    public QuestionDaoImpl getQuestionDao(Connection conn) {
+        return new QuestionDaoImpl(conn);
     }
 
-    public AnswerDao getAnswerDao(Connection conn) {
-        return new AnswerDao(conn);
+    public AnswerDaoImp getAnswerDao(Connection conn) {
+        return new AnswerDaoImp(conn);
     }
 
-    public ResultDao getResultDao(Connection conn) {
-        return new ResultDao(conn);
+    public ResultDaoImpl getResultDao(Connection conn) {
+        return new ResultDaoImpl(conn);
     }
 }

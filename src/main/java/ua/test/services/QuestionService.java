@@ -1,9 +1,9 @@
 package ua.test.services;
 
 import ua.test.connection.DataSource;
-import ua.test.dao.AnswerDao;
+import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.DaoFactory;
-import ua.test.dao.QuestionDao;
+import ua.test.dao.impl.QuestionDaoImpl;
 import ua.test.entity.Answer;
 import ua.test.entity.Question;
 
@@ -33,14 +33,14 @@ public class QuestionService {
     //TRANSACTION MUST BE HERE!!!!!
     private void addQuestion(int idTest, Question question) {
         Connection conn = DataSource.getInstance().getConnection();
-        QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao(conn);
-        AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao(conn);
+        QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao(conn);
+        AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao(conn);
 
-        int idQuestion = questionDao.addOne(question, idTest);
+        int idQuestion = questionDao.addQuestion(question, idTest);
         List<Answer> answers = question.getAnswers();
 
         for ( Answer answer: answers ) {
-            int idAnswer = answerDao.addOne(answer, idQuestion);
+            int idAnswer = answerDao.addAnswer(answer, idQuestion);
             answer.setId(idAnswer);
         }
     }
@@ -48,11 +48,11 @@ public class QuestionService {
     //TRANSACTION MUST BE HERE!!!!!
     public void deleteQuestion(int idQuestion) {
         Connection conn = DataSource.getInstance().getConnection();
-        QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao(conn);
-        AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao(conn);
+        QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao(conn);
+        AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao(conn);
 
         Question question = questionDao.findById(idQuestion);
-        List<Answer> answers = answerDao.selectByQuestionId(idQuestion);
+        List<Answer> answers = answerDao.findByQuestionId(idQuestion);
 
         for (Answer answer: answers) {
             answerDao.deleteById(answer.getId());

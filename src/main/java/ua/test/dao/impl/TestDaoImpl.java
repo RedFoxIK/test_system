@@ -1,14 +1,14 @@
-package ua.test.dao;
+package ua.test.dao.impl;
 
+import ua.test.dao.interfaces.TestDao;
 import ua.test.entity.Test;
-import ua.test.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestDao {
-    private static final String ADD_ONE = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `author`) VALUES(?, ?, ?, ?, ?)";
+public class TestDaoImpl implements TestDao{
+    private static final String ADD_TEST = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `author`) VALUES(?, ?, ?, ?, ?)";
     private static final String SELECT_ALL = "SELECT id_test, caption, description, size, activated, author FROM tests";
     private static final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated` FROM tests where author = ?";
     private static final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
@@ -16,14 +16,15 @@ public class TestDao {
 
     Connection conn;
 
-    public TestDao(Connection conn) {
+    public TestDaoImpl(Connection conn) {
         this.conn = conn;
     }
 
-    public int addOne(Test test) {
-        int idGenerated = -1;
+    @Override
+    public Integer addTest(Test test) {
+        Integer idGenerated = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(ADD_ONE, Statement.RETURN_GENERATED_KEYS) ) {
+        try ( PreparedStatement statement = conn.prepareStatement(ADD_TEST, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, test.getCaption());
             statement.setString(2, test.getDescription());
             statement.setInt(3, test.getSize());
@@ -35,12 +36,14 @@ public class TestDao {
             if ( rs.next() ) {
                 idGenerated = rs.getInt(1);
             }
+            return idGenerated;
         } catch ( SQLException e ) {
             e.printStackTrace();
         }
-        return idGenerated;
+        return null;
     }
 
+    @Override
     public Test findById(int id) {
         Test test = null;
 
@@ -54,38 +57,41 @@ public class TestDao {
                 test.setDescription(rs.getString("description"));
                 test.setSize(rs.getInt("size"));
                 test.setActivated(rs.getBoolean("activated"));
-                User user = (new UserDao(conn)).findById(rs.getInt("author"));
-                test.setAuthor(user);
+                return test;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return test;
+        return null;
     }
 
-    public List<Test> selectALL() {
+    @Override
+    public List<Test> findByUserId(int id) {
+        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_USER_ID) ) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            return getTests(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    @Override
+    public List<Test> findAll() {
         List<Test> tests = new ArrayList<>();
 
         try ( Statement statement = conn.createStatement();
               ResultSet rs = statement.executeQuery(SELECT_ALL) ) {
-
-            while ( rs.next() ) {
-                Test test = new Test();
-                test.setId(rs.getInt("id_test"));
-                test.setCaption(rs.getString("caption"));
-                test.setDescription(rs.getString("description"));
-                test.setSize(rs.getInt("size"));
-                test.setActivated(rs.getBoolean("activated"));
-                User user = (new UserDao(conn)).findById(rs.getInt("author"));
-                test.setAuthor(user);
-                tests.add(test);
-            }
+            return getTests(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return tests;
+        return null;
     }
 
+    @Override
     public void deleteById(int id) {
         try ( PreparedStatement statement = conn.prepareStatement(DELETE_BY_ID) ) {
             statement.setInt(1, id);
@@ -95,25 +101,17 @@ public class TestDao {
         }
     }
 
-    public List<Test> selectByUserId(int id) {
+    private List<Test> getTests(ResultSet rs) throws SQLException {
         List<Test> tests = new ArrayList<>();
 
-        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_USER_ID) ) {
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
-
-            while ( rs.next() ) {
-                Test test = new Test();
-                test.setId(rs.getInt("id_test"));
-                test.setCaption(rs.getString("caption"));
-                test.setDescription(rs.getString("description"));
-                test.setSize(rs.getInt("size"));
-                test.setActivated(rs.getBoolean("activated"));
-                tests.add(test);
-            }
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        while (rs.next()) {
+            Test test = new Test();
+            test.setId(rs.getInt("id_test"));
+            test.setCaption(rs.getString("caption"));
+            test.setDescription(rs.getString("description"));
+            test.setSize(rs.getInt("size"));
+            test.setActivated(rs.getBoolean("activated"));
+            tests.add(test);
         }
         return tests;
     }

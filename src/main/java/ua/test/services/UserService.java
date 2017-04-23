@@ -2,7 +2,7 @@ package ua.test.services;
 
 import ua.test.connection.DataSource;
 import ua.test.dao.DaoFactory;
-import ua.test.dao.UserDao;
+import ua.test.dao.impl.UserDaoImpl;
 import ua.test.entity.Role;
 import ua.test.entity.User;
 
@@ -10,7 +10,7 @@ import java.sql.Connection;
 
 public class UserService {
     Connection conn = DataSource.getInstance().getConnection();
-    UserDao userDao = DaoFactory.getInstance().getUserDao(conn);
+    UserDaoImpl userDao = DaoFactory.getInstance().getUserDao(conn);
 
     public UserService() {}
 
@@ -23,7 +23,7 @@ public class UserService {
         user.setName(name);
         user.setSurname(surname);
         user.setRole(Role.STUDENT);
-        return userDao.addOne(user);
+        return userDao.addUser(user);
     }
 
     public User getUserById(int id) {
