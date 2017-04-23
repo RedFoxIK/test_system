@@ -9,6 +9,9 @@
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
+    <form class="results"  method = "get" action="/testing_system/results">
+        <input type="submit" value="results">
+    </form>
     <c:forEach items="${test.questions}" var="question">
         <form method="post" action="/testing_system/delete_question">
         <div class="question">

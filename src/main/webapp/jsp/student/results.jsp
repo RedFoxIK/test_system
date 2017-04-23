@@ -21,7 +21,7 @@
                 <th>№</th>
                 <th>Name of the test</th>
                 <th>Mark</th>
-                <th>Pass time</th>
+                <th>Time</th>
             </tr>
             <c:forEach items="${results}" var="result">
                 <c:set var="count" value="${count + 1}" scope="page"/>

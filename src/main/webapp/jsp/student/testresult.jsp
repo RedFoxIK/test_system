@@ -15,7 +15,7 @@
 
             <c:if test="${mark > 99.99 }">
                 <h3> Well done! ☺</h3>
-                <img src="${pageContext.request.contextPath}/img/well_done.png" alt="" class="big_margin_top">
+                <img src="${pageContext.request.contextPath}/img/well_done.png" alt="" >
             </c:if>
             <div class="center">
                 <form method="get" action="/testing_system/">
