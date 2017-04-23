@@ -29,7 +29,7 @@ public class TestResultCommand implements Command {
             List<String> answers  = (answersArray == null) ? null : Arrays.asList(answersArray);
             testResult.put(questionId, answers);
         }
-        Integer idTest = Integer.parseInt(request.getParameter("test"));
+        Integer idTest = Integer.parseInt(request.getParameter("id_test"));
         mark = ServiceFactory.getResultService().giveMark(testResult);
         request.setAttribute("mark", mark);
         System.out.println(mark);

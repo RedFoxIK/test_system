@@ -5,6 +5,7 @@ import ua.test.commands.student.NewStudent;
 import ua.test.commands.tutor.AddQuestion;
 import ua.test.commands.general.MyProfile;
 import ua.test.commands.tutor.CreateQuestion;
+import ua.test.commands.tutor.DeleteQuestion;
 import ua.test.commands.tutor.EditTest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,7 @@ public class CommandFactory {
         tempMap.put("/testing_system/test_edit", new EditTest());
         tempMap.put("/testing_system/create_question", new CreateQuestion());
         tempMap.put("/testing_system/add_question", new AddQuestion());
+        tempMap.put("/testing_system/delete_question", new DeleteQuestion());
 
 
         commands = Collections.unmodifiableMap(tempMap);

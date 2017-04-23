@@ -1,0 +1,23 @@
+package ua.test.commands.tutor;
+
+import ua.test.entity.Test;
+import ua.test.services.ServiceFactory;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class DeleteQuestion implements ua.test.commands.Command {
+    @Override
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idQuestion = Integer.parseInt(request.getParameter("id_question"));
+        int idTest = Integer.parseInt(request.getParameter("id_test"));
+        System.out.println(idTest);
+        ServiceFactory.getQuestionService().deleteQuestion(idQuestion);
+        Test test = ServiceFactory.getTestService().getTestById(idTest);
+        test.addQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
+        request.setAttribute("test", test);
+        request.getRequestDispatcher("/jsp/tutor/test.jsp").forward(request, response);
+    }
+}

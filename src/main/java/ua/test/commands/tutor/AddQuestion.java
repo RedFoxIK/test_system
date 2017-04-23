@@ -1,5 +1,6 @@
 package ua.test.commands.tutor;
 
+import ua.test.entity.Test;
 import ua.test.services.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ public class AddQuestion implements ua.test.commands.Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idTest = Integer.parseInt(request.getParameter("id_test"));
+        Test test = ServiceFactory.getTestService().getTestById(idTest);
         String[] answersId = request.getParameterValues("group");
         List<String> answers = new ArrayList<>();
         Integer numbers = Integer.valueOf(request.getParameter("number_answers"));
@@ -24,6 +26,9 @@ public class AddQuestion implements ua.test.commands.Command {
         for ( int i = 0; i < answersId.length; i++ ) {
             System.out.println(answersId[i]);
         }
-        ServiceFactory.getTestService().addQuestion(idTest, questionText, answers, answersId);
+        ServiceFactory.getQuestionService().addQuestion(idTest, questionText, answers, answersId);
+        request.setAttribute("test", test);
+        test.addQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
+        request.getRequestDispatcher("/jsp/tutor/test.jsp").forward(request, response);
     }
 }

@@ -9,8 +9,8 @@
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
-    <c:forEach items="${questions}" var="question">
-        <form method="post" action="">
+    <c:forEach items="${test.questions}" var="question">
+        <form method="post" action="/testing_system/delete_question">
         <div class="question">
             <h3> <c:out value="${question.text}"/> </h3>
 
@@ -28,7 +28,6 @@
 
 
                     <input type="<c:out value="${type}"/>" disabled="true" <c:out value="${checked}"/> ">
-
                     <span> <c:out value="${answer.text}"/> </span> <br>
 
 
@@ -36,6 +35,7 @@
 
         </div>
             <input type="hidden" name="id_question" value="<c:out value="${question.id}"/>">
+            <input type="hidden" name="id_test"  value="<c:out value="${test.id}"/>"/>
             <input type="submit" value="delete">
         </form>
         <hr>

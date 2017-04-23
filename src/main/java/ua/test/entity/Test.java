@@ -68,6 +68,10 @@ public class Test {
         questions.add(question);
     }
 
+    public void addQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
     public List<Question> getQuestions() {
         return questions;
     }

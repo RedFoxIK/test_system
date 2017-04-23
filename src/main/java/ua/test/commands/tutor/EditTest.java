@@ -24,9 +24,10 @@ public class EditTest implements Command {
                 System.out.println(answer.isRight());
             }
         }
-
+        test.addQuestions(questions);
         request.setAttribute("test", test);
-        request.setAttribute("questions", questions);
+        System.out.println("1 " + questions);
+        System.out.println("2 " + test.getQuestions());
         request.getRequestDispatcher("/jsp/tutor/test.jsp").forward(request, response);
     }
 }
