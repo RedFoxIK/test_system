@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerDao {
-    private final String ADD_ONE = "INSERT INTO answers(`text`, `right`, `id_question`) VALUES(?, ?, ?)";
-    private final String DELETE_BY_ID = "DELETE FROM answers WHERE id_answer = ?";
-    private final String FIND_BY_ID = "SELECT id_answer, text, right, id_question FROM answers WHERE id_answer = ?";
-    private final String FIND_BY_QUESTION_ID = "SELECT `id_answer`, `text`, `right` FROM answers WHERE `id_question` = ?";
-    private final String FIND_RIGHT_ANSWERS_BY_QUESTION_ID = "SELECT `id_answer`, `text` FROM answers WHERE `id_question` = ? AND `right` = 1";
+    private static final String ADD_ONE = "INSERT INTO answers(`text`, `right`, `id_question`) VALUES(?, ?, ?)";
+    private static final String DELETE_BY_ID = "DELETE FROM answers WHERE id_answer = ?";
+    private static final String FIND_BY_ID = "SELECT id_answer, text, right, id_question FROM answers WHERE id_answer = ?";
+    private static final String FIND_BY_QUESTION_ID = "SELECT `id_answer`, `text`, `right` FROM answers WHERE `id_question` = ?";
+    private static final String FIND_RIGHT_ANSWERS_BY_QUESTION_ID = "SELECT `id_answer`, `text` FROM answers WHERE `id_question` = ? AND `right` = 1";
 
     Connection conn;
 

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDao {
-    private final String ADD_ONE = "INSERT INTO questions(`text`, `id_test`, `mult_choice`) VALUES(?, ?, ?)";
-    private final String SELECT_ALL = "SELECT `id_question`, `text`, `mult_choice` FROM questions";
-    private final String DELETE_BY_ID = "DELETE FROM questions WHERE `id_question` = ?";
-    private final String FIND_BY_ID = "SELECT `text` FROM questions WHERE `id_question` = ?";
-    private final String FIND_BY_TEST_ID = "SELECT `id_question`, `text`, `mult_choice` FROM questions WHERE `id_test` = ?";
+    private static final String ADD_ONE = "INSERT INTO questions(`text`, `id_test`, `mult_choice`) VALUES(?, ?, ?)";
+    private static final String SELECT_ALL = "SELECT `id_question`, `text`, `mult_choice` FROM questions";
+    private static final String DELETE_BY_ID = "DELETE FROM questions WHERE `id_question` = ?";
+    private static final String FIND_BY_ID = "SELECT `text` FROM questions WHERE `id_question` = ?";
+    private static final String FIND_BY_TEST_ID = "SELECT `id_question`, `text`, `mult_choice` FROM questions WHERE `id_test` = ?";
 
     Connection conn;
 

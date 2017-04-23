@@ -10,7 +10,7 @@ public class Test {
     private String caption;
     private String description;
     private User author;
-    List<Question> questions;
+    private List<Question> questions;
 
     public Test() {
         questions = new ArrayList<>();

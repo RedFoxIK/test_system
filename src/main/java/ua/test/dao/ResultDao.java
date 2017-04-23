@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultDao {
-    private final String SELECT_BY_USER_ID = "SELECT `id_result`, `id_test`, `mark`, `date` FROM results WHERE `id_user`  = ?";
-    private final String ADD_ONE = "INSERT INTO results(`id_user`, `id_test`, `mark`, `date`) VALUES(?, ?, ?, ?)";
+    private static final String SELECT_BY_USER_ID = "SELECT `id_result`, `id_test`, `mark`, `date` FROM results WHERE `id_user`  = ?";
+    private static final String ADD_ONE = "INSERT INTO results(`id_user`, `id_test`, `mark`, `date`) VALUES(?, ?, ?, ?)";
 
     Connection conn;
 

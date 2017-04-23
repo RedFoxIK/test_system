@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDao {
-    private final String ADD_ONE = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `author`) VALUES(?, ?, ?, ?, ?)";
-    private final String SELECT_ALL = "SELECT id_test, caption, description, size, activated, author FROM tests";
-    private final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated` FROM tests where author = ?";
-    private final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
-    private final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, author FROM tests WHERE id_test = ?";
+    private static final String ADD_ONE = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `author`) VALUES(?, ?, ?, ?, ?)";
+    private static final String SELECT_ALL = "SELECT id_test, caption, description, size, activated, author FROM tests";
+    private static final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated` FROM tests where author = ?";
+    private static final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
+    private static final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, author FROM tests WHERE id_test = ?";
 
     Connection conn;
 

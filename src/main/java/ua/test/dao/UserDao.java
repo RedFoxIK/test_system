@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
-    private final String ADD_ONE = "INSERT INTO users(`login`, `password`, `name`, `surname`, `email`, `role`) VALUES(?, ?, ?, ?, ?, ?)";
-    private final String SELECT_ALL = "SELECT id_user, login, password, name, surname, email, ole FROM users";
-    private final String DELETE_BY_ID = "DELETE FROM users WHERE id_user = ?";
-    private final String FIND_BY_ID = "SELECT id_user, login, password, name, surname, email, role FROM users WHERE id_user = ?";
-    private final String FIND_BY_LOGIN = "SELECT `id_user`, `login`, `password`, `name`, `surname`, `email`, `role` FROM users WHERE login = ? AND password = ?";
-    private final String CHECK_UNIQUE_LOGIN = "SELECT `login` FROM users WHERE login = ?";
-    private final String CHECK_UNIQUE_EMAIL = "SELECT `email` FROM users WHERE email = ?";
-    private final String UPDATE_PASSWORD = "UPDATE users set `password` = ? WHERE `id_user` = ?";
-    private final String UPDATE_EMAIL = "UPDATE users set `email` = ? WHERE `id_user` = ?";
+    private static final String ADD_ONE = "INSERT INTO users(`login`, `password`, `name`, `surname`, `email`, `role`) VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_ALL = "SELECT id_user, login, password, name, surname, email, ole FROM users";
+    private static final String DELETE_BY_ID = "DELETE FROM users WHERE id_user = ?";
+    private static final String FIND_BY_ID = "SELECT id_user, login, password, name, surname, email, role FROM users WHERE id_user = ?";
+    private static final String FIND_BY_LOGIN = "SELECT `id_user`, `login`, `password`, `name`, `surname`, `email`, `role` FROM users WHERE login = ? AND password = ?";
+    private static final String CHECK_UNIQUE_LOGIN = "SELECT `login` FROM users WHERE login = ?";
+    private static final String CHECK_UNIQUE_EMAIL = "SELECT `email` FROM users WHERE email = ?";
+    private static final String UPDATE_PASSWORD = "UPDATE users set `password` = ? WHERE `id_user` = ?";
+    private static final String UPDATE_EMAIL = "UPDATE users set `email` = ? WHERE `id_user` = ?";
 
     Connection conn;
 
@@ -41,10 +41,11 @@ public class UserDao {
                 idGenerated = rs.getInt(1);
             }
             rs.close();
+            return idGenerated;
         } catch ( SQLException e ) {
             e.printStackTrace();
         }
-        return idGenerated;
+        return -1;
     }
 
     public List<User> selectALL() {
@@ -73,10 +74,11 @@ public class UserDao {
                 user = getUserFromRS(rs);
             }
             rs.close();
+            return user;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
 

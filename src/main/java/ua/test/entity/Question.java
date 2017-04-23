@@ -6,8 +6,8 @@ import java.util.List;
 public class Question {
     private int id;
     private String text;
-    boolean multChoice;
-    List<Answer> answers;
+    private boolean multChoice;
+    private List<Answer> answers;
 
     public Question() {
         this.answers = new ArrayList<>();

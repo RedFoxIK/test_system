@@ -19,8 +19,9 @@ public class AddQuestion implements ua.test.commands.Command {
         List<String> answers = new ArrayList<>();
         Integer numbers = Integer.valueOf(request.getParameter("number_answers"));
         String questionText = request.getParameter("question");
-        Boolean multChoice = request.getParameter("mult_choice") != null ? true : false;
+//        boolean multChoice = request.getParameter("mult_choice") != null ? true : false;
 
+//        System.out.println(multChoice);
         for (Integer i = 0; i < numbers; i++ ) {
             answers.add(request.getParameter(i.toString()));
         }

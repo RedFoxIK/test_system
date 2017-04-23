@@ -29,10 +29,8 @@
                         <c:set var="checked" value="checked" scope="page"/>
                     </c:if>
 
-
                     <input type="<c:out value="${type}"/>" disabled="true" <c:out value="${checked}"/> ">
                     <span> <c:out value="${answer.text}"/> </span> <br>
-
 
             </c:forEach>
 
