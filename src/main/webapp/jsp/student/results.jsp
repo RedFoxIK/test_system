@@ -16,7 +16,13 @@
         </c:if>
 
         <c:set var="count" value="0" scope="page" />
-        <table>
+        <table class="table_results">
+            <tr>
+                <th>№</th>
+                <th>Name of the test</th>
+                <th>Mark</th>
+                <th>Pass time</th>
+            </tr>
             <c:forEach items="${results}" var="result">
                 <c:set var="count" value="${count + 1}" scope="page"/>
                 <tr>
@@ -28,9 +34,9 @@
             </c:forEach>
         </table>
 
-        <div>
+        <div class="center">
             <form method="get" action="/testing_system/">
-                <input type="submit" value="On main page">
+                <input type="submit" value="On main page" class="main_page">
             </form>
         </div>
 
