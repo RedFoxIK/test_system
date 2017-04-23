@@ -18,28 +18,43 @@
     
     <div class="content">
         <form method="post" action="/testing_system/test_result">
-            <c:forEach items="${questions}" var="question">
-                <c:set var="count" value="${count + 1}" scope="page"/>
 
-                <div data-name="block${count}">
-                    <h1><c:out value="${question.text}"/> </h1>
-                        <c:forEach items="${question.answers}" var="answer">
-                                <input type="checkbox" name="${question.id}" value="${answer.id}">
+            <div class="test_area">
+
+                <div class="item_question">
+
+                    <c:forEach items="${questions}" var="question">
+                        <c:set var="count" value="${count + 1}" scope="page"/>
+
+                        <div data-name="block${count}">
+                            <h1><c:out value="${question.text}"/> </h1>
+                            <c:forEach items="${question.answers}" var="answer">
+                                <div class="item_answer"><input type="checkbox" name="${question.id}" value="${answer.id}">
                                 <c:out value="${answer.text}"/>
                                 <br>
-                        </c:forEach>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </c:forEach>
+
                 </div>
-            </c:forEach>
 
-            <c:set var="number_questions" value="${fn:length(questions)}"/>
+                <c:set var="number_questions" value="${fn:length(questions)}"/>
 
-            <c:forEach begin="1" end="${number_questions}" varStatus="loop">
-                <input type="button" value="<c:out value="${loop.count}"/>" data-target="block${loop.count}">
-            </c:forEach>
+                <div class="item_number_question">
+
+                    <c:forEach begin="1" end="${number_questions}" varStatus="loop">
+                        <input type="button" value="<c:out value="${loop.count}"/>" data-target="block${loop.count}" class="number_question">
+                    </c:forEach>
+
+                </div>
+
+            </div>
 
             <input type="hidden" name="idQuestions" value="<c:out value="${idQuestions}"/>" />
             <input type="hidden" name="test" value="<c:out value="${test.id}"/>" />
-            <input type="submit" value="SEND"/>
+
+            <div class="item_submit"><input type="submit" value="SEND" class="button_send"/></div>
         </form>
 
     </div>

@@ -6,6 +6,7 @@ import java.util.List;
 public class Question {
     private int id;
     private String text;
+    boolean multChoice;
     List<Answer> answers;
 
     public Question() {
@@ -26,6 +27,18 @@ public class Question {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public boolean isMultChoice() {
+        return multChoice;
+    }
+
+    public void setMultChoice(boolean multChoice) {
+        this.multChoice = multChoice;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 
     public void addAnswers(List<Answer> answers ) {

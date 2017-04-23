@@ -14,7 +14,7 @@
         <h1>Question</h1>
         <input type="text" name="question"> <br>
 
-        <input type="checkbox" onclick="changeType()"> <span>multiple choice</span> <br>
+        <input type="checkbox" name="mult_choice" value="yes" onclick="changeType()"> <span>multiple choice</span> <br>
         <h3>Answers:</h3>
 
         <input class="type_answer" name="group" value="0">

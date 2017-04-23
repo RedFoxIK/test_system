@@ -12,10 +12,10 @@
     <main>
         <div class="info">
             <p>
-                Dear, student please choose!
+                Dear student, please choose!
             </p>
             <form class="results"  method = "get" action="/testing_system/results">
-                <input type="submit" value="results">
+                <input type="submit" value="results" class="button_results">
             </form>
             </div>
             <div class="tests">

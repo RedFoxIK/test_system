@@ -23,7 +23,7 @@ public class Answer {
         this.text = text;
     }
 
-    public boolean isRigth() {
+    public boolean isRight() {
         return right;
     }
 

@@ -26,7 +26,7 @@ public class AnswerDao {
         answer.getText();
         try ( PreparedStatement statement = conn.prepareStatement(ADD_ONE, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, answer.getText());
-            statement.setBoolean(2, answer.isRigth());
+            statement.setBoolean(2, answer.isRight());
             statement.setInt(3, idQuestion);
             statement.executeUpdate();
 

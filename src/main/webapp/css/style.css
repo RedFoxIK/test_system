@@ -2,7 +2,7 @@
 * {
     padding: 0;
     margin: 0;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .big_margin_top {margin-top:100px;}
@@ -62,7 +62,9 @@ p.error {
 }
 
 .buttons {
-    float: right;
+    display: inline-block;
+    width: 49%;
+    text-align: right;
 }
 
 .buttons form {
@@ -107,13 +109,17 @@ p.error {
     background: #66AAFF;
     cursor:pointer;
 }
+
+.image_position {width:500px; margin:0 auto;max-width: 100%;}
 /*END MAIN STYLES*/
 
 /*LOG-IN STYLES*/
 .log_in {
     padding: 20px;
     margin:70px auto 0;
-    max-width: 35vw;
+    width: 35vw;
+    max-width:500px;
+    min-width:200px;
     text-align: center;
     background-color: #4682B4;
     border-radius: 20px;
@@ -141,6 +147,7 @@ p.error {
 .text_log_in {
     font-size: 20px;
     margin: 10px;
+    padding: 8px;
     background-color: yellow;
     border-radius: 10px;
 }
@@ -161,6 +168,9 @@ form input:focus {
 /*END REGISTRATION STYLES*/
 
 /*START TEST STYLES*/
+
+
+
 .info {
     text-align: center;
     line-height: 10vh;
@@ -168,10 +178,29 @@ form input:focus {
 .info p {
     vertical-align: middle;
     display: inline-block;
+    width: 80%;
+    text-align: center;
+    min-width:250px;
+    font-size: 35px;
 }
 
 .results {
     display: inline-block;
+}
+
+.results .button_results {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.results .button_results:hover {
+    background: #66AAFF;
+    cursor:pointer;
 }
 
 .tests {
@@ -182,8 +211,9 @@ form input:focus {
     background-color: lightyellow;
     border: white solid;
     border-radius: 30px;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin: 0 auto;
+    width:85%;
+    min-width: 350px;
     text-align: center;
 }
 
@@ -225,13 +255,14 @@ form input:focus {
     bottom: 5px;
     border-color: black;
 }
+.test p {font-size:24px;}
 
 .test .author {
     color: black;
     font-weight: normal;
     display: inline-block;
     background-color: white;
-    font-size: 12px;
+    font-size: 16px;
     height: 40px;
     width: 100%;
     margin: 0px;
@@ -247,35 +278,132 @@ form input:focus {
 .spoiler_show {
     display: block;
 }
+
+.button_send {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 10px 30px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.button_send:hover {
+    background: #66AAFF;
+    cursor:pointer;
+}
+
+.number_question {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    width: 26px;
+    margin: 5px 0;
+    box-shadow: 5px 5px 15px #3496FE;
+}
+
+.number_question:active {
+    background:#50C878;
+}
+
+.test_area {
+    margin-top: 55px;
+    padding: 30px;
+    min-height: 140px;
+    padding-bottom: 0;
+}
+
+.item_question {
+    display:inline-block;
+    width: 100%;
+    min-height: 250px;
+    min-width:500px;
+    padding:20px;
+    border: 2px solid #3496FE;
+    border-radius:20px;
+    vertical-align: top;
+}
+
+.item_question div .item_answer {
+    margin:10px 0px;
+    padding-left:30px;
+}
+
+.item_question h1 {
+    margin: 10px 0;
+    font-size:30px;
+    background-color: #89D3F0;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 30px;
+}
+
+.item_number_question {
+    width: 100%;
+    display:inline-block;
+    min-width:100px;
+    margin-top:30px;
+}
+
+.item_submit {
+    width:100%;
+    text-align: center;
+}
 /*END TEST STYLES*/
 
 /*PROFILE STYLES*/
 .profile_image IMG {
     height: 200px;
 }
- /*PROFILE STYLES*/
 
-header {height: auto;}
-
-.logo {
-    display:inline-block;
+.main_info {
+    max-width: 500px;
+    border: 2px solid #3496FE;
+    border-radius: 30px;
+    margin: 40px auto;
 }
 
-.buttons form {
+.profile_image {
     display: inline-block;
-    margin:20px;
+    vertical-align: middle;
+    width: 39%;
 }
 
-.profile_button {float:none;}
+.name_surname {
+    display:inline-block;
+    width: 59%;
+    vertical-align: middle;
+}
 
-.buttons form input {
+.name_surname h2 {
+    font-size:40px;
+}
+
+.other_info {
+    margin: 40px auto;
+}
+
+.other_info form {
+    margin: 20px;
+}
+
+.other_info form input[type="submit"] {
     background: #3496FE;
     border: 2px solid #3496FE;
     border-radius: 10px;
     padding: 5px;
-    font-size: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
 }
 
-.buttons form input:hover {
+.other_info form input[type="submit"]:hover {
     background: #66AAFF;
+    cursor:pointer;
 }
+ /*PROFILE STYLES*/

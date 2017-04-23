@@ -12,12 +12,21 @@
     <c:forEach items="${questions}" var="question">
         <div class="question" id="<c:out value='${question.id}'/>" onclick="showTest(this.id)">
             <h3> <c:out value="${question.text}"/> </h3>
-            <c:forEach items="${question.answers}" var="answer">
 
-                <c:set var="checked" value="checked" scope="page"/>
-                <c:set var="type" value="radio" scope="page" />
+            <c:set var="type" value="radio" scope="page" />
+            <c:if test="${question.multChoice}">
+                <c:set var="type" value="checkbox" scope="page" />
+            </c:if>
+
+            <c:forEach items="${question.answers}" var="answer">
+                <c:set var="checked" value="" scope="page"/>
+                <c:if test="${answer.right}">
+                    <c:set var="checked" value="checked" scope="page"/>
+                </c:if>
+
 
                 <input type="<c:out value="${type}"/>" disabled="true" <c:out value="${checked}"/> ">
+
                 <span> <c:out value="${answer.text}"/> </span> <br>
             </c:forEach>
         </div>

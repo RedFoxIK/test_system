@@ -7,7 +7,7 @@
     <%@ include file="../main/header.jsp"%>
     <main>
         <div class="content center">
-            <img src="${pageContext.request.contextPath}/img/oops.png" alt="" class="big_margin_top">
+            <div class="image_position"><img src="${pageContext.request.contextPath}/img/oops.png" alt="" class="big_margin_top"></div>
             <p class="big_font_size">Something is wrong!</p>
 
             <form method="get" action="/testing_system/">

@@ -27,6 +27,6 @@ public class TestCommand implements Command {
         request.getSession().setAttribute(idQuestions, questions);
         request.setAttribute("idQuestions", idQuestions);
 
-        request.getRequestDispatcher("/jsp/student/newQuestion.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/student/test.jsp").forward(request, response);
     }
 }

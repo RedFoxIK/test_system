@@ -26,6 +26,7 @@ public class FirstCommand implements Command {
             request.setAttribute("tests", ServiceFactory.getTestService().getAllTests());
             request.getRequestDispatcher("/jsp/student/tests.jsp").forward(request, response);
         } else {
+            request.setAttribute("tests", ServiceFactory.getTestService().getTestsByUserId(userId));
             request.getRequestDispatcher("/jsp/tutor/tests.jsp").forward(request, response);
         }
     }

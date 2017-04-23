@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDao {
-    private final String ADD_ONE = "INSERT INTO questions(`text`, `id_test`) VALUES(?, ?)";
-    private final String SELECT_ALL = "SELECT `id_question`, `text` FROM questions";
+    private final String ADD_ONE = "INSERT INTO questions(`text`, `id_test`, `mult_choice`) VALUES(?, ?, ?)";
+    private final String SELECT_ALL = "SELECT `id_question`, `text`, `mult_choice` FROM questions";
     private final String DELETE_BY_ID = "DELETE FROM questions WHERE `id_question` = ?";
     private final String FIND_BY_ID = "SELECT `text` FROM questions WHERE `id_question` = ?";
-    private final String FIND_BY_TEST_ID = "SELECT `id_question`, `text` FROM questions WHERE `id_test` = ?";
+    private final String FIND_BY_TEST_ID = "SELECT `id_question`, `text`, `mult_choice` FROM questions WHERE `id_test` = ?";
 
     Connection conn;
 
@@ -25,6 +25,7 @@ public class QuestionDao {
         try ( PreparedStatement statement = conn.prepareStatement(ADD_ONE, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, question.getText());
             statement.setInt(2, idTest);
+            statement.setBoolean(3, question.isMultChoice());
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -48,6 +49,7 @@ public class QuestionDao {
                 question = new Question();
                 question.setId(id);
                 question.setText(rs.getString("text"));
+                question.setMultChoice(rs.getBoolean("mult_choice"));
             }
             rs.close();
         } catch (SQLException e) {
@@ -66,6 +68,7 @@ public class QuestionDao {
                 Question question = new Question();
                 question.setId(rs.getInt("id_question"));
                 question.setText(rs.getString("text"));
+                question.setMultChoice(rs.getBoolean("mult_choice"));
                 questions.add(question);
             }
         } catch (SQLException e) {
@@ -85,6 +88,7 @@ public class QuestionDao {
 
                 question.setId(rs.getInt("id_question"));
                 question.setText(rs.getString("text"));
+                question.setMultChoice(rs.getBoolean("mult_choice"));
                 questions.add(question);
             }
             rs.close();
