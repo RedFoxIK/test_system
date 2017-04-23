@@ -13,6 +13,5 @@
 <form method="get" action="/testing_system/">
     <input type="button" value="On main page" class="main_page">
 </form>
-
 </body>
 </html>

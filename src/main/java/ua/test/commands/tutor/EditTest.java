@@ -1,5 +1,6 @@
-package ua.test.commands;
+package ua.test.commands.tutor;
 
+import ua.test.commands.Command;
 import ua.test.entity.Answer;
 import ua.test.entity.Question;
 import ua.test.entity.Test;

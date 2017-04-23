@@ -31,5 +31,10 @@
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
         <input type="submit" value="SEND" onclick="count_answers()">
     </form>
+
+    <form method="post" action="/testing_system/test_edit">
+        <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
+        <input type="submit" value="BACK">
+    </form>
 </body>
 </html>
