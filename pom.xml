@@ -73,9 +73,12 @@
               <artifactId>tomcat7-maven-plugin</artifactId>
               <version>2.2</version>
               <configuration>
+                  <url>http://localhost:8080/manager/text</url>
                   <uriEncoding>UTF-8</uriEncoding>
                   <path>/testing_system</path>
                   <update>true</update>
+                  <username>admin</username>
+                  <password>1111</password>
               </configuration>
           </plugin>
       </plugins>

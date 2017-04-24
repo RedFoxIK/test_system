@@ -11,7 +11,7 @@
             <p class="big_font_size">Something is wrong!</p>
 
             <form method="get" action="/testing_system/">
-                <input type="button" value="On main page" class="main_page">
+                <input type="submit" value="On main page" class="main_page">
             </form>
 
         </div>
