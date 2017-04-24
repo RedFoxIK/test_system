@@ -1,6 +1,8 @@
 package ua.test.dao.impl;
 
 import org.apache.log4j.Logger;
+import ua.test.connection.ConnectionWrapper;
+import ua.test.connection.TransactionManager;
 import ua.test.dao.interfaces.QuestionDao;
 import ua.test.entity.Question;
 
@@ -19,17 +21,15 @@ public class QuestionDaoImpl implements QuestionDao {
 
     private static final String DB_CON_ERROR = "Database connection error";
 
-    Connection conn;
-
-    public QuestionDaoImpl(Connection conn) {
-        this.conn = conn;
+    public QuestionDaoImpl() {
     }
 
     @Override
     public Integer addQuestion(Question question, int idTest) {
         Integer idGenerated = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(ADD_QUESTION, Statement.RETURN_GENERATED_KEYS) ) {
+        try (ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+             PreparedStatement statement = connWrap.prepareStatement(ADD_QUESTION, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, question.getText());
             statement.setInt(2, idTest);
             statement.setBoolean(3, question.isMultChoice());
@@ -51,7 +51,8 @@ public class QuestionDaoImpl implements QuestionDao {
     public Question findById(int id) {
         Question question = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(SELECT_BY_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if ( rs.next() ) {
@@ -72,7 +73,8 @@ public class QuestionDaoImpl implements QuestionDao {
     public List<Question> findAll() {
         List<Question> questions;
 
-        try ( Statement statement = conn.createStatement();
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                Statement statement = connWrap.createStatement();
               ResultSet rs = statement.executeQuery(SELECT_ALL) ) {
             questions = getQuestions(rs);
         } catch (SQLException e) {
@@ -86,7 +88,8 @@ public class QuestionDaoImpl implements QuestionDao {
     public List<Question> findByTestId(int id) {
         List<Question> questions;
 
-        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_TEST_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(SELECT_BY_TEST_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             questions = getQuestions(rs);
@@ -99,7 +102,8 @@ public class QuestionDaoImpl implements QuestionDao {
 
     @Override
     public void deleteById(int id) {
-        try ( PreparedStatement statement = conn.prepareStatement(DELETE_BY_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(DELETE_BY_ID) ) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {

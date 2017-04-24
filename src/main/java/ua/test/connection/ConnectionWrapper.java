@@ -1,24 +1,38 @@
 package ua.test.connection;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
-public class ConnectionWrapper implements AutoCloseable{
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class ConnectionWrapper implements AutoCloseable {
+    private static final Logger LOGGER = Logger.getLogger(ConnectionWrapper.class);
+
+    private static final String DB_CON_ERROR = "Database connection error";
+
+    private boolean transactionActive;
+
     Connection conn;
 
-    public ConnectionWrapper() {
-        this.conn = DataSource.getInstance().getConnection();
+    public ConnectionWrapper(Connection conn) {
+        this.conn = conn;
     }
 
-    public Connection getConnection() {
-        return conn;
+    public boolean isTransactionActive() {
+        return transactionActive;
+    }
+
+    public void setTransactionActive(boolean transactionActive) {
+        transactionActive = transactionActive;
     }
 
     public void setAutoCommit(boolean autoCommit) {
         try {
             conn.setAutoCommit(autoCommit);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR, e);
         }
     }
 
@@ -26,7 +40,7 @@ public class ConnectionWrapper implements AutoCloseable{
         try {
             conn.commit();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR, e);
         }
     }
 
@@ -34,16 +48,30 @@ public class ConnectionWrapper implements AutoCloseable{
         try {
             conn.rollback();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR, e);
         }
     }
 
     @Override
-    public void close() throws Exception {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public void close()  {
+        if ( !this.transactionActive ) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public PreparedStatement prepareStatement(String sql, int returnGeneratedKeys) throws SQLException {
+        return this.conn.prepareStatement(sql, returnGeneratedKeys);
+    }
+
+    public PreparedStatement prepareStatement(String sql) throws SQLException {
+        return this.conn.prepareStatement(sql);
+    }
+
+    public Statement createStatement() throws SQLException {
+        return this.conn.createStatement();
     }
 }

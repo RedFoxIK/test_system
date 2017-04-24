@@ -1,21 +1,18 @@
 package ua.test.services;
 
-import ua.test.connection.DataSource;
-import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.DaoFactory;
+import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.impl.QuestionDaoImpl;
 import ua.test.dao.impl.TestDaoImpl;
 import ua.test.entity.Question;
 import ua.test.entity.Test;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class TestService {
-    Connection conn = DataSource.getInstance().getConnection();
-    TestDaoImpl testDao = DaoFactory.getInstance().getTestDao(conn);
-    QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao(conn);
-    AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao(conn);
+    TestDaoImpl testDao = DaoFactory.getInstance().getTestDao();
+    QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
+    AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
 
     public List<Test> getAllTests() {
         return testDao.findAll();

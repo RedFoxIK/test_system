@@ -1,6 +1,8 @@
 package ua.test.dao.impl;
 
 import org.apache.log4j.Logger;
+import ua.test.connection.ConnectionWrapper;
+import ua.test.connection.TransactionManager;
 import ua.test.dao.interfaces.UserDao;
 import ua.test.entity.Role;
 import ua.test.entity.User;
@@ -24,17 +26,15 @@ public class UserDaoImpl implements UserDao {
 
     private static final String DB_CON_ERROR = "Database connection error";
 
-    Connection conn;
-
-    public UserDaoImpl(Connection conn) {
-        this.conn = conn;
+    public UserDaoImpl() {
     }
 
     @Override
     public Integer addUser(User user) {
         Integer idGenerated = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(ADD_USER, Statement.RETURN_GENERATED_KEYS) ) {
+        try (ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+             PreparedStatement statement = connWrap.prepareStatement(ADD_USER, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getName());
@@ -59,7 +59,8 @@ public class UserDaoImpl implements UserDao {
     public List<User> selectAll() {
         List<User> users = new ArrayList<>();
 
-        try ( Statement statement = conn.createStatement();
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                Statement statement = connWrap.createStatement();
               ResultSet rs = statement.executeQuery(SELECT_ALL) ) {
             while ( rs.next() ) {
                 users.add(getUser(rs));
@@ -75,7 +76,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findByLogin(String login, String password) {
         User user = null;
-        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_LOGIN) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(SELECT_BY_LOGIN) ) {
             statement.setString(1, login);
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
@@ -93,7 +95,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findById(int id) {
         User user = null;
-        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(SELECT_BY_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if ( rs.next() ) {
@@ -110,7 +113,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteById(int id) {
-        try ( PreparedStatement statement = conn.prepareStatement(DELETE_BY_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(DELETE_BY_ID) ) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -152,7 +156,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     private boolean updateUser(int id, String key, String sql) {
-        try ( PreparedStatement statement = conn.prepareStatement(UPDATE_PASSWORD) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(UPDATE_PASSWORD) ) {
             int result;
 
             statement.setString(1, key);
@@ -168,7 +173,8 @@ public class UserDaoImpl implements UserDao {
     private boolean isSuchRecord(String key, String sql) {
         boolean result = false;
 
-        try ( PreparedStatement statement = conn.prepareStatement(sql) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(sql) ) {
             statement.setString(1, key);
             ResultSet rs = statement.executeQuery();
             result = rs.next();

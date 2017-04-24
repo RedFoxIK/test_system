@@ -1,6 +1,8 @@
 package ua.test.dao.impl;
 
 import org.apache.log4j.Logger;
+import ua.test.connection.ConnectionWrapper;
+import ua.test.connection.TransactionManager;
 import ua.test.dao.interfaces.ResultDao;
 import ua.test.entity.Result;
 import ua.test.entity.Test;
@@ -17,17 +19,15 @@ public class ResultDaoImpl implements ResultDao {
 
     private static final String DB_CON_ERROR = "Database connection error";
 
-    Connection conn;
-
-    public ResultDaoImpl(Connection conn) {
-        this.conn = conn;
+    public ResultDaoImpl() {
     }
 
     @Override
     public Integer addResult(Result result) {
         Integer idGenerated = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(ADD_RESULT, Statement.RETURN_GENERATED_KEYS) ) {
+        try (ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+             PreparedStatement statement = connWrap.prepareStatement(ADD_RESULT, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setInt(1, result.getUser().getId());
             statement.setInt(2, result.getTest().getId());
             statement.setDouble(3, result.getMark());
@@ -50,7 +50,8 @@ public class ResultDaoImpl implements ResultDao {
     public List<Result> findByUserId(int id) {
         List<Result> results = new ArrayList<>();
 
-        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_USER_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(SELECT_BY_USER_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 

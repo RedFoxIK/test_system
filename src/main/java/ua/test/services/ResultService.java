@@ -1,8 +1,7 @@
 package ua.test.services;
 
-import ua.test.connection.DataSource;
-import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.DaoFactory;
+import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.impl.ResultDaoImpl;
 import ua.test.dao.impl.TestDaoImpl;
 import ua.test.entity.Answer;
@@ -10,16 +9,14 @@ import ua.test.entity.Result;
 import ua.test.entity.Test;
 import ua.test.entity.User;
 
-import java.sql.Connection;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 public class ResultService {
-    Connection conn = DataSource.getInstance().getConnection();
-    ResultDaoImpl resultDao = DaoFactory.getInstance().getResultDao(conn);
-    TestDaoImpl testDao = DaoFactory.getInstance().getTestDao(conn);
-    AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao(conn);
+    ResultDaoImpl resultDao = DaoFactory.getInstance().getResultDao();
+    TestDaoImpl testDao = DaoFactory.getInstance().getTestDao();
+    AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
 
 
     public ResultService() {}
@@ -57,10 +54,8 @@ public class ResultService {
         result.setUser(user);
         result.setTest(test);
         result.setMark(mark);
-        System.out.println("ATTENTION MARK = 0.0 !!!!!" + mark);
-        System.out.println("ATTENTION MARK = 1.0 !!!!!" + result.getMark());
         result.setDateTime(dateTime);
-        id = DaoFactory.getInstance().getResultDao(conn).addResult(result);
+        id = DaoFactory.getInstance().getResultDao().addResult(result);
         result.setId(id);
     }
 

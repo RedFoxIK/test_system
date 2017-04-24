@@ -13,23 +13,23 @@ public class DaoFactory {
         return instance;
     }
 
-    public UserDaoImpl getUserDao(Connection conn) {
-        return new UserDaoImpl(conn);
+    public UserDaoImpl getUserDao() {
+        return new UserDaoImpl();
     }
 
-    public TestDaoImpl getTestDao(Connection conn) {
-        return new TestDaoImpl(conn);
+    public TestDaoImpl getTestDao() {
+        return new TestDaoImpl();
     }
 
-    public QuestionDaoImpl getQuestionDao(Connection conn) {
-        return new QuestionDaoImpl(conn);
+    public QuestionDaoImpl getQuestionDao() {
+        return new QuestionDaoImpl();
     }
 
-    public AnswerDaoImp getAnswerDao(Connection conn) {
-        return new AnswerDaoImp(conn);
+    public AnswerDaoImp getAnswerDao() {
+        return new AnswerDaoImp();
     }
 
-    public ResultDaoImpl getResultDao(Connection conn) {
-        return new ResultDaoImpl(conn);
+    public ResultDaoImpl getResultDao() {
+        return new ResultDaoImpl();
     }
 }

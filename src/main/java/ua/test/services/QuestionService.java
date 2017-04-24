@@ -1,13 +1,11 @@
 package ua.test.services;
 
-import ua.test.connection.DataSource;
-import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.DaoFactory;
+import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.impl.QuestionDaoImpl;
 import ua.test.entity.Answer;
 import ua.test.entity.Question;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class QuestionService {
@@ -32,9 +30,8 @@ public class QuestionService {
 
     //TRANSACTION MUST BE HERE!!!!!
     private void addQuestion(int idTest, Question question) {
-        Connection conn = DataSource.getInstance().getConnection();
-        QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao(conn);
-        AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao(conn);
+        QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
+        AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
 
         int idQuestion = questionDao.addQuestion(question, idTest);
         List<Answer> answers = question.getAnswers();
@@ -47,9 +44,8 @@ public class QuestionService {
 
     //TRANSACTION MUST BE HERE!!!!!
     public void deleteQuestion(int idQuestion) {
-        Connection conn = DataSource.getInstance().getConnection();
-        QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao(conn);
-        AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao(conn);
+        QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
+        AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
 
         Question question = questionDao.findById(idQuestion);
         List<Answer> answers = answerDao.findByQuestionId(idQuestion);

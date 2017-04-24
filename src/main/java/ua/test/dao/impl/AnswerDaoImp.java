@@ -1,6 +1,8 @@
 package ua.test.dao.impl;
 
 import org.apache.log4j.Logger;
+import ua.test.connection.ConnectionWrapper;
+import ua.test.connection.TransactionManager;
 import ua.test.dao.interfaces.AnswerDao;
 import ua.test.entity.Answer;
 
@@ -19,17 +21,17 @@ public class AnswerDaoImp implements AnswerDao {
 
     private static final String DB_CON_ERROR = "Database connection error";
 
-    Connection conn;
 
-    public AnswerDaoImp(Connection conn) {
-        this.conn = conn;
+    public AnswerDaoImp() {
     }
 
     @Override
     public Integer addAnswer(Answer answer, int idQuestion) {
         Integer idGenerated = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(ADD_ANSWER, Statement.RETURN_GENERATED_KEYS) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(ADD_ANSWER, Statement.RETURN_GENERATED_KEYS) ) {
+
             statement.setString(1, answer.getText());
             statement.setBoolean(2, answer.isRight());
             statement.setInt(3, idQuestion);
@@ -50,7 +52,8 @@ public class AnswerDaoImp implements AnswerDao {
     public Answer findById(int id) {
         Answer answer = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(SELECT_BY_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if ( rs.next() ) {
@@ -67,7 +70,8 @@ public class AnswerDaoImp implements AnswerDao {
 
     @Override
     public void deleteById(int id) {
-        try ( PreparedStatement statement = conn.prepareStatement(DELETE_BY_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(DELETE_BY_ID) ) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -88,7 +92,8 @@ public class AnswerDaoImp implements AnswerDao {
     private  List<Answer> findByQuestionId(int id, String sql) {
         List<Answer> answers = new ArrayList<>();
 
-        try ( PreparedStatement statement = conn.prepareStatement(sql) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(sql) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             while ( rs.next() ) {

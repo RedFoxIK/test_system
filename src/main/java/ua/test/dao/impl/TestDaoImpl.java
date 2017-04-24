@@ -1,6 +1,8 @@
 package ua.test.dao.impl;
 
 import org.apache.log4j.Logger;
+import ua.test.connection.ConnectionWrapper;
+import ua.test.connection.TransactionManager;
 import ua.test.dao.interfaces.TestDao;
 import ua.test.entity.Test;
 
@@ -19,17 +21,15 @@ public class TestDaoImpl implements TestDao{
 
     private static final String DB_CON_ERROR = "Database connection error";
 
-    Connection conn;
-
-    public TestDaoImpl(Connection conn) {
-        this.conn = conn;
+    public TestDaoImpl() {
     }
 
     @Override
     public Integer addTest(Test test) {
         Integer idGenerated = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(ADD_TEST, Statement.RETURN_GENERATED_KEYS) ) {
+        try (ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+             PreparedStatement statement = connWrap.prepareStatement(ADD_TEST, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, test.getCaption());
             statement.setString(2, test.getDescription());
             statement.setInt(3, test.getSize());
@@ -52,7 +52,8 @@ public class TestDaoImpl implements TestDao{
     public Test findById(int id) {
         Test test = null;
 
-        try ( PreparedStatement statement = conn.prepareStatement(FIND_BY_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(FIND_BY_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if ( rs.next() ) {
@@ -74,7 +75,8 @@ public class TestDaoImpl implements TestDao{
     public List<Test> findByUserId(int id) {
         List<Test> tests;
 
-        try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_USER_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(SELECT_BY_USER_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             tests = getTests(rs);
@@ -90,7 +92,8 @@ public class TestDaoImpl implements TestDao{
     public List<Test> findAll() {
         List<Test> tests;
 
-        try ( Statement statement = conn.createStatement();
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                Statement statement = connWrap.createStatement();
               ResultSet rs = statement.executeQuery(SELECT_ALL) ) {
             tests = getTests(rs);
         } catch (SQLException e) {
@@ -102,7 +105,8 @@ public class TestDaoImpl implements TestDao{
 
     @Override
     public void deleteById(int id) {
-        try ( PreparedStatement statement = conn.prepareStatement(DELETE_BY_ID) ) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+                PreparedStatement statement = connWrap.prepareStatement(DELETE_BY_ID) ) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
