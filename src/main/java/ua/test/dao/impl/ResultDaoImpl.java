@@ -64,7 +64,7 @@ public class ResultDaoImpl implements ResultDao {
                 result.setMark(rs.getDouble("mark"));
                 result.setDateTime(rs.getTimestamp("date").toLocalDateTime());
                 Test test = new Test();
-                test.setId(rs.getInt("id_user"));
+                test.setId(rs.getInt("id_test"));
                 result.setTest(test);
                 results.add(result);
             }
