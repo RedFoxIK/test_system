@@ -27,7 +27,7 @@
                 </c:forEach>
             </div>
         <form id="hidden_form" method="get" action="/testing_system/test_edit">
-            <input name="id_test" type="hidden" value="" id="id_test"/>
+            <input type="hidden" name="id_test"  value="<c:out value="${test.id}"/>" id="id_test"/>
         </form>
     </main>
 </body>

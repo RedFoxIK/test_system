@@ -157,7 +157,7 @@ public class UserDaoImpl implements UserDao {
 
     private boolean updateUser(int id, String key, String sql) {
         try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
-                PreparedStatement statement = connWrap.prepareStatement(UPDATE_PASSWORD) ) {
+                PreparedStatement statement = connWrap.prepareStatement(sql) ) {
             int result;
 
             statement.setString(1, key);

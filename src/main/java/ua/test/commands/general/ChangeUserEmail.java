@@ -22,6 +22,7 @@ public class ChangeUserEmail implements Command {
             if ( userService.isSuchEmail(email) ) {
                 request.setAttribute("email_exc", EMAIL_EXC);
             } else {
+                System.out.println(email);
                 userService.changeEmail(idUser, email);
             }
             request.getRequestDispatcher("/my_profile").forward(request, response);

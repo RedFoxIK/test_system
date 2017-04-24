@@ -1,5 +1,6 @@
-package ua.test.commands;
+package ua.test.commands.student;
 
+import ua.test.commands.Command;
 import ua.test.entity.Question;
 import ua.test.services.ServiceFactory;
 
@@ -32,7 +33,6 @@ public class TestResultCommand implements Command {
         Integer idTest = Integer.parseInt(request.getParameter("id_test"));
         mark = ServiceFactory.getResultService().giveMark(testResult);
         request.setAttribute("mark", mark);
-        System.out.println(mark);
         ServiceFactory.getResultService().addResult(idUser, idTest, mark, LocalDateTime.now());
 
         request.getRequestDispatcher("/jsp/student/testresult.jsp").forward(request, response);

@@ -1,5 +1,6 @@
-package ua.test.commands;
+package ua.test.commands.student;
 
+import ua.test.commands.Command;
 import ua.test.services.ResultService;
 import ua.test.services.ServiceFactory;
 
@@ -16,7 +17,7 @@ public class ResultCommand implements Command {
         Integer userId = (int) request.getSession().getAttribute("idUser");
 
         if ( userId != null ) {
-            request.setAttribute("results", resultService.getResultsBuUserId(userId));
+            request.setAttribute("results", resultService.getResultsByUserId(userId));
         }
         request.getRequestDispatcher("/jsp/student/results.jsp").forward(request, response);
     }

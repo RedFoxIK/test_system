@@ -55,6 +55,7 @@ main {
 
 .error {
     color: red;
+    display: block;
 }
 
 p.error {

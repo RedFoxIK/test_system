@@ -2,11 +2,10 @@ package ua.test.commands;
 
 import ua.test.commands.general.*;
 import ua.test.commands.student.NewStudent;
-import ua.test.commands.tutor.AddQuestion;
+import ua.test.commands.student.ResultCommand;
+import ua.test.commands.student.TestResultCommand;
+import ua.test.commands.tutor.*;
 import ua.test.commands.general.MyProfile;
-import ua.test.commands.tutor.CreateQuestion;
-import ua.test.commands.tutor.DeleteQuestion;
-import ua.test.commands.tutor.EditTest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -40,6 +39,8 @@ public class CommandFactory {
         tempMap.put("/testing_system/create_question", new CreateQuestion());
         tempMap.put("/testing_system/add_question", new AddQuestion());
         tempMap.put("/testing_system/delete_question", new DeleteQuestion());
+
+        tempMap.put("/testing_system/results_for_test", new ResultForTestCommand());
 
 
         commands = Collections.unmodifiableMap(tempMap);

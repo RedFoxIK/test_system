@@ -9,9 +9,12 @@
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
-    <form class="results"  method = "get" action="/testing_system/results">
+
+    <form class="results"  method = "get" action="/testing_system/results_for_test">
+        <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
         <input type="submit" value="results">
     </form>
+
     <c:forEach items="${test.questions}" var="question">
         <form method="post" action="/testing_system/delete_question">
         <div class="question">
@@ -49,7 +52,7 @@
         </form>
     </div>
     <form method="get" action="/testing_system/">
-        <input type="button" value="On main page" class="main_page">
+        <input type="submit" value="On main page" class="main_page">
     </form>
 </body>
 </html>

@@ -4,6 +4,7 @@ import ua.test.dao.DaoFactory;
 import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.impl.ResultDaoImpl;
 import ua.test.dao.impl.TestDaoImpl;
+import ua.test.dao.interfaces.UserDao;
 import ua.test.entity.Answer;
 import ua.test.entity.Result;
 import ua.test.entity.Test;
@@ -21,7 +22,7 @@ public class ResultService {
 
     public ResultService() {}
 
-    public List<Result> getResultsBuUserId(int id) {
+    public List<Result> getResultsByUserId(int id) {
         List<Result> results = resultDao.findByUserId(id);
 
         for ( Result result: results ) {
@@ -82,4 +83,14 @@ public class ResultService {
         return Math.round(result * 100.0) / 100.0;
     }
 
+    public List<Result> getResultsByTestId(int testId) {
+        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        List<Result> results = resultDao.findByTestId(testId);
+
+        for ( Result result: results ) {
+            User user = userDao.findById(result.getUser().getId());
+            result.setUser(user);
+        }
+        return  results;
+    }
 }

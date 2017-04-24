@@ -6,6 +6,7 @@ import ua.test.connection.TransactionManager;
 import ua.test.dao.interfaces.ResultDao;
 import ua.test.entity.Result;
 import ua.test.entity.Test;
+import ua.test.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,8 +15,9 @@ import java.util.List;
 public class ResultDaoImpl implements ResultDao {
     private static final Logger LOGGER = Logger.getLogger(ResultDao.class);
 
-    private static final String SELECT_BY_USER_ID = "SELECT `id_result`, `id_test`, `mark`, `date` FROM results WHERE `id_user`  = ?";
     private static final String ADD_RESULT = "INSERT INTO results(`id_user`, `id_test`, `mark`, `date`) VALUES(?, ?, ?, ?)";
+    private static final String SELECT_BY_USER_ID = "SELECT `id_result`, `id_test`, `mark`, `date` FROM results WHERE `id_user`  = ?";
+    private static final String SELECT_BY_TEST_ID = "SELECT `id_result`, `id_user`, `mark`, `date` FROM results WHERE `id_test`  = ?";
 
     private static final String DB_CON_ERROR = "Database connection error";
 
@@ -62,7 +64,7 @@ public class ResultDaoImpl implements ResultDao {
                 result.setMark(rs.getDouble("mark"));
                 result.setDateTime(rs.getTimestamp("date").toLocalDateTime());
                 Test test = new Test();
-                test.setId(rs.getInt("id_test"));
+                test.setId(rs.getInt("id_user"));
                 result.setTest(test);
                 results.add(result);
             }
@@ -71,6 +73,31 @@ public class ResultDaoImpl implements ResultDao {
             return null;
         }
         return results;
+    }
 
+    public List<Result> findByTestId(int id) {
+        List<Result> results = new ArrayList<>();
+
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+              PreparedStatement statement = connWrap.prepareStatement(SELECT_BY_TEST_ID) ) {
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+
+            while ( rs.next() ) {
+                Result result = new Result();
+
+                result.setId(rs.getInt("id_result"));
+                result.setMark(rs.getDouble("mark"));
+                result.setDateTime(rs.getTimestamp("date").toLocalDateTime());
+                User user = new User();
+                user.setId(rs.getInt("id_user"));
+                result.setUser(user);
+                results.add(result);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
+        }
+        return results;
     }
 }
