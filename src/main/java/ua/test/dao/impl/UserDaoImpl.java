@@ -1,5 +1,6 @@
 package ua.test.dao.impl;
 
+import org.apache.log4j.Logger;
 import ua.test.dao.interfaces.UserDao;
 import ua.test.entity.Role;
 import ua.test.entity.User;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
+    private static final Logger LOGGER = Logger.getLogger(UserDao.class);
+
     private static final String ADD_USER = "INSERT INTO users(`login`, `password`, `name`, `surname`, `email`, `role`) VALUES(?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID = "SELECT `id_user`, `login`, `password`, `name`, `surname`, `email`, `role` FROM users WHERE `id_user` = ?";
     private static final String SELECT_BY_LOGIN = "SELECT `id_user`, `login`, `password`, `name`, `surname`, `email`, `role` FROM users WHERE `login` = ? AND `password` = ?";
@@ -18,6 +21,8 @@ public class UserDaoImpl implements UserDao {
     private static final String UPDATE_PASSWORD = "UPDATE users set `password` = ? WHERE `id_user` = ?";
     private static final String UPDATE_EMAIL = "UPDATE users set `email` = ? WHERE `id_user` = ?";
     private static final String DELETE_BY_ID = "DELETE FROM users WHERE `id_user` = ?";
+
+    private static final String DB_CON_ERROR = "Database connection error";
 
     Connection conn;
 
@@ -43,63 +48,64 @@ public class UserDaoImpl implements UserDao {
                 idGenerated = rs.getInt(1);
             }
             rs.close();
-            return idGenerated;
         } catch ( SQLException e ) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return idGenerated;
     }
 
     @Override
     public List<User> selectAll() {
+        List<User> users = new ArrayList<>();
+
         try ( Statement statement = conn.createStatement();
               ResultSet rs = statement.executeQuery(SELECT_ALL) ) {
-            List<User> users = new ArrayList<>();
-
             while ( rs.next() ) {
                 users.add(getUser(rs));
             }
             rs.close();
-            return users;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return users;
     }
 
     @Override
     public User findByLogin(String login, String password) {
+        User user = null;
         try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_LOGIN) ) {
             statement.setString(1, login);
             statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
-            User user = null;
             if ( rs.next() ) {
                 user = getUser(rs);
             }
             rs.close();
-            return user;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return user;
     }
 
     @Override
     public User findById(int id) {
+        User user = null;
         try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
-            User user = null;
             if ( rs.next() ) {
                 user = getUser(rs);
             }
             rs.close();
-            return user;
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return user;
     }
 
     @Override
@@ -108,7 +114,7 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
         }
     }
 
@@ -134,6 +140,7 @@ public class UserDaoImpl implements UserDao {
 
     private User getUser(ResultSet rs) throws SQLException {
         User user = new User();
+
         user.setId(rs.getInt("id_user"));
         user.setLogin(rs.getString("login"));
         user.setPassword(rs.getString("password"));
@@ -153,7 +160,7 @@ public class UserDaoImpl implements UserDao {
             result = statement.executeUpdate();
             return result == 1;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
         }
         return false;
     }
@@ -167,7 +174,7 @@ public class UserDaoImpl implements UserDao {
             result = rs.next();
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
         }
         return result;
     }

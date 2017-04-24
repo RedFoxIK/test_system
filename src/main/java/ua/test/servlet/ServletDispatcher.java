@@ -1,5 +1,6 @@
 package ua.test.servlet;
 
+import org.apache.log4j.Logger;
 import ua.test.commands.Command;
 import ua.test.commands.CommandFactory;
 
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ServletDispatcher extends HttpServlet {
+    private static final Logger LOGGER = Logger.getLogger(ServletDispatcher.class);
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
@@ -23,7 +26,7 @@ public class ServletDispatcher extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Command command = CommandFactory.getInstance().getCommand(request);
 
-        System.out.println(request.getRequestURI());
+        LOGGER.info(request.getRequestURI());
         if ( command == null ) {
             request.getRequestDispatcher("/jsp/errors/404.jsp").forward(request, response);
             return;

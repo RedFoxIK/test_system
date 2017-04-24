@@ -1,5 +1,6 @@
 package ua.test.dao.impl;
 
+import org.apache.log4j.Logger;
 import ua.test.dao.interfaces.QuestionDao;
 import ua.test.entity.Question;
 
@@ -8,11 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDaoImpl implements QuestionDao {
+    private static final Logger LOGGER = Logger.getLogger(QuestionDao.class);
+
     private static final String ADD_QUESTION = "INSERT INTO questions(`text`, `id_test`, `mult_choice`) VALUES(?, ?, ?)";
     private static final String SELECT_BY_ID = "SELECT `text` FROM questions WHERE `id_question` = ?";
     private static final String SELECT_BY_TEST_ID = "SELECT `id_question`, `text`, `mult_choice` FROM questions WHERE `id_test` = ?";
     private static final String SELECT_ALL = "SELECT `id_question`, `text`, `mult_choice` FROM questions";
     private static final String DELETE_BY_ID = "DELETE FROM questions WHERE `id_question` = ?";
+
+    private static final String DB_CON_ERROR = "Database connection error";
 
     Connection conn;
 
@@ -35,11 +40,11 @@ public class QuestionDaoImpl implements QuestionDao {
                 idGenerated = rs.getInt(1);
             }
             rs.close();
-            return idGenerated;
         } catch ( SQLException e ) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return idGenerated;
     }
 
     @Override
@@ -57,32 +62,39 @@ public class QuestionDaoImpl implements QuestionDao {
             }
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
         return question;
     }
 
     @Override
     public List<Question> findAll() {
+        List<Question> questions;
+
         try ( Statement statement = conn.createStatement();
               ResultSet rs = statement.executeQuery(SELECT_ALL) ) {
-            return getQuestions(rs);
+            questions = getQuestions(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return questions;
     }
 
     @Override
     public List<Question> findByTestId(int id) {
+        List<Question> questions;
+
         try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_TEST_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
-           return getQuestions(rs);
+            questions = getQuestions(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return questions;
     }
 
     @Override
@@ -91,7 +103,7 @@ public class QuestionDaoImpl implements QuestionDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
         }
     }
 

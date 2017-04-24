@@ -1,5 +1,6 @@
 package ua.test.dao.impl;
 
+import org.apache.log4j.Logger;
 import ua.test.dao.interfaces.TestDao;
 import ua.test.entity.Test;
 
@@ -8,11 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDaoImpl implements TestDao{
+    private static final Logger LOGGER = Logger.getLogger(TestDao.class);
+
     private static final String ADD_TEST = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `author`) VALUES(?, ?, ?, ?, ?)";
     private static final String SELECT_ALL = "SELECT id_test, caption, description, size, activated, author FROM tests";
     private static final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated` FROM tests where author = ?";
     private static final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
     private static final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, author FROM tests WHERE id_test = ?";
+
+    private static final String DB_CON_ERROR = "Database connection error";
 
     Connection conn;
 
@@ -36,11 +41,11 @@ public class TestDaoImpl implements TestDao{
             if ( rs.next() ) {
                 idGenerated = rs.getInt(1);
             }
-            return idGenerated;
         } catch ( SQLException e ) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return idGenerated;
     }
 
     @Override
@@ -57,38 +62,42 @@ public class TestDaoImpl implements TestDao{
                 test.setDescription(rs.getString("description"));
                 test.setSize(rs.getInt("size"));
                 test.setActivated(rs.getBoolean("activated"));
-                return test;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return test;
     }
 
     @Override
     public List<Test> findByUserId(int id) {
+        List<Test> tests;
+
         try ( PreparedStatement statement = conn.prepareStatement(SELECT_BY_USER_ID) ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
-            return getTests(rs);
+            tests = getTests(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return tests;
     }
 
 
     @Override
     public List<Test> findAll() {
-        List<Test> tests = new ArrayList<>();
+        List<Test> tests;
 
         try ( Statement statement = conn.createStatement();
               ResultSet rs = statement.executeQuery(SELECT_ALL) ) {
-            return getTests(rs);
+            tests = getTests(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return tests;
     }
 
     @Override
@@ -97,7 +106,7 @@ public class TestDaoImpl implements TestDao{
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
         }
     }
 

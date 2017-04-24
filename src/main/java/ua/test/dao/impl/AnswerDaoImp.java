@@ -1,5 +1,6 @@
 package ua.test.dao.impl;
 
+import org.apache.log4j.Logger;
 import ua.test.dao.interfaces.AnswerDao;
 import ua.test.entity.Answer;
 
@@ -8,11 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerDaoImp implements AnswerDao {
+    private static final Logger LOGGER = Logger.getLogger(AnswerDao.class);
+
     private static final String ADD_ANSWER = "INSERT INTO answers(`text`, `right`, `id_question`) VALUES(?, ?, ?)";
     private static final String SELECT_BY_ID = "SELECT `id_answer`, `text`, `right`, `id_question` FROM answers WHERE `id_answer` = ?";
     private static final String SELECT_BY_QUESTION_ID = "SELECT `id_answer`, `text`, `right` FROM answers WHERE `id_question` = ?";
     private static final String SELECT_RIGHT_BY_QUESTION_ID = "SELECT `id_answer`, `right`, `text` FROM answers WHERE `id_question` = ? AND `right` = 1";
     private static final String DELETE_BY_ID = "DELETE FROM answers WHERE id_answer = ?";
+
+    private static final String DB_CON_ERROR = "Database connection error";
 
     Connection conn;
 
@@ -34,11 +39,11 @@ public class AnswerDaoImp implements AnswerDao {
             if ( rs.next() ) {
                 idGenerated = rs.getInt(1);
             }
-            return idGenerated;
         } catch ( SQLException e ) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return idGenerated;
     }
 
     @Override
@@ -53,11 +58,11 @@ public class AnswerDaoImp implements AnswerDao {
                 answer.setId(id);
                 answer.setText(rs.getString("text"));
             }
-            return answer;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return answer;
     }
 
     @Override
@@ -66,7 +71,7 @@ public class AnswerDaoImp implements AnswerDao {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
         }
     }
 
@@ -95,10 +100,10 @@ public class AnswerDaoImp implements AnswerDao {
                 answers.add(answer);
             }
             rs.close();
-            return answers;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return answers;
     }
 }

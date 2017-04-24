@@ -1,5 +1,6 @@
 package ua.test.dao.impl;
 
+import org.apache.log4j.Logger;
 import ua.test.dao.interfaces.ResultDao;
 import ua.test.entity.Result;
 import ua.test.entity.Test;
@@ -9,8 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultDaoImpl implements ResultDao {
+    private static final Logger LOGGER = Logger.getLogger(ResultDao.class);
+
     private static final String SELECT_BY_USER_ID = "SELECT `id_result`, `id_test`, `mark`, `date` FROM results WHERE `id_user`  = ?";
     private static final String ADD_RESULT = "INSERT INTO results(`id_user`, `id_test`, `mark`, `date`) VALUES(?, ?, ?, ?)";
+
+    private static final String DB_CON_ERROR = "Database connection error";
 
     Connection conn;
 
@@ -34,11 +39,11 @@ public class ResultDaoImpl implements ResultDao {
                 idGenerated = rs.getInt(1);
             }
             rs.close();
-            return idGenerated;
         } catch ( SQLException e ) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return idGenerated;
     }
 
     @Override
@@ -60,10 +65,11 @@ public class ResultDaoImpl implements ResultDao {
                 result.setTest(test);
                 results.add(result);
             }
-            return results;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(DB_CON_ERROR + " " + e);
+            return null;
         }
-        return null;
+        return results;
+
     }
 }
