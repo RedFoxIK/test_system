@@ -9,12 +9,13 @@ import ua.test.entity.Question;
 import java.util.List;
 
 public class QuestionService {
-    public void addQuestion(int idTest, String questionText, List<String> answersText, String[] rightAnswers) {
+    public void addQuestion(int idTest, String questionText, boolean multChoice, List<String> answersText, String[] rightAnswers) {
         int numAnsw = answersText.size();
         int numRightAnsw = rightAnswers.length;
         Question question = new Question();
 
         question.setText(questionText);
+        question.setMultChoice(multChoice);
         for ( int i = 0; i < numAnsw; i++ ) {
             Answer answer = new Answer();
             answer.setText(answersText.get(i));
@@ -22,7 +23,6 @@ public class QuestionService {
         }
         for ( int i = 0; i < numRightAnsw; i++ ) {
             Integer index = Integer.parseInt(rightAnswers[i]);
-            System.out.println(index);
             question.getAnswers().get(index).setRight(true);
         }
         addQuestion(idTest, question);

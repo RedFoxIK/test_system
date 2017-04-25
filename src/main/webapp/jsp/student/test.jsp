@@ -28,8 +28,14 @@
 
                         <div data-name="block${count}">
                             <h1><c:out value="${question.text}"/> </h1>
+
+                            <c:set var="type" value="radio" scope="page" />
+                            <c:if test="${question.multChoice}">
+                                <c:set var="type" value="checkbox" scope="page" />
+                            </c:if>
+
                             <c:forEach items="${question.answers}" var="answer">
-                                <div class="item_answer"><input type="checkbox" name="${question.id}" value="${answer.id}">
+                                <div class="item_answer"><input type="${type}" name="${question.id}" value="${answer.id}">
                                 <c:out value="${answer.text}"/>
                                 <br>
                                 </div>

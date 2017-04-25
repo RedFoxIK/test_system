@@ -14,15 +14,15 @@
     <form class="results"  method = "get" action="/testing_system/change_test_state">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
 
-        <c:set var="activate" value="disactivate"/>
+        <c:set var="activate" value="deactivate"/>
         <c:set var="disable" value=""/>
         <c:if test="${not test.activated}">
             <c:set var="activate" value="activate"/>
             <c:if test="${fn:length(test.questions) < test.size}">
-                <c:set var="disable" value="disabled"/>
+                <c:set var="disabled" value="disabled"/>
             </c:if>
         </c:if>
-        <input type="submit" value="<c:out value='${activate}'/>" <c:out value="${disable}"/>>
+        <input type="submit" value="<c:out value='${activate}'/>" <c:out value="${disabled}"/>>
     </form>
 
     <form class="results"  method = "get" action="/testing_system/results_for_test">
