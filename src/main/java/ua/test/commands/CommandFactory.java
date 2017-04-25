@@ -39,9 +39,8 @@ public class CommandFactory {
         tempMap.put("/testing_system/create_question", new CreateQuestion());
         tempMap.put("/testing_system/add_question", new AddQuestion());
         tempMap.put("/testing_system/delete_question", new DeleteQuestion());
-
         tempMap.put("/testing_system/results_for_test", new ResultForTestCommand());
-
+        tempMap.put("/testing_system/change_test_state", new ChangeTestState());
 
         commands = Collections.unmodifiableMap(tempMap);
     }

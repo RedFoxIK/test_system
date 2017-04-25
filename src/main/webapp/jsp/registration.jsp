@@ -8,6 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <%@ include file="main/head.jsp"%>
     <title>Registration</title>
+    <style>
+        .buttons {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <%@ include file="main/header.jsp"%>

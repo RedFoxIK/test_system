@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page isELIgnored ="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -9,6 +10,20 @@
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
+
+    <form class="results"  method = "get" action="/testing_system/change_test_state">
+        <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
+
+        <c:set var="activate" value="disactivate"/>
+        <c:set var="disable" value=""/>
+        <c:if test="${not test.activated}">
+            <c:set var="activate" value="activate"/>
+            <c:if test="${fn:length(test.questions) < test.size}">
+                <c:set var="disable" value="disabled"/>
+            </c:if>
+        </c:if>
+        <input type="submit" value="<c:out value='${activate}'/>" <c:out value="${disable}"/>>
+    </form>
 
     <form class="results"  method = "get" action="/testing_system/results_for_test">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
@@ -26,7 +41,6 @@
             </c:if>
 
             <c:forEach items="${question.answers}" var="answer">
-
                     <c:set var="checked" value="" scope="page"/>
                     <c:if test="${answer.right}">
                         <c:set var="checked" value="checked" scope="page"/>
@@ -43,7 +57,6 @@
             <input type="submit" value="delete">
         </form>
         <hr>
-
     </c:forEach>
     <div>
         <form action="/testing_system/create_question" method="get">

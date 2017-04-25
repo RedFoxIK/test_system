@@ -6,8 +6,10 @@ import ua.test.dao.impl.QuestionDaoImpl;
 import ua.test.dao.impl.TestDaoImpl;
 import ua.test.entity.Question;
 import ua.test.entity.Test;
+import ua.test.exceptions.TestCannotBeActivatedException;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class TestService {
     TestDaoImpl testDao = DaoFactory.getInstance().getTestDao();
@@ -29,11 +31,26 @@ public class TestService {
     }
 
     public Test getTestById(int testId) {
-        return testDao.findById(testId);
+        Test test = testDao.findById(testId);
+        List<Question> questions = ServiceFactory.getTestService().getQuestionsByTestId(testId);
+        test.addQuestions(questions);
+        return test;
     }
 
     public List<Test> getTestsByUserId(int id) {
         return testDao.findByUserId(id);
     }
 
+
+    public Test changeTestState(int idTest)  {
+        Test test = getTestById(idTest);
+
+        if ( test.isActivated() ) {
+            test.setActivated(false);
+        } else {
+            test.setActivated(true);
+        }
+        testDao.updateTest(test);
+        return test;
+    }
 }

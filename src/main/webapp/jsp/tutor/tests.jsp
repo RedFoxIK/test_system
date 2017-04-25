@@ -17,7 +17,13 @@
             </div>
             <div class="tests">
                 <c:forEach items="${tests}" var="test">
-                    <div class="test" id="<c:out value='${test.id}'/>" onclick="showTest(this.id)">
+
+                    <c:set var="not_activated" value=""/>
+                    <c:if test="${not test.activated}">
+                        <c:set var="not_activated" value="not_activated"/>
+                    </c:if>
+
+                    <div class="test ${not_activated}" id="<c:out value='${test.id}'/>" onclick="showTest(this.id)">
                         <p> <c:out value="${test.caption}"/> </p>
                         <div class="author">
                             <c:out value="${test.author.name}"/>

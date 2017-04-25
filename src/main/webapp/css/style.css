@@ -427,3 +427,7 @@ form input:focus {
     font-size:50px;
 }
 /*RESULTS STYLES*/
+
+div.tests .not_activated {
+    opacity: 0.3;
+}

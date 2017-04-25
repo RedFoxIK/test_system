@@ -10,4 +10,5 @@ public interface TestDao {
     List<Test> findByUserId(int id);
     List<Test> findAll();
     void deleteById(int id);
+    void updateTest(Test test);
 }
