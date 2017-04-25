@@ -431,3 +431,11 @@ form input:focus {
 div.tests .not_activated {
     opacity: 0.3;
 }
+
+#new_test {
+    display: none;
+}
+
+#new_test span {
+    color: black;
+}

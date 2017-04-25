@@ -11,7 +11,7 @@
     <script src="${pageContext.request.contextPath}/js/test.js"></script>
     <title> <c:out value="${test.caption}"/> </title>
 </head>
-<body>
+<body oncopy="return false;">
 <%@ include file="../main/header.jsp"%>
 <main>
     <c:set var="count" value="0" scope="page" />

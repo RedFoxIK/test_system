@@ -1,5 +1,6 @@
 package ua.test.services;
 
+import ua.test.connection.TransactionManager;
 import ua.test.dao.DaoFactory;
 import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.impl.QuestionDaoImpl;
@@ -33,6 +34,8 @@ public class QuestionService {
         QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
         AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
 
+
+        TransactionManager.getInstance().beginTransaction();
         int idQuestion = questionDao.addQuestion(question, idTest);
         List<Answer> answers = question.getAnswers();
 
@@ -40,6 +43,8 @@ public class QuestionService {
             int idAnswer = answerDao.addAnswer(answer, idQuestion);
             answer.setId(idAnswer);
         }
+        TransactionManager.getInstance().commit();
+        TransactionManager.getInstance().close();
     }
 
     //TRANSACTION MUST BE HERE!!!!!

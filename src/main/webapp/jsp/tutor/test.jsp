@@ -11,6 +11,16 @@
 <body>
     <%@ include file="../main/header.jsp"%>
 
+    <h1> ${test.caption}</h1>
+    <h2> ${test.size} questions </h2>
+
+    <form method="get" id="form_delete_test" action="/testing_system/delete_question">
+        <iput type="hidden" name="id_test" value="<c:out value="${test.id}"/>"/>
+        <input type="submit" value="delete test" >
+               <%--onclick="deleteTest()">--%>
+    </form>
+    <br>
+
     <form class="results"  method = "get" action="/testing_system/change_test_state">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
 
@@ -25,10 +35,14 @@
         <input type="submit" value="<c:out value='${activate}'/>" <c:out value="${disabled}"/>>
     </form>
 
+    <br>
+
     <form class="results"  method = "get" action="/testing_system/results_for_test">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
         <input type="submit" value="results">
     </form>
+
+    <br>
 
     <c:forEach items="${test.questions}" var="question">
         <form method="post" action="/testing_system/delete_question">
@@ -64,6 +78,7 @@
             <input type="submit" value="Add question">
         </form>
     </div>
+
     <form method="get" action="/testing_system/">
         <input type="submit" value="On main page" class="main_page">
     </form>

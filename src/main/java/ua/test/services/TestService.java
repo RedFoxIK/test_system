@@ -53,4 +53,18 @@ public class TestService {
         testDao.updateTest(test);
         return test;
     }
+
+    public void addTest(String caption, String description, int size, Integer idUser) {
+        Test test = new Test();
+
+        test.setCaption(caption);
+        test.setDescription(description);
+        test.setSize(size);
+        test.setActivated(false);
+        test.setAuthor(ServiceFactory.getUserService().getUserById(idUser));
+        testDao.addTest(test);
+    }
+
+    public void deleteTestById(Integer idTest) {
+    }
 }
