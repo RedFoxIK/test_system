@@ -2,11 +2,12 @@ package ua.test.services;
 
 import ua.test.dao.DaoFactory;
 import ua.test.dao.impl.UserDaoImpl;
+import ua.test.dao.interfaces.UserDao;
 import ua.test.entity.Role;
 import ua.test.entity.User;
 
 public class UserService {
-    UserDaoImpl userDao = DaoFactory.getInstance().getUserDao();
+    UserDao userDao = DaoFactory.getInstance().getUserDao();
 
     public UserService() {}
 

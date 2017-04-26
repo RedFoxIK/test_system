@@ -4,6 +4,8 @@ import ua.test.connection.TransactionManager;
 import ua.test.dao.DaoFactory;
 import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.impl.QuestionDaoImpl;
+import ua.test.dao.interfaces.AnswerDao;
+import ua.test.dao.interfaces.QuestionDao;
 import ua.test.entity.Answer;
 import ua.test.entity.Question;
 
@@ -30,8 +32,8 @@ public class QuestionService {
     }
 
     private void addQuestion(int idTest, Question question) {
-        QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
-        AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
+        QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
+        AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
 
         TransactionManager.getInstance().beginTransaction();
         int idQuestion = questionDao.addQuestion(question, idTest);
@@ -45,15 +47,19 @@ public class QuestionService {
     }
 
     public void deleteQuestion(int idQuestion) {
-        QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
-        AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
         TransactionManager.getInstance().beginTransaction();
+        deleteQuestionInTransaction(idQuestion);
+        TransactionManager.getInstance().commit();
+    }
+
+    public void deleteQuestionInTransaction(int idQuestion) {
+        AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
+        QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
         List<Answer> answers = answerDao.findByQuestionId(idQuestion);
 
         for (Answer answer: answers) {
             answerDao.deleteById(answer.getId());
         }
         questionDao.deleteById(idQuestion);
-        TransactionManager.getInstance().commit();
     }
 }

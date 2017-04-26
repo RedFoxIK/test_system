@@ -4,6 +4,9 @@ import ua.test.dao.DaoFactory;
 import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.impl.ResultDaoImpl;
 import ua.test.dao.impl.TestDaoImpl;
+import ua.test.dao.interfaces.AnswerDao;
+import ua.test.dao.interfaces.ResultDao;
+import ua.test.dao.interfaces.TestDao;
 import ua.test.dao.interfaces.UserDao;
 import ua.test.entity.Answer;
 import ua.test.entity.Result;
@@ -15,9 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultService {
-    ResultDaoImpl resultDao = DaoFactory.getInstance().getResultDao();
-    TestDaoImpl testDao = DaoFactory.getInstance().getTestDao();
-    AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
+    ResultDao resultDao = DaoFactory.getInstance().getResultDao();
+    TestDao testDao = DaoFactory.getInstance().getTestDao();
+    AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
 
 
     public ResultService() {}

@@ -11,4 +11,5 @@ public interface TestDao {
     List<Test> findAll();
     void deleteById(int id);
     void updateTest(Test test);
+    List<Test> findAllActivated();
 }

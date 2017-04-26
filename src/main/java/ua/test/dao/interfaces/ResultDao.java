@@ -7,4 +7,5 @@ import java.util.List;
 public interface ResultDao {
     Integer addResult(Result result);
     List<Result> findByUserId(int id);
+    List<Result> findByTestId(int testId);
 }

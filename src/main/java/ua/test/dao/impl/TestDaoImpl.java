@@ -16,8 +16,8 @@ public class TestDaoImpl implements TestDao{
 
     private static final String ADD_TEST = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `author`) VALUES(?, ?, ?, ?, ?)";
     private static final String SELECT_ALL = "SELECT id_test, caption, description, size, activated, author FROM tests";
-    private static final String SELECT_ALL_ACTIVATED = "SELECT id_test, caption, description, size, activated, author FROM tests where activated = 1";
-    private static final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated` FROM tests where author = ?";
+    private static final String SELECT_ALL_ACTIVATED = "SELECT `id_test`, `caption`,`description`, `size`, `activated`, `author` FROM tests WHERE activated = 1";
+    private static final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated`, `author` FROM tests WHERE `author` = ?";
     private static final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
     private static final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, author FROM tests WHERE id_test = ?";
     private static final String UPDATE_STATE = "UPDATE tests set `activated` = ? WHERE `id_test` = ?";
@@ -106,6 +106,7 @@ public class TestDaoImpl implements TestDao{
         return tests;
     }
 
+    @Override
     public List<Test> findAllActivated() {
         List<Test> tests;
 
@@ -118,6 +119,18 @@ public class TestDaoImpl implements TestDao{
             return null;
         }
         return tests;
+    }
+
+    @Override
+    public void updateTest(Test test) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+              PreparedStatement statement = connWrap.prepareStatement(UPDATE_STATE) ) {
+            statement.setBoolean(1, test.isActivated());
+            statement.setInt(2, test.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error(DB_CON_ERROR, e);
+        }
     }
 
     @Override
@@ -150,15 +163,4 @@ public class TestDaoImpl implements TestDao{
         return tests;
     }
 
-    @Override
-    public void updateTest(Test test) {
-        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
-              PreparedStatement statement = connWrap.prepareStatement(UPDATE_STATE) ) {
-            statement.setBoolean(1, test.isActivated());
-            statement.setInt(2, test.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.error(DB_CON_ERROR, e);
-        }
-    }
 }

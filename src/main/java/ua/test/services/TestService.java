@@ -1,10 +1,15 @@
 package ua.test.services;
 
+import ua.test.connection.TransactionManager;
 import ua.test.dao.DaoFactory;
 import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.impl.QuestionDaoImpl;
 import ua.test.dao.impl.TestDaoImpl;
 import ua.test.dao.impl.UserDaoImpl;
+import ua.test.dao.interfaces.AnswerDao;
+import ua.test.dao.interfaces.QuestionDao;
+import ua.test.dao.interfaces.TestDao;
+import ua.test.dao.interfaces.UserDao;
 import ua.test.entity.Question;
 import ua.test.entity.Test;
 import ua.test.entity.User;
@@ -17,10 +22,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class TestService {
-    UserDaoImpl userDao = DaoFactory.getInstance().getUserDao();
-    TestDaoImpl testDao = DaoFactory.getInstance().getTestDao();
-    QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
-    AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
+    UserDao userDao = DaoFactory.getInstance().getUserDao();
+    TestDao testDao = DaoFactory.getInstance().getTestDao();
+    QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
+    AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
 
     public List<Test> getAllTests() {
         return testDao.findAll();
@@ -72,6 +77,16 @@ public class TestService {
     }
 
     public void deleteTestById(int idTest) {
+        QuestionService questionService = ServiceFactory.getQuestionService();
+        TransactionManager.getInstance().beginTransaction();
+        Test test = testDao.findById(idTest);
+        List<Question> questions = test.getQuestions();
+
+        for ( Question question: questions ) {
+            questionService.deleteQuestionInTransaction(question.getId());
+        }
+        ServiceFactory.getTestService().deleteTestById(idTest);
+        TransactionManager.getInstance().commit();
     }
 
     public Test shuffleQuestions(Test test) {
