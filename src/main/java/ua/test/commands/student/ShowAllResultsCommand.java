@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ResultCommand implements Command {
+public class ShowAllResultsCommand implements Command {
     private final ResultService resultService = ServiceFactory.getResultService();
 
     @Override

@@ -14,7 +14,7 @@
             <p>
                 Dear student, please choose!
             </p>
-            <form class="results"  method = "get" action="/testing_system/student/results">
+            <form class="results"  method = "post" action="/testing_system/student/results">
                 <input type="submit" value="results" class="button_results">
             </form>
             </div>
@@ -29,7 +29,7 @@
                     </div>
                 </c:forEach>
             </div>
-        <form id="hidden_form" method="get" action="/testing_system/student/test">
+        <form id="hidden_form" method="get" action="/testing_system/student/start_test">
             <input name="id_test" type="hidden" value="" id="id_test"/>
         </form>
     </main>

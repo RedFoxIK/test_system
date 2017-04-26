@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class RegistartionCommand implements Command {
+public class RegistrationCommand implements Command {
     private final UserService userService = ServiceFactory.getUserService();
     private final TestService testService = ServiceFactory.getTestService();
 
@@ -37,8 +37,7 @@ public class RegistartionCommand implements Command {
         } else {
             int idUser = userService.createUser(login, password, name, surname, email);
             request.getSession().setAttribute("idUser", idUser);
-            request.setAttribute("tests", testService.getAllTests());
-            request.getRequestDispatcher("/pages/student/tests.jsp").forward(request, response);
+            response.sendRedirect("/testing_system/");
         }
     }
 

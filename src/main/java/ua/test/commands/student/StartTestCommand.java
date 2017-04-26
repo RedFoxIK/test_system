@@ -24,7 +24,6 @@ public class StartTestCommand implements Command {
         test = testService.shuffleQuestions(test);
         request.setAttribute("test", test);
         request.getSession().setAttribute("userTest", test);
-
-        request.getRequestDispatcher("/pages/student/test.jsp").forward(request, response);
+        response.sendRedirect("/testing_system/student/test");
     }
 }

@@ -3,17 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-    <filter>
-        <filter-name>GuestsFilter</filter-name>
-        <filter-class>ua.test.filters.GuestsFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>GuestsFilter</filter-name>
-        <url-pattern>/student/*</url-pattern>
-        <url-pattern>/tutor/*</url-pattern>
-        <url-pattern>/user/*</url-pattern>
-    </filter-mapping>
 
     <filter>
         <filter-name>EncodingFilter</filter-name>
@@ -23,15 +12,40 @@
             <param-value>UTF8</param-value>
         </init-param>
     </filter>
+
+    <filter>
+        <filter-name>GuestsFilter</filter-name>
+        <filter-class>ua.test.filters.GuestsFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>StudentInTestFilter</filter-name>
+        <filter-class>ua.test.filters.StudentInTestFilter</filter-class>
+    </filter>
+
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+
+    <filter-mapping>
+        <filter-name>GuestsFilter</filter-name>
+        <url-pattern>/student/*</url-pattern>
+        <url-pattern>/tutor/*</url-pattern>
+        <url-pattern>/user/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>StudentInTestFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
+
         <servlet-name>Servlet</servlet-name>
         <servlet-class>ua.test.servlet.ServletDispatcher</servlet-class>
     </servlet>
-
 
     <servlet-mapping>
         <servlet-name>Servlet</servlet-name>
@@ -48,11 +62,11 @@
 
     <error-page>
     <error-code>404</error-code>
-    <location>/jsp/errors/404.jsp</location>
+    <location>/pages/errors/404.jsp</location>
     </error-page>
 
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
-        <location>/jsp/errors/exception.jsp</location>
+        <location>/pages/errors/exception.jsp</location>
     </error-page>
 </web-app>

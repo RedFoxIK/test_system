@@ -1,10 +1,7 @@
 package ua.test.commands;
 
 import ua.test.commands.general.*;
-import ua.test.commands.student.RegistartionCommand;
-import ua.test.commands.student.ResultCommand;
-import ua.test.commands.student.StartTestCommand;
-import ua.test.commands.student.TestResultCommand;
+import ua.test.commands.student.*;
 import ua.test.commands.tutor.*;
 import ua.test.commands.general.ShowMyProfileCommand;
 
@@ -29,7 +26,7 @@ public class CommandFactory {
         tempMap.put("/testing_system/", new FirstCommand());
 
         tempMap.put("/testing_system/sign_in", new SigInCommand());
-        tempMap.put("/testing_system/registration", new RegistartionCommand());
+        tempMap.put("/testing_system/registration", new RegistrationCommand());
 
         tempMap.put("/testing_system/user/tests", new ShowTestsCommand());
         tempMap.put("/testing_system/user/log_out", new SignOutCommand());
@@ -37,13 +34,14 @@ public class CommandFactory {
         tempMap.put("/testing_system/user/update_pass", new ChangeUserPasswordCommand());
         tempMap.put("/testing_system/user/update_email", new ChangeUserEmailCommand());
 
-        tempMap.put("/testing_system/student/test", new StartTestCommand());
-        tempMap.put("/testing_system/student/results", new ResultCommand());
-        tempMap.put("/testing_system/student/test_result", new TestResultCommand());
+        tempMap.put("/testing_system/student/start_test", new StartTestCommand());
+        tempMap.put("/testing_system/student/test", new ShowTestCommand());
+        tempMap.put("/testing_system/student/results", new ShowAllResultsCommand());
+        tempMap.put("/testing_system/student/test_end", new EndTestCommand());
+        tempMap.put("/testing_system/student/show_result", new ShowTestResultCommand());
 
         tempMap.put("/testing_system/tutor/test_edit", new EditTest());
         tempMap.put("/testing_system/tutor/create_question", new CreateQuestion());
-
         tempMap.put("/testing_system/tutor/add_question", new AddQuestion());
         tempMap.put("/testing_system/tutor/delete_question", new DeleteQuestion());
         tempMap.put("/testing_system/tutor/results_for_test", new ResultForTestCommand());

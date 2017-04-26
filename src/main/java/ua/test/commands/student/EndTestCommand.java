@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TestResultCommand implements Command {
+public class EndTestCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Test test = (Test) request.getSession().getAttribute("userTest");
@@ -25,7 +25,6 @@ public class TestResultCommand implements Command {
         double mark;
 
         request.getSession().removeAttribute("userTest");
-
         for ( Question question: questions ) {
             Integer questionId = question.getId();
             String[] answersArray = request.getParameterValues(questionId.toString());
@@ -33,9 +32,8 @@ public class TestResultCommand implements Command {
             testResult.put(questionId, answers);
         }
         mark = ServiceFactory.getResultService().giveMark(testResult);
-        request.setAttribute("mark", mark);
         ServiceFactory.getResultService().addResult(idUser, test, mark, LocalDateTime.now());
-
-        request.getRequestDispatcher("/pages/student/test_result.jsp").forward(request, response);
+        request.getSession().setAttribute("mark", mark);
+        response.sendRedirect("/testing_system/student/show_result");
     }
 }
