@@ -19,6 +19,6 @@ public class DeleteTest implements ua.test.commands.Command {
         ServiceFactory.getTestService().deleteTestById(idTest);
         List<Test> tests = ServiceFactory.getTestService().getTestsByUserId(idUser);
         request.setAttribute("tests", tests);
-        request.getRequestDispatcher("/jsp/tutor/tests.jsp");
+        request.getRequestDispatcher("/pages/tutor/tests.jsp");
     }
 }

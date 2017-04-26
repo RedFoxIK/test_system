@@ -26,17 +26,10 @@ public class SigInCommand implements Command {
         if ( user != null ) {
             int idUser = user.getId();
             request.getSession().setAttribute("idUser", idUser);
-
-            if ( user.getRole() == Role.STUDENT ) {
-                request.setAttribute("tests", testService.getAllTests());
-                request.getRequestDispatcher("/jsp/student/tests.jsp").forward(request, response);
-            } else {
-                request.setAttribute("tests", testService.getTestsByUserId(idUser));
-                request.getRequestDispatcher("/jsp/tutor/tests.jsp").forward(request, response);
-            }
+                response.sendRedirect("/testing_system/user/tests");
         } else {
             request.setAttribute("error", errorMess);
-            request.getRequestDispatcher("/jsp/signIn.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/signIn.jsp").forward(request, response);
         }
     }
 }

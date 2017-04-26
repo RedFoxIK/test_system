@@ -15,6 +15,6 @@ public class ResultForTestCommand implements ua.test.commands.Command {
         if ( testId != null ) {
             request.setAttribute("results", ServiceFactory.getResultService().getResultsByTestId(testId));
         }
-        request.getRequestDispatcher("/jsp/tutor/test_results.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/tutor/test_results.jsp").forward(request, response);
     }
 }

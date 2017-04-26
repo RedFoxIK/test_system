@@ -14,11 +14,9 @@ public class ResultCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer userId = (int) request.getSession().getAttribute("idUser");
+        int userId = (int) request.getSession().getAttribute("idUser");
 
-        if ( userId != null ) {
-            request.setAttribute("results", resultService.getResultsByUserId(userId));
-        }
-        request.getRequestDispatcher("/jsp/student/results.jsp").forward(request, response);
+        request.setAttribute("results", resultService.getResultsByUserId(userId));
+        request.getRequestDispatcher("/pages/student/results.jsp").forward(request, response);
     }
 }

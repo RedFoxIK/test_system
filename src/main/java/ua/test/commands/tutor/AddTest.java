@@ -23,6 +23,6 @@ public class AddTest implements ua.test.commands.Command {
         testService.addTest(caption, description, size, idUser);
         tests = testService.getTestsByUserId(idUser);
         request.setAttribute("tests", tests);
-        request.getRequestDispatcher("/jsp/tutor/tests.jsp").include(request, response);
+        request.getRequestDispatcher("/pages/tutor/tests.jsp").include(request, response);
     }
 }

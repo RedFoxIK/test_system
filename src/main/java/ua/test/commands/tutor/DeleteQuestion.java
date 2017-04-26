@@ -19,6 +19,6 @@ public class DeleteQuestion implements ua.test.commands.Command {
         Test test = ServiceFactory.getTestService().getTestById(idTest);
         test.setQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
         request.setAttribute("test", test);
-        request.getRequestDispatcher("/jsp/tutor/test.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/tutor/test.jsp").forward(request, response);
     }
 }

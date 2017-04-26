@@ -16,7 +16,7 @@ public class FirstCommand implements Command {
         Integer userId = (Integer) request.getSession().getAttribute("idUser");
 
         if ( userId == null ) {
-            request.getRequestDispatcher("/jsp/signIn.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/signIn.jsp").include(request, response);
             return;
         }
 
@@ -24,10 +24,10 @@ public class FirstCommand implements Command {
 
         if ( user.getRole() == Role.STUDENT ) {
             request.setAttribute("tests", ServiceFactory.getTestService().getAllTests());
-            request.getRequestDispatcher("/jsp/student/tests.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/student/tests.jsp").include(request, response);
         } else {
             request.setAttribute("tests", ServiceFactory.getTestService().getTestsByUserId(userId));
-            request.getRequestDispatcher("/jsp/tutor/tests.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/tutor/tests.jsp").include(request, response);
         }
     }
 }

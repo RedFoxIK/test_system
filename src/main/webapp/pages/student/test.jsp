@@ -17,7 +17,7 @@
     <c:set var="count" value="0" scope="page" />
     
     <div class="content">
-        <form method="post" action="/testing_system/test_result">
+        <form method="post" action="/testing_system/student/test_result">
 
             <div class="test_area">
 

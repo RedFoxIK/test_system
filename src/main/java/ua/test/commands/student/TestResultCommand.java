@@ -20,11 +20,11 @@ public class TestResultCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Test test = (Test) request.getSession().getAttribute("userTest");
         List<Question> questions = test.getQuestions();
-
-        request.getSession().removeAttribute("userTest");
         Map<Integer, List<String>> testResult = new HashMap<>();
         Integer idUser = (Integer) request.getSession().getAttribute("idUser");
         double mark;
+
+        request.getSession().removeAttribute("userTest");
 
         for ( Question question: questions ) {
             Integer questionId = question.getId();
@@ -32,11 +32,10 @@ public class TestResultCommand implements Command {
             List<String> answers  = (answersArray == null) ? null : Arrays.asList(answersArray);
             testResult.put(questionId, answers);
         }
-        Integer idTest = Integer.parseInt(request.getParameter("id_test"));
         mark = ServiceFactory.getResultService().giveMark(testResult);
         request.setAttribute("mark", mark);
-        ServiceFactory.getResultService().addResult(idUser, idTest, mark, LocalDateTime.now());
+        ServiceFactory.getResultService().addResult(idUser, test, mark, LocalDateTime.now());
 
-        request.getRequestDispatcher("/jsp/student/testresult.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/student/test_result.jsp").forward(request, response);
     }
 }

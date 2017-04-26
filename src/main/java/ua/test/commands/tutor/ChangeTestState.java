@@ -18,7 +18,7 @@ public class ChangeTestState implements ua.test.commands.Command {
         int idTest = Integer.parseInt(request.getParameter("id_test"));
         Test test = testService.changeTestState(idTest);
         request.setAttribute("test", test);
-        request.getRequestDispatcher("/jsp/tutor/test.jsp").include(request, response);
+        request.getRequestDispatcher("/pages/tutor/test.jsp").include(request, response);
     }
 
 }

@@ -22,11 +22,11 @@
             </div>
         </div>
         <div class="other_info">
-            <form method="post" action="/testing_system/update_email">
+            <form method="post" action="/testing_system/user/update_email">
                 <input type="text" value="${user.email}" name="email">
                 <input type="submit">  <span class="error"> <c:out value="${email_exc}"/></span>
             </form>
-            <form method="post" action="/testing_system/update_pass">
+            <form method="post" action="/testing_system/user/update_pass">
                 <input type="password" value="${user.password}" name="password">
                 <input type="submit">
             </form>

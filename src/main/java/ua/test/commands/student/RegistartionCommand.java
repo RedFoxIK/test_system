@@ -33,12 +33,12 @@ public class RegistartionCommand implements Command {
             request.setAttribute("name", name);
             request.setAttribute("surname", surname);
             request.setAttribute("email", email);
-            request.getRequestDispatcher("/jsp/registration.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/registration.jsp").forward(request, response);
         } else {
             int idUser = userService.createUser(login, password, name, surname, email);
             request.getSession().setAttribute("idUser", idUser);
             request.setAttribute("tests", testService.getAllTests());
-            request.getRequestDispatcher("/jsp/student/tests.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/student/tests.jsp").forward(request, response);
         }
     }
 

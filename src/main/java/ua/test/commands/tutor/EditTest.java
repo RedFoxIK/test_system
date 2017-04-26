@@ -18,6 +18,6 @@ public class EditTest implements Command {
         int testId = Integer.parseInt(request.getParameter("id_test"));
         Test test = ServiceFactory.getTestService().getTestById(testId);
         request.setAttribute("test", test);
-        request.getRequestDispatcher("/jsp/tutor/test.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/tutor/test.jsp").forward(request, response);
     }
 }

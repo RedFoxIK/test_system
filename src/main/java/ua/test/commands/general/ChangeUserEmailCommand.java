@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ChangeUserEmail implements Command {
+public class ChangeUserEmailCommand implements Command {
     private final String EMAIL_EXC = "*Email hasn't changed. Such email already registered!";
 
     @Override
@@ -18,14 +18,11 @@ public class ChangeUserEmail implements Command {
         Integer idUser = (Integer) request.getSession().getAttribute("idUser");
         UserService userService = ServiceFactory.getUserService();
 
-        if ( idUser != null ) {
-            if ( userService.isSuchEmail(email) ) {
-                request.setAttribute("email_exc", EMAIL_EXC);
-            } else {
-                System.out.println(email);
-                userService.changeEmail(idUser, email);
-            }
-            request.getRequestDispatcher("/my_profile").forward(request, response);
+        if ( userService.isSuchEmail(email) ) {
+            request.setAttribute("email_exc", EMAIL_EXC);
+        } else {
+            userService.changeEmail(idUser, email);
         }
+        response.sendRedirect("/testing_system/user/my_profile");
     }
 }

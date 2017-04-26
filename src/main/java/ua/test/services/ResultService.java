@@ -46,10 +46,9 @@ public class ResultService {
         return getPercent(rightAnswers, testResult.size());
     }
 
-    public void addResult(int idUser, int idTest, double mark, LocalDateTime dateTime) {
+    public void addResult(int idUser, Test test, double mark, LocalDateTime dateTime) {
         Result result = new Result();
         User user = ServiceFactory.getUserService().getUserById(idUser);
-        Test test = ServiceFactory.getTestService().getTestById(idTest);
         int id;
 
         result.setUser(user);

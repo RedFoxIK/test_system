@@ -25,6 +25,6 @@ public class StartTestCommand implements Command {
         request.setAttribute("test", test);
         request.getSession().setAttribute("userTest", test);
 
-        request.getRequestDispatcher("/jsp/student/test.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/student/test.jsp").forward(request, response);
     }
 }

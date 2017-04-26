@@ -15,14 +15,14 @@
     <h1> ${test.caption}</h1>
     <h2> ${test.size} questions </h2>
 
-    <form method="get" id="form_delete_test" action="/testing_system/delete_question">
+    <form method="get" id="form_delete_test" action="/testing_system/tutor/delete_question">
         <iput type="hidden" name="id_test" value="<c:out value="${test.id}"/>"/>
         <input type="submit" value="delete test" >
                <%--onclick="deleteTest()">--%>
     </form>
     <br>
 
-    <form class="results"  method = "get" action="/testing_system/change_test_state">
+    <form class="results"  method = "get" action="/testing_system/tutor/change_test_state">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
 
         <c:set var="activate" value="deactivate"/>
@@ -38,7 +38,7 @@
 
     <br>
 
-    <form class="results test_result"  method = "get" action="/testing_system/results_for_test">
+    <form class="results test_result"  method = "get" action="/testing_system/tutor/results_for_test">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
         <input type="submit" value="results" class="button_results">
     </form>
@@ -48,7 +48,7 @@
 
     <c:forEach items="${test.questions}" var="question">
     <div class="content">
-        <form method="post" action="/testing_system/delete_question">
+        <form method="post" action="/testing_system/tutor/delete_question">
         <div class="question tutor_question">
             <h3> <c:out value="${question.text}"/> </h3>
 
@@ -67,7 +67,6 @@
                     <span> <c:out value="${answer.text}"/> </span> <br>
 
             </c:forEach>
-
         </div>
             <input type="hidden" name="id_question" value="<c:out value="${question.id}"/>">
             <input type="hidden" name="id_test"  value="<c:out value="${test.id}"/>"/>
@@ -79,7 +78,7 @@
     <div class="content">
 
     <div>
-        <form action="/testing_system/create_question" method="get">
+        <form action="/testing_system/tutor/create_question" method="get">
             <input type="hidden" name="test" value="<c:out value="${test.id}"/>">
             <input type="submit" value="Add question" class="add_question">
         </form>

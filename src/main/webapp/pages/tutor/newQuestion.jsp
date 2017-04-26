@@ -10,7 +10,7 @@
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
-    <form method="post" action="/testing_system/add_question">
+    <form method="post" action="/testing_system/tutor/add_question">
         <h1>Question</h1>
         <input type="text" name="question"> <br>
 

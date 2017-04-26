@@ -31,13 +31,11 @@
                 </tr>
             </c:forEach>
         </table>
-
         <div class="center">
             <form method="get" action="/testing_system/">
                 <input type="submit" value="On main page" class="main_page">
             </form>
         </div>
-
     </main>
 </body>
 </html>

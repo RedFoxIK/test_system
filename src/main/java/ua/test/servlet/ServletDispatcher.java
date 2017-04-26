@@ -28,7 +28,7 @@ public class ServletDispatcher extends HttpServlet {
 
         LOGGER.info(request.getRequestURI());
         if ( command == null ) {
-            request.getRequestDispatcher("/jsp/errors/404.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/errors/404.jsp").forward(request, response);
             return;
         }
         command.execute(request, response);

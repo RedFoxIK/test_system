@@ -14,6 +14,6 @@ public class CreateQuestion implements ua.test.commands.Command {
         Integer idTest = Integer.valueOf(request.getParameter("test"));
         Test test = ServiceFactory.getTestService().getTestById(idTest);
         request.setAttribute("test", test);
-        request.getRequestDispatcher("/jsp/tutor/newQuestion.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/tutor/newQuestion.jsp").forward(request, response);
     }
 }

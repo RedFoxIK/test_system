@@ -6,7 +6,7 @@ import ua.test.commands.student.ResultCommand;
 import ua.test.commands.student.StartTestCommand;
 import ua.test.commands.student.TestResultCommand;
 import ua.test.commands.tutor.*;
-import ua.test.commands.general.MyProfile;
+import ua.test.commands.general.ShowMyProfileCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -27,29 +27,29 @@ public class CommandFactory {
         Map<String, Command> tempMap = new HashMap<>();
 
         tempMap.put("/testing_system/", new FirstCommand());
-        tempMap.put("/testing_system/tests", new SigInCommand());
-        tempMap.put("/testing_system/test", new StartTestCommand());
 
-        tempMap.put("/testing_system/new_user", new RegistartionCommand());
-        tempMap.put("/testing_system/results", new ResultCommand());
-        tempMap.put("/testing_system/test_result", new TestResultCommand());
-        tempMap.put("/testing_system/log_out", new SignOutCommand());
-        tempMap.put("/testing_system/my_profile", new MyProfile());
-        tempMap.put("/testing_system/update_pass", new ChangeUserPassword());
-        tempMap.put("/testing_system/update_email", new ChangeUserEmail());
-        tempMap.put("/testing_system/test_edit", new EditTest());
-        tempMap.put("/testing_system/create_question", new CreateQuestion());
-        tempMap.put("/testing_system/add_question", new AddQuestion());
-        tempMap.put("/testing_system/delete_question", new DeleteQuestion());
-        tempMap.put("/testing_system/results_for_test", new ResultForTestCommand());
-        tempMap.put("/testing_system/change_test_state", new ChangeTestState());
-        tempMap.put("/testing_system/add_test", new AddTest());
-        tempMap.put("/testing_system/delete_test", new DeleteTest());
+        tempMap.put("/testing_system/sign_in", new SigInCommand());
+        tempMap.put("/testing_system/registration", new RegistartionCommand());
 
+        tempMap.put("/testing_system/user/tests", new ShowTestsCommand());
+        tempMap.put("/testing_system/user/log_out", new SignOutCommand());
+        tempMap.put("/testing_system/user/my_profile", new ShowMyProfileCommand());
+        tempMap.put("/testing_system/user/update_pass", new ChangeUserPasswordCommand());
+        tempMap.put("/testing_system/user/update_email", new ChangeUserEmailCommand());
 
+        tempMap.put("/testing_system/student/test", new StartTestCommand());
+        tempMap.put("/testing_system/student/results", new ResultCommand());
+        tempMap.put("/testing_system/student/test_result", new TestResultCommand());
 
-        tempMap.put("/testing_system/ttt", new TTT());
-        tempMap.put("/testing_system/ttt", new XXX());
+        tempMap.put("/testing_system/tutor/test_edit", new EditTest());
+        tempMap.put("/testing_system/tutor/create_question", new CreateQuestion());
+
+        tempMap.put("/testing_system/tutor/add_question", new AddQuestion());
+        tempMap.put("/testing_system/tutor/delete_question", new DeleteQuestion());
+        tempMap.put("/testing_system/tutor/results_for_test", new ResultForTestCommand());
+        tempMap.put("/testing_system/tutor/change_test_state", new ChangeTestState());
+        tempMap.put("/testing_system/tutor/add_test", new AddTest());
+        tempMap.put("/testing_system/tutor/delete_test", new DeleteTest());
 
         commands = Collections.unmodifiableMap(tempMap);
     }

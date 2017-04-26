@@ -17,7 +17,7 @@
 <body>
     <%@ include file="main/header.jsp"%>
     <main>
-        <form class="registration" method="post" action="/testing_system/new_user">
+        <form class="registration" method="post" action="/testing_system/registration">
             <div class="EnterData">
                 <p>Login: </p>
                 <input type="text" name="login" value="<c:out value="${login}"/>" maxlength="20" required>
