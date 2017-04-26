@@ -25,7 +25,7 @@ public class ConnectionWrapper implements AutoCloseable {
     }
 
     public void setTransactionActive(boolean transactionActive) {
-        transactionActive = transactionActive;
+        this.transactionActive = transactionActive;
     }
 
     public void setAutoCommit(boolean autoCommit) {
@@ -58,7 +58,7 @@ public class ConnectionWrapper implements AutoCloseable {
             try {
                 conn.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                LOGGER.error("Transaction probably active");
             }
         }
     }

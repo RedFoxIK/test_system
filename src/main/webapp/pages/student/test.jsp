@@ -8,8 +8,8 @@
 <html>
 <head>
     <%@ include file="../main/head.jsp"%>
-    <script src="${pageContext.request.contextPath}/js/test.js"></script>
     <title> <c:out value="${test.caption}"/> </title>
+    <script src="${pageContext.request.contextPath}/js/test.js"></script>
 </head>
 <body oncopy="return false;">
 <%@ include file="../main/header.jsp"%>

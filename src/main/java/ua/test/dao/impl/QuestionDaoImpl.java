@@ -28,7 +28,7 @@ public class QuestionDaoImpl implements QuestionDao {
     public Integer addQuestion(Question question, int idTest) {
         Integer idGenerated = null;
 
-        try (ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
              PreparedStatement statement = connWrap.prepareStatement(ADD_QUESTION, Statement.RETURN_GENERATED_KEYS) ) {
             statement.setString(1, question.getText());
             statement.setInt(2, idTest);

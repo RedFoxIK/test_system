@@ -40,4 +40,20 @@ function count_answers() {
     var input = document.getElementsByClassName("answer");
     var size = input.length;
     document.getElementById("number_answers").value = size;
+
+    var answers = document.getElementsByName("group");
+    var numAnswers = answers.length;
+    var numRightAnswers = 0;
+
+    for ( var i = 0; i <numAnswers; i++ ) {
+        if ( answers[i].checked ) {
+            numRightAnswers += 1;
+        }
+    }
+
+    if ( numRightAnswers > 0 ) {
+        document.forms["form_add_question"].submit();
+    } else {
+        alert("You must select at least one right answer!!!")
+    }
 }

@@ -18,7 +18,7 @@ public class ShowTestsCommand implements ua.test.commands.Command {
         TestService testService = ServiceFactory.getTestService();
 
         if ( user.getRole() == Role.STUDENT ) {
-            request.setAttribute("tests", testService.getAllTests());
+            request.setAttribute("tests", testService.findAllActivatedTests());
             request.getRequestDispatcher("/pages/student/tests.jsp").forward(request, response);
         } else {
             request.setAttribute("tests", testService.getTestsByUserId(idUser));

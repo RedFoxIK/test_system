@@ -5,6 +5,7 @@ import ua.test.connection.ConnectionWrapper;
 import ua.test.connection.TransactionManager;
 import ua.test.dao.interfaces.TestDao;
 import ua.test.entity.Test;
+import ua.test.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class TestDaoImpl implements TestDao{
 
     private static final String ADD_TEST = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `author`) VALUES(?, ?, ?, ?, ?)";
     private static final String SELECT_ALL = "SELECT id_test, caption, description, size, activated, author FROM tests";
+    private static final String SELECT_ALL_ACTIVATED = "SELECT id_test, caption, description, size, activated, author FROM tests where activated = 1";
     private static final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated` FROM tests where author = ?";
     private static final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
     private static final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, author FROM tests WHERE id_test = ?";
@@ -104,6 +106,20 @@ public class TestDaoImpl implements TestDao{
         return tests;
     }
 
+    public List<Test> findAllActivated() {
+        List<Test> tests;
+
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+              Statement statement = connWrap.createStatement();
+              ResultSet rs = statement.executeQuery(SELECT_ALL_ACTIVATED) ) {
+            tests = getTests(rs);
+        } catch (SQLException e) {
+            LOGGER.error(DB_CON_ERROR, e);
+            return null;
+        }
+        return tests;
+    }
+
     @Override
     public void deleteById(int id) {
         try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
@@ -120,11 +136,15 @@ public class TestDaoImpl implements TestDao{
 
         while (rs.next()) {
             Test test = new Test();
+            User user = new User();
+
+            test.setAuthor(user);
             test.setId(rs.getInt("id_test"));
             test.setCaption(rs.getString("caption"));
             test.setDescription(rs.getString("description"));
             test.setSize(rs.getInt("size"));
             test.setActivated(rs.getBoolean("activated"));
+            test.getAuthor().setId(rs.getInt("author"));
             tests.add(test);
         }
         return tests;

@@ -10,7 +10,7 @@
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
-    <form method="post" action="/testing_system/tutor/add_question">
+    <form method="post" action="/testing_system/tutor/add_question" id="form_add_question">
         <h1>Question</h1>
         <input type="text" name="question"> <br>
 
@@ -29,7 +29,7 @@
         <input type="button"  value="remove" onclick="remove()">
         <input type="hidden" name="number_answers" id="number_answers" value="">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
-        <input type="submit" value="SEND" onclick="count_answers()">
+        <input type="button" value="ADD QUESTION" onclick="count_answers()">
     </form>
 
     <form method="get" action="/testing_system/test_edit">

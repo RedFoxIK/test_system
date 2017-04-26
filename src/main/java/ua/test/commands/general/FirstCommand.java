@@ -23,7 +23,7 @@ public class FirstCommand implements Command {
         User user = ServiceFactory.getUserService().getUserById(userId);
 
         if ( user.getRole() == Role.STUDENT ) {
-            request.setAttribute("tests", ServiceFactory.getTestService().getAllTests());
+            request.setAttribute("tests", ServiceFactory.getTestService().findAllActivatedTests());
             request.getRequestDispatcher("/pages/student/tests.jsp").forward(request, response);
         } else {
             request.setAttribute("tests", ServiceFactory.getTestService().getTestsByUserId(userId));

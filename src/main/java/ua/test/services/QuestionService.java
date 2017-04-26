@@ -11,30 +11,29 @@ import java.util.List;
 
 public class QuestionService {
     public void addQuestion(int idTest, String questionText, boolean multChoice, List<String> answersText, String[] rightAnswers) {
-        int numAnsw = answersText.size();
-        int numRightAnsw = rightAnswers.length;
+        int numAnswers = answersText.size();
+        int numRightAnswers = rightAnswers.length;
         Question question = new Question();
 
         question.setText(questionText);
         question.setMultChoice(multChoice);
-        for ( int i = 0; i < numAnsw; i++ ) {
+        for ( int i = 0; i < numAnswers; i++ ) {
             Answer answer = new Answer();
             answer.setText(answersText.get(i));
             question.addAnswer(answer);
         }
-        for ( int i = 0; i < numRightAnsw; i++ ) {
+        for ( int i = 0; i < numRightAnswers; i++ ) {
             Integer index = Integer.parseInt(rightAnswers[i]);
             question.getAnswers().get(index).setRight(true);
         }
         addQuestion(idTest, question);
     }
 
-    //TRANSACTION MUST BE HERE!!!!!
     private void addQuestion(int idTest, Question question) {
         QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
         AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
 
-//        TransactionManager.getInstance().beginTransaction();
+        TransactionManager.getInstance().beginTransaction();
         int idQuestion = questionDao.addQuestion(question, idTest);
         List<Answer> answers = question.getAnswers();
 
@@ -42,21 +41,19 @@ public class QuestionService {
             int idAnswer = answerDao.addAnswer(answer, idQuestion);
             answer.setId(idAnswer);
         }
-//        TransactionManager.getInstance().commit();
-//        TransactionManager.getInstance().close();
+        TransactionManager.getInstance().commit();
     }
 
-    //TRANSACTION MUST BE HERE!!!!!
     public void deleteQuestion(int idQuestion) {
         QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
         AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
-
-        Question question = questionDao.findById(idQuestion);
+        TransactionManager.getInstance().beginTransaction();
         List<Answer> answers = answerDao.findByQuestionId(idQuestion);
 
         for (Answer answer: answers) {
             answerDao.deleteById(answer.getId());
         }
         questionDao.deleteById(idQuestion);
+        TransactionManager.getInstance().commit();
     }
 }

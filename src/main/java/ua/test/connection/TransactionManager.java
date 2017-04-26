@@ -20,25 +20,23 @@ public class TransactionManager {
     }
 
     public void beginTransaction() {
-        ConnectionWrapper connWprap = DataSource.getInstance().getConnection();
-        connWprap.setTransactionActive(true);
-        connWprap.setAutoCommit(false);
-        connectionLocal.set(connWprap);
+        ConnectionWrapper connWrap = DataSource.getInstance().getConnection();
+        connWrap.setTransactionActive(true);
+        connWrap.setAutoCommit(false);
+        connectionLocal.set(connWrap);
     }
 
     public void commit() {
         ConnectionWrapper connWrap = connectionLocal.get();
         connWrap.commit();
         connWrap.setTransactionActive(false);
-        connWrap.setAutoCommit(false);
-        close();
+        connWrap.setAutoCommit(true);
+        connectionLocal.get().close();
+        connectionLocal.remove();
     }
 
     public void rollback() {
         connectionLocal.get().rollback();
-    }
-
-    public void close()  {
         connectionLocal.get().close();
         connectionLocal.remove();
     }

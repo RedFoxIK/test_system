@@ -4,8 +4,10 @@ import ua.test.dao.DaoFactory;
 import ua.test.dao.impl.AnswerDaoImp;
 import ua.test.dao.impl.QuestionDaoImpl;
 import ua.test.dao.impl.TestDaoImpl;
+import ua.test.dao.impl.UserDaoImpl;
 import ua.test.entity.Question;
 import ua.test.entity.Test;
+import ua.test.entity.User;
 import ua.test.exceptions.TestCannotBeActivatedException;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class TestService {
+    UserDaoImpl userDao = DaoFactory.getInstance().getUserDao();
     TestDaoImpl testDao = DaoFactory.getInstance().getTestDao();
     QuestionDaoImpl questionDao = DaoFactory.getInstance().getQuestionDao();
     AnswerDaoImp answerDao = DaoFactory.getInstance().getAnswerDao();
@@ -68,7 +71,7 @@ public class TestService {
         testDao.addTest(test);
     }
 
-    public void deleteTestById(Integer idTest) {
+    public void deleteTestById(int idTest) {
     }
 
     public Test shuffleQuestions(Test test) {
@@ -84,5 +87,15 @@ public class TestService {
         }
         test.setQuestions(newQuestions);
         return test;
+    }
+
+    public List<Test> findAllActivatedTests() {
+        List<Test> tests =  testDao.findAllActivated();
+
+        for (Test test: tests) {
+            User user = userDao.findById(test.getAuthor().getId());
+            test.setAuthor(user);
+        }
+        return tests;
     }
 }
