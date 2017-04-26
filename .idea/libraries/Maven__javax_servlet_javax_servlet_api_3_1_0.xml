@@ -7,9 +7,7 @@
       <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="file://D:/Мои файлы/Загрузки/slf4j-simple-1.7.0-sources.jar" />
       <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0-sources.jar!/" />
     </SOURCES>
-    <jarDirectory url="file://D:/Мои файлы/Загрузки/slf4j-simple-1.7.0-sources.jar" recursive="false" type="SOURCES" />
   </library>
 </component>

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored ="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -31,6 +31,10 @@
             </div>
         <form id="hidden_form" method="get" action="/testing_system/test">
             <input name="id_test" type="hidden" value="" id="id_test"/>
+        </form>
+
+        <form action="/testing_system/ttt">
+            <input type="submit" value="TEST"/>
         </form>
     </main>
 </body>

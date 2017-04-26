@@ -10,7 +10,8 @@
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
-
+<main>
+    <div class="content">
     <h1> ${test.caption}</h1>
     <h2> ${test.size} questions </h2>
 
@@ -37,16 +38,18 @@
 
     <br>
 
-    <form class="results"  method = "get" action="/testing_system/results_for_test">
+    <form class="results test_result"  method = "get" action="/testing_system/results_for_test">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
-        <input type="submit" value="results">
+        <input type="submit" value="results" class="button_results">
     </form>
 
     <br>
+    </div>
 
     <c:forEach items="${test.questions}" var="question">
+    <div class="content">
         <form method="post" action="/testing_system/delete_question">
-        <div class="question">
+        <div class="question tutor_question">
             <h3> <c:out value="${question.text}"/> </h3>
 
             <c:set var="type" value="radio" scope="page" />
@@ -68,19 +71,24 @@
         </div>
             <input type="hidden" name="id_question" value="<c:out value="${question.id}"/>">
             <input type="hidden" name="id_test"  value="<c:out value="${test.id}"/>"/>
-            <input type="submit" value="delete">
+            <input type="submit" value="delete" class="button_delete">
         </form>
+    </div>
         <hr>
     </c:forEach>
+    <div class="content">
+
     <div>
         <form action="/testing_system/create_question" method="get">
             <input type="hidden" name="test" value="<c:out value="${test.id}"/>">
-            <input type="submit" value="Add question">
+            <input type="submit" value="Add question" class="add_question">
         </form>
     </div>
 
-    <form method="get" action="/testing_system/">
+    <form method="get" action="/testing_system/" class="tutor_main">
         <input type="submit" value="On main page" class="main_page">
     </form>
+    </div>
+</main>
 </body>
 </html>

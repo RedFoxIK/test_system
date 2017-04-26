@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored ="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <%@ include file="../main/head.jsp"%>
@@ -21,15 +21,16 @@
                 <th>№</th>
                 <th>Name of the test</th>
                 <th>Mark</th>
-                <th>Time</th>
+                <th>Date</th>
             </tr>
             <c:forEach items="${results}" var="result">
                 <c:set var="count" value="${count + 1}" scope="page"/>
+
                 <tr>
                     <td><c:out value="${count}" /> </td>
                     <td><c:out value="${result.test.caption}"/></td>
                     <td><c:out value="${result.mark}"/></td>
-                    <td><c:out value="${result.dateTime}"/></td>
+                    <td><tags:datetime date="${result.dateTime}"/></td>
                 </tr>
             </c:forEach>
         </table>

@@ -42,7 +42,12 @@ public class CommandFactory {
         tempMap.put("/testing_system/results_for_test", new ResultForTestCommand());
         tempMap.put("/testing_system/change_test_state", new ChangeTestState());
         tempMap.put("/testing_system/add_test", new AddTest());
-        tempMap.put("/testing_system/delete_question", new DeleteTest());
+        tempMap.put("/testing_system/delete_test", new DeleteTest());
+
+
+
+        tempMap.put("/testing_system/ttt", new TTT());
+        tempMap.put("/testing_system/ttt", new XXX());
 
         commands = Collections.unmodifiableMap(tempMap);
     }

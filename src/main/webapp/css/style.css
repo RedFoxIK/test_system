@@ -439,3 +439,58 @@ div.tests .not_activated {
 #new_test span {
     color: black;
 }
+
+/*TUTOR*/
+
+.button_delete {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    display: inline-block;
+}
+
+.button_delete:hover {
+    background: #66AAFF;
+    cursor:pointer;
+}
+
+.test_result {
+    width:100%;
+    text-align: right;
+}
+
+.test_result .button_results {
+    margin:30px 0;
+}
+
+.tutor_question {
+    display:inline-block;
+    vertical-align:middle;
+    width: 90%;
+}
+
+.add_question {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    display: inline-block;
+    margin:15px 0;
+}
+
+.add_question:hover {
+    background: #66AAFF;
+    cursor:pointer;
+}
+
+.tutor_main {
+    text-align:center;
+}
+/*TUTOR*/
