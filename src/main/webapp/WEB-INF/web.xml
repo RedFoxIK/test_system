@@ -3,6 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <filter>
+        <filter-name>GuestsFilter</filter-name>
+        <filter-class>ua.test.filters.GuestsFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>GuestsFilter</filter-name>
+        <url-pattern>/student/*</url-pattern>
+        <url-pattern>/tutor/*</url-pattern>
+    </filter-mapping>
 
     <filter>
         <filter-name>EncodingFilter</filter-name>

@@ -8,6 +8,9 @@ import ua.test.entity.Question;
 import ua.test.entity.Test;
 import ua.test.exceptions.TestCannotBeActivatedException;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -33,7 +36,7 @@ public class TestService {
     public Test getTestById(int testId) {
         Test test = testDao.findById(testId);
         List<Question> questions = ServiceFactory.getTestService().getQuestionsByTestId(testId);
-        test.addQuestions(questions);
+        test.setQuestions(questions);
         return test;
     }
 
@@ -66,5 +69,20 @@ public class TestService {
     }
 
     public void deleteTestById(Integer idTest) {
+    }
+
+    public Test shuffleQuestions(Test test) {
+        List<Question> newQuestions = new ArrayList<>();
+        List<Question> oldQuestions = test.getQuestions();
+        int numberQuestions = oldQuestions.size();
+        int size = numberQuestions > test.getSize() ? test.getSize() : numberQuestions;
+
+        Collections.shuffle(oldQuestions);
+        for ( int i = 0; i < size; i++ ) {
+            Collections.shuffle(oldQuestions.get(i).getAnswers());
+            newQuestions.add(oldQuestions.get(i));
+        }
+        test.setQuestions(newQuestions);
+        return test;
     }
 }

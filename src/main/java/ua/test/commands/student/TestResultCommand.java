@@ -2,6 +2,7 @@ package ua.test.commands.student;
 
 import ua.test.commands.Command;
 import ua.test.entity.Question;
+import ua.test.entity.Test;
 import ua.test.services.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -17,9 +18,10 @@ import java.util.Map;
 public class TestResultCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idQuestions = request.getParameter("idQuestions");
-        List<Question> questions = (List<Question>) request.getSession().getAttribute(idQuestions);
-        request.getSession().removeAttribute(idQuestions);
+        Test test = (Test) request.getSession().getAttribute("userTest");
+        List<Question> questions = test.getQuestions();
+
+        request.getSession().removeAttribute("userTest");
         Map<Integer, List<String>> testResult = new HashMap<>();
         Integer idUser = (Integer) request.getSession().getAttribute("idUser");
         double mark;

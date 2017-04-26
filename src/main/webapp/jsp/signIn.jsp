@@ -17,6 +17,7 @@
         <main>
             <div class="content">
                 <div class="log_in">
+
                     <form class="form_login" action="/testing_system/tests" method="post">
                         <p class="text_log_in">PLEASE, SIGN IN!</p>
                         <label class="label" for="login" maxlength="16"><p>Login:</p></label>
@@ -27,6 +28,7 @@
                         <br>
                         <input type="submit" class="submit" value="Enter"/>
                     </form>
+
                     <form class="registration" action="${pageContext.request.contextPath}/jsp/registration.jsp" method="get">
                         <input type="submit"  value="Registration"/>
                     </form>

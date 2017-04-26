@@ -68,7 +68,7 @@ public class Test {
         questions.add(question);
     }
 
-    public void addQuestions(List<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
 

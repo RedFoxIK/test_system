@@ -26,7 +26,7 @@ public class AddQuestion implements ua.test.commands.Command {
         }
         ServiceFactory.getQuestionService().addQuestion(idTest, questionText, multChoice, answers, rightAnswersId);
         request.setAttribute("test", test);
-        test.addQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
+        test.setQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
         request.getRequestDispatcher("/jsp/tutor/test.jsp").forward(request, response);
     }
 }

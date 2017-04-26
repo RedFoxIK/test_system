@@ -24,10 +24,10 @@
                 <span class="error"><c:out value="${login_exc}"/></span>
 
                 <p>Password:</p>
-                <input type="password" name="password" maxlength="10" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4, }$" oninvalid="this.setCustomValidity('Invalid password')">
+                <input type="password" name="password" maxlength="10" required pattern="{4, }$" oninvalid="this.setCustomValidity('Invalid password')">
 
                 <p>Repeat password:</p>
-                <input type="password" name="password_repeat" maxlength="10" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$">
+                <input type="password" name="password_repeat" maxlength="10" required pattern="{4,}$">
                 <span class="error"><c:out value="${password_exc}"/></span>
             </div>
 

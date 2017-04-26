@@ -2,6 +2,7 @@
 <%@ page isELIgnored ="false" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <%@ include file="../main/head.jsp"%>
@@ -26,7 +27,7 @@
                     <td><c:out value="${count}" /> </td>
                     <td><c:out value="${result.user.login}"/></td>
                     <td><c:out value="${result.mark}"/></td>
-                    <td><c:out value="${result.dateTime}"/></td>
+                    <td><tags:datetime date="${result.dateTime}"/></td>
                 </tr>
             </c:forEach>
         </table>

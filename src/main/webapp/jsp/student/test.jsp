@@ -23,7 +23,7 @@
 
                 <div class="item_question">
 
-                    <c:forEach items="${questions}" var="question">
+                    <c:forEach items="${test.questions}" var="question">
                         <c:set var="count" value="${count + 1}" scope="page"/>
 
                         <div data-name="block${count}">
@@ -45,7 +45,7 @@
 
                 </div>
 
-                <c:set var="number_questions" value="${fn:length(questions)}"/>
+                <c:set var="number_questions" value="${fn:length(test.questions)}"/>
 
                 <div class="item_number_question">
 

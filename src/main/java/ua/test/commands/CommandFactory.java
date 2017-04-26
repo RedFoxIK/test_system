@@ -1,8 +1,9 @@
 package ua.test.commands;
 
 import ua.test.commands.general.*;
-import ua.test.commands.student.NewStudent;
+import ua.test.commands.student.RegistartionCommand;
 import ua.test.commands.student.ResultCommand;
+import ua.test.commands.student.StartTestCommand;
 import ua.test.commands.student.TestResultCommand;
 import ua.test.commands.tutor.*;
 import ua.test.commands.general.MyProfile;
@@ -26,12 +27,13 @@ public class CommandFactory {
         Map<String, Command> tempMap = new HashMap<>();
 
         tempMap.put("/testing_system/", new FirstCommand());
-        tempMap.put("/testing_system/tests", new SigIn());
-        tempMap.put("/testing_system/test", new TestCommand());
-        tempMap.put("/testing_system/new_user", new NewStudent());
+        tempMap.put("/testing_system/tests", new SigInCommand());
+        tempMap.put("/testing_system/test", new StartTestCommand());
+
+        tempMap.put("/testing_system/new_user", new RegistartionCommand());
         tempMap.put("/testing_system/results", new ResultCommand());
         tempMap.put("/testing_system/test_result", new TestResultCommand());
-        tempMap.put("/testing_system/log_out", new SignOut());
+        tempMap.put("/testing_system/log_out", new SignOutCommand());
         tempMap.put("/testing_system/my_profile", new MyProfile());
         tempMap.put("/testing_system/update_pass", new ChangeUserPassword());
         tempMap.put("/testing_system/update_email", new ChangeUserEmail());

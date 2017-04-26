@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class NewStudent implements Command {
+public class RegistartionCommand implements Command {
     private final UserService userService = ServiceFactory.getUserService();
     private final TestService testService = ServiceFactory.getTestService();
 
