@@ -14,11 +14,11 @@ public class DeleteQuestion implements ua.test.commands.Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idQuestion = Integer.parseInt(request.getParameter("id_question"));
         int idTest = Integer.parseInt(request.getParameter("id_test"));
-        System.out.println(idTest);
         ServiceFactory.getQuestionService().deleteQuestion(idQuestion);
         Test test = ServiceFactory.getTestService().getTestById(idTest);
+
         test.setQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
         request.setAttribute("test", test);
-        request.getRequestDispatcher("/pages/tutor/test.jsp").forward(request, response);
+        response.sendRedirect("/testing_system/tutor/test_edit?id_test="+test.getId());
     }
 }
