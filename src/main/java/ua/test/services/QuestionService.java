@@ -48,11 +48,6 @@ public class QuestionService {
 
     public void deleteQuestion(int idQuestion) {
         TransactionManager.getInstance().beginTransaction();
-        deleteQuestionInTransaction(idQuestion);
-        TransactionManager.getInstance().commit();
-    }
-
-    public void deleteQuestionInTransaction(int idQuestion) {
         AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
         QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
         List<Answer> answers = answerDao.findByQuestionId(idQuestion);
@@ -61,5 +56,7 @@ public class QuestionService {
             answerDao.deleteById(answer.getId());
         }
         questionDao.deleteById(idQuestion);
+        TransactionManager.getInstance().commit();
     }
+
 }

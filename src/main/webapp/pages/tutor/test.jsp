@@ -15,10 +15,9 @@
     <h1> ${test.caption}</h1>
     <h2> ${test.size} questions </h2>
 
-    <form method="get" id="form_delete_test" action="/testing_system/tutor/delete_question">
-        <iput type="hidden" name="id_test" value="<c:out value="${test.id}"/>"/>
+    <form method="post" id="form_delete_test" action="/testing_system/tutor/delete_test">
+        <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
         <input type="submit" value="delete test" >
-               <%--onclick="deleteTest()">--%>
     </form>
     <br>
 

@@ -10,6 +10,7 @@ import ua.test.dao.interfaces.AnswerDao;
 import ua.test.dao.interfaces.QuestionDao;
 import ua.test.dao.interfaces.TestDao;
 import ua.test.dao.interfaces.UserDao;
+import ua.test.entity.Answer;
 import ua.test.entity.Question;
 import ua.test.entity.Test;
 import ua.test.entity.User;
@@ -79,13 +80,18 @@ public class TestService {
     public void deleteTestById(int idTest) {
         QuestionService questionService = ServiceFactory.getQuestionService();
         TransactionManager.getInstance().beginTransaction();
-        Test test = testDao.findById(idTest);
+        Test test = getTestById(idTest);
         List<Question> questions = test.getQuestions();
-
         for ( Question question: questions ) {
-            questionService.deleteQuestionInTransaction(question.getId());
+            List<Answer> answers = question.getAnswers();
+
+            for ( Answer answer: answers ) {
+                answerDao.deleteById(answer.getId());
+            }
+            questionDao.deleteById(question.getId());
         }
-        ServiceFactory.getTestService().deleteTestById(idTest);
+        answerDao.deleteById(idTest);
+        testDao.deleteById(idTest);
         TransactionManager.getInstance().commit();
     }
 

@@ -14,11 +14,8 @@ public class DeleteTest implements ua.test.commands.Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idTest = Integer.parseInt(request.getParameter("id_test"));
-        Integer idUser = (Integer) request.getSession().getAttribute("idUser");
 
         ServiceFactory.getTestService().deleteTestById(idTest);
-        List<Test> tests = ServiceFactory.getTestService().getTestsByUserId(idUser);
-        request.setAttribute("tests", tests);
-        request.getRequestDispatcher("/pages/tutor/tests.jsp");
+        response.sendRedirect("/testing_system/");
     }
 }

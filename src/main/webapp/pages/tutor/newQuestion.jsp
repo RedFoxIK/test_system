@@ -17,7 +17,7 @@
         <input type="checkbox" name="mult_choice" value="yes" onclick="changeType()"> <span>multiple choice</span> <br>
         <h3>Answers:</h3>
 
-        <input class="type_answer" name="group" value="0">
+        <input type="checkbox" class="type_answer" name="group" value="0">
         <input type="text" class="answer" name="0"/> <br>
 
         <input class="type_answer" name="group" value="1">
