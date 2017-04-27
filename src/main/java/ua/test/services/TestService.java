@@ -119,4 +119,14 @@ public class TestService {
         }
         return tests;
     }
+
+    public void editTest(int idTest, int size, String caption, String description) {
+        Test test = new Test();
+
+        test.setId(idTest);
+        test.setSize(size);
+        test.setCaption(caption);
+        test.setDescription(description);
+        testDao.updateTest(test);
+    }
 }

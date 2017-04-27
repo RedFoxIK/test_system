@@ -21,6 +21,7 @@ public class TestDaoImpl implements TestDao{
     private static final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
     private static final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, author FROM tests WHERE id_test = ?";
     private static final String UPDATE_STATE = "UPDATE tests set `activated` = ? WHERE `id_test` = ?";
+    private static final String UPDATE_TEST = "UPDATE tests set `caption` = ?, `description` = ?, `size` = ? WHERE `id_test` = ?";
 
     private static final String DB_CON_ERROR = "Database connection error";
 
@@ -122,11 +123,25 @@ public class TestDaoImpl implements TestDao{
     }
 
     @Override
-    public void updateTest(Test test) {
+    public void updateState(Test test) {
         try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
               PreparedStatement statement = connWrap.prepareStatement(UPDATE_STATE) ) {
             statement.setBoolean(1, test.isActivated());
             statement.setInt(2, test.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            LOGGER.error(DB_CON_ERROR, e);
+        }
+    }
+
+    @Override
+    public void updateTest(Test test) {
+        try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
+              PreparedStatement statement = connWrap.prepareStatement(UPDATE_TEST) ) {
+            statement.setString(1, test.getCaption());
+            statement.setString(2, test.getDescription());
+            statement.setInt(3, test.getSize());
+            statement.setInt(4, test.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(DB_CON_ERROR, e);

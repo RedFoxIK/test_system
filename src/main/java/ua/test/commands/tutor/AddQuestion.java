@@ -28,6 +28,6 @@ public class AddQuestion implements ua.test.commands.Command {
         request.setAttribute("test", test);
         test.setQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
 
-        response.sendRedirect("/testing_system/tutor/test_edit?id_test="+test.getId());
+        response.sendRedirect("/testing_system/tutor/test?id_test="+test.getId());
     }
 }

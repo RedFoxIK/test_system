@@ -36,7 +36,7 @@
 
                 <div id="new_test">
                     <h2>New test</h2>
-                    <form method="get" action="/testing_system/tutor/add_test">
+                    <form method="post" action="/testing_system/tutor/add_test">
                         <span>caption: </span><input type="text" name="caption"> <br>
                         <span>description: </span><input type="text" name="description"> <br>
                         <span>questions: </span> <input type="number" name="size" min="1" max="100"> <br>
@@ -47,7 +47,7 @@
             </div>
 
 
-        <form id="hidden_form" method="get" action="/testing_system/tutor/test_edit">
+        <form id="hidden_form" method="get" action="/testing_system/tutor/test">
             <input type="hidden" name="id_test"  value="<c:out value="${test.id}"/>" id="id_test"/>
         </form>
     </main>

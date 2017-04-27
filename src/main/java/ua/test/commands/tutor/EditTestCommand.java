@@ -1,22 +1,21 @@
 package ua.test.commands.tutor;
 
-import ua.test.entity.Test;
-import ua.test.exceptions.TestCannotBeActivatedException;
 import ua.test.services.ServiceFactory;
-import ua.test.services.TestService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ChangeTestState implements ua.test.commands.Command {
-
+public class EditTestCommand implements ua.test.commands.Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TestService testService = ServiceFactory.getTestService();
         int idTest = Integer.parseInt(request.getParameter("id_test"));
-        Test test = testService.changeTestState(idTest);
-        response.sendRedirect("/testing_system/tutor/test?id_test="+test.getId());
+        int size = Integer.parseInt(request.getParameter("test_size"));
+        String caption = request.getParameter("caption");
+        String description = request.getParameter("description");
+
+        ServiceFactory.getTestService().editTest(idTest, size, caption, description);
+        response.sendRedirect("/testing_system/tutor/test?id_test="+idTest);
     }
 }

@@ -1,15 +1,17 @@
 package ua.test.commands.tutor;
 
+import ua.test.commands.Command;
 import ua.test.entity.Test;
+import ua.test.services.QuestionService;
 import ua.test.services.ServiceFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.logging.Logger;
 
-public class DeleteQuestion implements ua.test.commands.Command {
+public class DeleteQuestion implements Command {
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idQuestion = Integer.parseInt(request.getParameter("id_question"));
@@ -19,6 +21,6 @@ public class DeleteQuestion implements ua.test.commands.Command {
 
         test.setQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
         request.setAttribute("test", test);
-        response.sendRedirect("/testing_system/tutor/test_edit?id_test="+test.getId());
+        response.sendRedirect("/testing_system/tutor/test?id_test="+test.getId());
     }
 }

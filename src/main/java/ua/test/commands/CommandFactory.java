@@ -40,13 +40,14 @@ public class CommandFactory {
         tempMap.put("/testing_system/student/test_end", new EndTestCommand());
         tempMap.put("/testing_system/student/show_result", new ShowTestResultCommand());
 
-        tempMap.put("/testing_system/tutor/test_edit", new EditTest());
+        tempMap.put("/testing_system/tutor/test", new ShowTutorTestCommand());
         tempMap.put("/testing_system/tutor/create_question", new CreateQuestion());
         tempMap.put("/testing_system/tutor/add_question", new AddQuestion());
         tempMap.put("/testing_system/tutor/delete_question", new DeleteQuestion());
         tempMap.put("/testing_system/tutor/results_for_test", new ResultForTestCommand());
         tempMap.put("/testing_system/tutor/change_test_state", new ChangeTestState());
         tempMap.put("/testing_system/tutor/add_test", new AddTest());
+        tempMap.put("/testing_system/tutor/test_edit", new EditTestCommand());
         tempMap.put("/testing_system/tutor/delete_test", new DeleteTest());
 
         commands = Collections.unmodifiableMap(tempMap);

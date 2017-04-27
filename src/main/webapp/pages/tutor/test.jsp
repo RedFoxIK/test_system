@@ -12,9 +12,16 @@
     <%@ include file="../main/header.jsp"%>
 <main>
     <div class="content">
-    <h1> ${test.caption}</h1>
-    <h2> ${test.size} questions </h2>
-
+        <div class="test_data">
+            <form id="test_data" method = "post" action="/testing_system/tutor/test_edit">
+                <span>Caption: </span> <input type="text" name="caption" value="${test.caption}"/> <br>
+                <span> Description: </span> <input type="text" name="description" value="${test.description}"/> <br>
+                <span> size: </span> <input type="number" name="test_size" max="100" min="1"  value="${test.size}"/> <span> questions </span> <br>
+                <input type="hidden" name="id_test" value="${test.id}"/>
+                <input type="submit" value="change"/>
+            </form>
+        </div>
+        <br> <br>
     <form method="post" id="form_delete_test" action="/testing_system/tutor/delete_test">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
         <input type="submit" value="delete test" >
