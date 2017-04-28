@@ -7,6 +7,11 @@ import java.sql.Connection;
 
 public class DaoFactory {
     private static final DaoFactory instance = new DaoFactory();
+    private final AnswerDao answerDao = new AnswerDaoImp();
+    private final ResultDao resultDao = new ResultDaoImpl();
+    private final QuestionDao questionDao = new QuestionDaoImpl();
+    private final TestDao testDao = new TestDaoImpl();
+    private final UserDao userDao = new UserDaoImpl();
 
     private DaoFactory() {}
 
@@ -15,22 +20,22 @@ public class DaoFactory {
     }
 
     public UserDao getUserDao() {
-        return new UserDaoImpl();
+        return userDao;
     }
 
     public TestDao getTestDao() {
-        return new TestDaoImpl();
+        return testDao;
     }
 
     public QuestionDao getQuestionDao() {
-        return new QuestionDaoImpl();
+        return questionDao;
     }
 
     public AnswerDao getAnswerDao() {
-        return new AnswerDaoImp();
+        return answerDao;
     }
 
     public ResultDao getResultDao() {
-        return new ResultDaoImpl();
+        return resultDao;
     }
 }

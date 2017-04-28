@@ -14,8 +14,8 @@ public class ShowTestsCommand implements ua.test.commands.Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idUser = (int) request.getSession().getAttribute("idUser");
-        User user = ServiceFactory.getUserService().getUserById(idUser);
-        TestService testService = ServiceFactory.getTestService();
+        User user = ServiceFactory.getInstance().getUserService().getUserById(idUser);
+        TestService testService = ServiceFactory.getInstance().getTestService();
 
         if ( user.getRole() == Role.STUDENT ) {
             request.setAttribute("tests", testService.findAllActivatedTests());

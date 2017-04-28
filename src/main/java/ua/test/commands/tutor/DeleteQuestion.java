@@ -16,10 +16,10 @@ public class DeleteQuestion implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idQuestion = Integer.parseInt(request.getParameter("id_question"));
         int idTest = Integer.parseInt(request.getParameter("id_test"));
-        ServiceFactory.getQuestionService().deleteQuestion(idQuestion);
-        Test test = ServiceFactory.getTestService().getTestById(idTest);
+        ServiceFactory.getInstance().getQuestionService().deleteQuestion(idQuestion);
+        Test test = ServiceFactory.getInstance().getTestService().getTestById(idTest);
 
-        test.setQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
+        test.setQuestions(ServiceFactory.getInstance().getTestService().getQuestionsByTestId(idTest));
         request.setAttribute("test", test);
         response.sendRedirect("/testing_system/tutor/test?id_test="+test.getId());
     }

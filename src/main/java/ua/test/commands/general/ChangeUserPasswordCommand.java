@@ -14,7 +14,7 @@ public class ChangeUserPasswordCommand implements Command {
         String password = request.getParameter("password");
         Integer idUser = (Integer) request.getSession().getAttribute("idUser");
 
-        ServiceFactory.getUserService().changePassword(idUser, password);
+        ServiceFactory.getInstance().getUserService().changePassword(idUser, password);
         response.sendRedirect("/testing_system/user/my_profile");
     }
 }

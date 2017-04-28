@@ -31,8 +31,8 @@ public class EndTestCommand implements Command {
             List<String> answers  = (answersArray == null) ? null : Arrays.asList(answersArray);
             testResult.put(questionId, answers);
         }
-        mark = ServiceFactory.getResultService().giveMark(testResult);
-        ServiceFactory.getResultService().addResult(idUser, test, mark, LocalDateTime.now());
+        mark = ServiceFactory.getInstance().getResultService().giveMark(testResult);
+        ServiceFactory.getInstance().getResultService().addResult(idUser, test, mark, LocalDateTime.now());
         request.getSession().setAttribute("mark", mark);
         response.sendRedirect("/testing_system/student/show_result");
     }

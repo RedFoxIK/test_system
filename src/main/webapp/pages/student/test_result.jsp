@@ -13,7 +13,7 @@
             <h2> <c:out value="${mark}"/>% right answers </h2>
 
             <c:if test="${mark > 99.99 }">
-                <h3> Well done! ☺</h3>
+                <h3> Well done! </h3>
                 <img src="${pageContext.request.contextPath}/img/well_done.png" alt="" >
             </c:if>
             <div class="center">

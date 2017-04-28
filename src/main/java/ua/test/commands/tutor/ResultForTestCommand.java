@@ -13,7 +13,7 @@ public class ResultForTestCommand implements ua.test.commands.Command {
         Integer testId = Integer.valueOf(request.getParameter("id_test"));
 
         if ( testId != null ) {
-            request.setAttribute("results", ServiceFactory.getResultService().getResultsByTestId(testId));
+            request.setAttribute("results", ServiceFactory.getInstance().getResultService().getResultsByTestId(testId));
         }
         request.getRequestDispatcher("/pages/tutor/test_results.jsp").forward(request, response);
     }

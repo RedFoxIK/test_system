@@ -28,6 +28,8 @@ public class TestService {
     QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
     AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
 
+    TestService() {}
+
     public List<Test> getAllTests() {
         return testDao.findAll();
     }
@@ -44,7 +46,7 @@ public class TestService {
 
     public Test getTestById(int testId) {
         Test test = testDao.findById(testId);
-        List<Question> questions = ServiceFactory.getTestService().getQuestionsByTestId(testId);
+        List<Question> questions = ServiceFactory.getInstance().getTestService().getQuestionsByTestId(testId);
         test.setQuestions(questions);
         return test;
     }
@@ -57,12 +59,8 @@ public class TestService {
     public Test changeTestState(int idTest)  {
         Test test = getTestById(idTest);
 
-        if ( test.isActivated() ) {
-            test.setActivated(false);
-        } else {
-            test.setActivated(true);
-        }
-        testDao.updateTest(test);
+        test.setActivated(!test.isActivated());
+        testDao.updateState(test);
         return test;
     }
 
@@ -73,12 +71,12 @@ public class TestService {
         test.setDescription(description);
         test.setSize(size);
         test.setActivated(false);
-        test.setAuthor(ServiceFactory.getUserService().getUserById(idUser));
+        test.setAuthor(ServiceFactory.getInstance().getUserService().getUserById(idUser));
         testDao.addTest(test);
     }
 
     public void deleteTestById(int idTest) {
-        QuestionService questionService = ServiceFactory.getQuestionService();
+        QuestionService questionService = ServiceFactory.getInstance().getQuestionService();
         TransactionManager.getInstance().beginTransaction();
         Test test = getTestById(idTest);
         List<Question> questions = test.getQuestions();
@@ -128,5 +126,11 @@ public class TestService {
         test.setCaption(caption);
         test.setDescription(description);
         testDao.updateTest(test);
+
+        List<Question> questions = questionDao.findByTestId(idTest);
+        if ( questions.size() < size ) {
+            test.setActivated(false);
+            testDao.updateState(test);
+        }
     }
 }

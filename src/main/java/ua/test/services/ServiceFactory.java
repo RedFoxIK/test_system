@@ -1,20 +1,33 @@
 package ua.test.services;
 
 public class ServiceFactory {
+    private static ServiceFactory instance = new ServiceFactory();
+    private final UserService userService = new UserService();
+    private final TestService testService = new TestService();
+    private final ResultService resultService = new ResultService();
+    private final QuestionService questionService = new QuestionService();
 
-    public static UserService getUserService() {
-        return new UserService();
+    private ServiceFactory() {}
+
+    public static ServiceFactory getInstance() {
+        return instance;
     }
 
-    public static TestService getTestService() {
-        return new TestService();
+    public UserService getUserService() {
+        return userService;
     }
 
-    public static  ResultService getResultService() {
-        return new ResultService();
+    public TestService getTestService() {
+        return testService;
     }
 
-    public static QuestionService getQuestionService() {
-        return new QuestionService();
+    public ResultService getResultService() {
+        return resultService;
     }
+
+    public QuestionService getQuestionService() {
+        return questionService;
+    }
+
+
 }

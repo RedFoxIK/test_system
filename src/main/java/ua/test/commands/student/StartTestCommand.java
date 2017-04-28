@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class StartTestCommand implements Command {
-    TestService testService = ServiceFactory.getTestService();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        TestService testService = ServiceFactory.getInstance().getTestService();
         int testId = Integer.parseInt(request.getParameter("id_test"));
         Test test = testService.getTestById(testId);
 

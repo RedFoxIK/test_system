@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SigInCommand implements Command {
-    private final UserService userService = ServiceFactory.getUserService();
-    private final TestService testService = ServiceFactory.getTestService();
+    private final UserService userService = ServiceFactory.getInstance().getUserService();
+    private final TestService testService = ServiceFactory.getInstance().getTestService();
     private final String errorMess = "*Ups. Something wrong with your login or password. Please try again";
 
     @Override

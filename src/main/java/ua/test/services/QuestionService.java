@@ -12,6 +12,8 @@ import ua.test.entity.Question;
 import java.util.List;
 
 public class QuestionService {
+    QuestionService() {}
+
     public void addQuestion(int idTest, String questionText, boolean multChoice, List<String> answersText, String[] rightAnswers) {
         int numAnswers = answersText.size();
         int numRightAnswers = rightAnswers.length;

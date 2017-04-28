@@ -1,6 +1,6 @@
 function showTest(id) {
     document.getElementById("id_test").value = id;
-    document.getElementById('hidden_form').submit();
+    document.getElementById("hidden_form").submit();
 };
 
 function showDiv() {
@@ -18,3 +18,4 @@ function deleteTest() {
         document.forms["form_delete_test"].submit();
     }
 };
+

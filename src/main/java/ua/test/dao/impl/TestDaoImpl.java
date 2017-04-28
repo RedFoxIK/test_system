@@ -127,6 +127,7 @@ public class TestDaoImpl implements TestDao{
         try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
               PreparedStatement statement = connWrap.prepareStatement(UPDATE_STATE) ) {
             statement.setBoolean(1, test.isActivated());
+            System.out.println(test.isActivated());
             statement.setInt(2, test.getId());
             statement.executeUpdate();
         } catch (SQLException e) {

@@ -30,8 +30,8 @@
                     <td><c:out value="${count}" /> </td>
                     <td><c:out value="${result.test.caption}"/></td>
                     <td><c:out value="${result.mark}"/></td>
-                    <td><c:out value="${result.dateTime}"/></td>
-                    <%--<td><tags:datetime date="${result.dateTime}"/></td>--%>
+                    <td><tags:datetime date="${result.dateTime}"/></td>
+                        <%--<td><c:out value="${result.dateTime}"/></td>--%>
                 </tr>
             </c:forEach>
         </table>

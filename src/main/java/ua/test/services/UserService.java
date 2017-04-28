@@ -9,7 +9,7 @@ import ua.test.entity.User;
 public class UserService {
     UserDao userDao = DaoFactory.getInstance().getUserDao();
 
-    public UserService() {}
+    UserService() {}
 
     public int createUser(String login, String password, String name, String surname, String email ) {
         User user = new User();

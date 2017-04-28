@@ -5,7 +5,7 @@
 <html>
 <head>
     <title><c:out value="${test.caption}"/></title>
-    <script src="${pageContext.request.contextPath}/js/test2.js"></script>
+    <script src="${pageContext.request.contextPath}/js/tutortest.js"></script>
     <%@ include file="../main/head.jsp"%>
 </head>
 <body>

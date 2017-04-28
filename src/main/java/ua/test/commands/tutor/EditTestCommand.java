@@ -15,7 +15,7 @@ public class EditTestCommand implements ua.test.commands.Command {
         String caption = request.getParameter("caption");
         String description = request.getParameter("description");
 
-        ServiceFactory.getTestService().editTest(idTest, size, caption, description);
+        ServiceFactory.getInstance().getTestService().editTest(idTest, size, caption, description);
         response.sendRedirect("/testing_system/tutor/test?id_test="+idTest);
     }
 }

@@ -27,7 +27,6 @@
                     <td><c:out value="${count}" /> </td>
                     <td><c:out value="${result.user.login}"/></td>
                     <td><c:out value="${result.mark}"/></td>
-                    <%--<td><c:out value="${result.dateTime}"/></td>--%>
                     <td><tags:datetime date="${result.dateTime}"/></td>
                 </tr>
             </c:forEach>

@@ -14,7 +14,7 @@ public class AddQuestion implements ua.test.commands.Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idTest = Integer.parseInt(request.getParameter("id_test"));
-        Test test = ServiceFactory.getTestService().getTestById(idTest);
+        Test test = ServiceFactory.getInstance().getTestService().getTestById(idTest);
         String[] rightAnswersId = request.getParameterValues("group");
         List<String> answers = new ArrayList<>();
         Integer numbers = Integer.valueOf(request.getParameter("number_answers"));
@@ -24,9 +24,9 @@ public class AddQuestion implements ua.test.commands.Command {
         for (Integer i = 0; i < numbers; i++ ) {
             answers.add(request.getParameter(i.toString()));
         }
-        ServiceFactory.getQuestionService().addQuestion(idTest, questionText, multChoice, answers, rightAnswersId);
+        ServiceFactory.getInstance().getQuestionService().addQuestion(idTest, questionText, multChoice, answers, rightAnswersId);
         request.setAttribute("test", test);
-        test.setQuestions(ServiceFactory.getTestService().getQuestionsByTestId(idTest));
+        test.setQuestions(ServiceFactory.getInstance().getTestService().getQuestionsByTestId(idTest));
 
         response.sendRedirect("/testing_system/tutor/test?id_test="+test.getId());
     }

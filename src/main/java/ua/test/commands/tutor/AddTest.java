@@ -13,7 +13,7 @@ import java.util.List;
 public class AddTest implements ua.test.commands.Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TestService testService = ServiceFactory.getTestService();
+        TestService testService = ServiceFactory.getInstance().getTestService();
         Integer idUser = (Integer) request.getSession().getAttribute("idUser");
         String caption = request.getParameter("caption");
         String description = request.getParameter("description");

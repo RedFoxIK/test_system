@@ -23,7 +23,7 @@ public class ResultService {
     AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
 
 
-    public ResultService() {}
+    ResultService() {}
 
     public List<Result> getResultsByUserId(int id) {
         List<Result> results = resultDao.findByUserId(id);
@@ -51,7 +51,7 @@ public class ResultService {
 
     public void addResult(int idUser, Test test, double mark, LocalDateTime dateTime) {
         Result result = new Result();
-        User user = ServiceFactory.getUserService().getUserById(idUser);
+        User user = ServiceFactory.getInstance().getUserService().getUserById(idUser);
         int id;
 
         result.setUser(user);

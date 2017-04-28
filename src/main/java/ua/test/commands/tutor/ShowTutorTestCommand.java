@@ -16,7 +16,7 @@ public class ShowTutorTestCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int testId = Integer.parseInt(request.getParameter("id_test"));
-        Test test = ServiceFactory.getTestService().getTestById(testId);
+        Test test = ServiceFactory.getInstance().getTestService().getTestById(testId);
         request.setAttribute("test", test);
         request.getRequestDispatcher("/pages/tutor/test.jsp").forward(request, response);
     }

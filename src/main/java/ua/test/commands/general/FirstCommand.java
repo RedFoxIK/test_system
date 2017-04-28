@@ -20,13 +20,13 @@ public class FirstCommand implements Command {
             return;
         }
 
-        User user = ServiceFactory.getUserService().getUserById(userId);
+        User user = ServiceFactory.getInstance().getUserService().getUserById(userId);
 
         if ( user.getRole() == Role.STUDENT ) {
-            request.setAttribute("tests", ServiceFactory.getTestService().findAllActivatedTests());
+            request.setAttribute("tests", ServiceFactory.getInstance().getTestService().findAllActivatedTests());
             request.getRequestDispatcher("/pages/student/tests.jsp").forward(request, response);
         } else {
-            request.setAttribute("tests", ServiceFactory.getTestService().getTestsByUserId(userId));
+            request.setAttribute("tests", ServiceFactory.getInstance().getTestService().getTestsByUserId(userId));
             request.getRequestDispatcher("/pages/tutor/tests.jsp").forward(request, response);
         }
     }

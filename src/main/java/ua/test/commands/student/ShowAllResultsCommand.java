@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ShowAllResultsCommand implements Command {
-    private final ResultService resultService = ServiceFactory.getResultService();
+    private final ResultService resultService = ServiceFactory.getInstance().getResultService();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

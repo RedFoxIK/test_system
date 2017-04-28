@@ -13,7 +13,7 @@ public class CreateQuestion implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer idTest = Integer.valueOf(request.getParameter("test"));
-        Test test = ServiceFactory.getTestService().getTestById(idTest);
+        Test test = ServiceFactory.getInstance().getTestService().getTestById(idTest);
         request.setAttribute("test", test);
         request.getRequestDispatcher("/pages/tutor/newQuestion.jsp").forward(request, response);
     }

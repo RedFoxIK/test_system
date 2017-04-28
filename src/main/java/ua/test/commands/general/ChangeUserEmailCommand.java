@@ -16,7 +16,7 @@ public class ChangeUserEmailCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         Integer idUser = (Integer) request.getSession().getAttribute("idUser");
-        UserService userService = ServiceFactory.getUserService();
+        UserService userService = ServiceFactory.getInstance().getUserService();
 
         if ( userService.isSuchEmail(email) ) {
             request.setAttribute("email_exc", EMAIL_EXC);
