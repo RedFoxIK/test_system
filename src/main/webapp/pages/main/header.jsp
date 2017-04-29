@@ -13,7 +13,7 @@
             <form method="get" action="/testing_system/user/my_profile" class="profile_button">
                 <input type="submit" value="My profile">
             </form>
-            <form method="get" action="/testing_system/user/log_out" class="logout_button">
+            <form method="get" action="/testing_system/user/sign_out" class="logout_button">
                 <input type="submit" value="Log out">
             </form>
         </div>
