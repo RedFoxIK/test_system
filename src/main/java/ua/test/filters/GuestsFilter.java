@@ -17,13 +17,13 @@ public class GuestsFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        HttpSession httpSession = ((HttpServletRequest) request).getSession(false);
-
-        if ( httpSession == null || httpSession.getAttribute("idUser") == null ) {
-            ((HttpServletResponse)response).sendRedirect("/testing_system/");
-        } else {
+//        HttpSession httpSession = ((HttpServletRequest) request).getSession(false);
+//
+//        if ( httpSession == null || httpSession.getAttribute("idUser") == null ) {
+//            ((HttpServletResponse)response).sendRedirect("/testing_system/");
+//        } else {
             filterChain.doFilter(request, response);
-        }
+//        }
     }
 
     @Override

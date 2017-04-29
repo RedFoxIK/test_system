@@ -21,15 +21,17 @@ public class StudentInTestFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        HttpSession httpSession = ((HttpServletRequest) request).getSession(false);
-        String uri = ((HttpServletRequest) request).getRequestURI();
-
-        if ( httpSession != null && httpSession.getAttribute("userTest") != null ) {
-            if ( !(uri.equals(START_TEST_URI) || uri.equals(END_TEST_URI) || uri.equals(TEST_URI)) ) {
-                ((HttpServletResponse) response).sendRedirect("/testing_system/student/test");
-                return;
-            }
-        }
+//        HttpSession httpSession = ((HttpServletRequest) request).getSession(false);
+//        String uri = ((HttpServletRequest) request).getRequestURI();
+//
+//        System.out.println(uri.equals(TEST_URI));
+//
+//        if ( httpSession != null && httpSession.getAttribute("userTest") != null ) {
+//            if ( !( uri.equals(START_TEST_URI) || uri.equals(END_TEST_URI) || uri.equals(TEST_URI) ) ) {
+//                ((HttpServletResponse) response).sendRedirect("/testing_system/student/test");
+//                return;
+//            }
+//        }
         filterChain.doFilter(request, response);
     }
 

@@ -54,6 +54,13 @@ public class CommandFactory {
     }
 
     public Command getCommand(HttpServletRequest request) throws IOException {
-        return commands.get(request.getRequestURI());
+        Command command = CommandHandler.getInstance().getUnexpectedCommand(request);
+
+        return command != null ? command : commands.get(request.getRequestURI());
+//        return commands.get(request.getRequestURI());
+    }
+
+    Command getCommand(String uri) {
+        return commands.get(uri);
     }
 }
