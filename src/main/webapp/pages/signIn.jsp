@@ -34,14 +34,14 @@
 
                         <label class="label" for="password">
                             <p><fmt:message key="sign_in.password"/>:</p></label>
-
                         <input type="password" id="password" name="password" class="password" maxlength="10" required/>
                         <br>
-                        <input type="submit" class="submit" value="Enter"/>
+
+                        <input type="submit" class="submit" value="<fmt:message key='sign_in.sign_in'/>">
                     </form>
 
                     <form class="registration" action="${pageContext.request.contextPath}/pages/registration.jsp" method="get">
-                        <input type="submit"  value="Registration"/>
+                        <input type="submit"  value="<fmt:message key='sign_in.registration'/>"/>
                     </form>
                 </div>
                 <p class="error"> <c:out value="${error}"/> </p>
