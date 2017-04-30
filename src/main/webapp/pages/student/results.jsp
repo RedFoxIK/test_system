@@ -5,40 +5,42 @@
 <html>
 <head>
     <%@ include file="../main/head.jsp"%>
-    <title>results</title>
+    <title><fmt:message key='title.results'/></title>
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
     <main>
+    <c:choose>
+        <c:when test="${empty results}">
+            <h2><fmt:message key='results.none'/>( </h2>
+        </c:when>
 
-        <c:if test="${empty results}">
-            <h2>You don't have any test results yet( </h2>
-        </c:if>
-
-        <c:set var="count" value="0" scope="page" />
-        <table class="table_results">
-            <tr>
-                <th>№</th>
-                <th>Name of the test</th>
-                <th>Mark</th>
-                <th>Date</th>
-            </tr>
-            <c:forEach items="${results}" var="result">
-                <c:set var="count" value="${count + 1}" scope="page"/>
-
+        <c:otherwise>
+            <c:set var="count" value="0" scope="page" />
+            <table class="table_results">
                 <tr>
-                    <td><c:out value="${count}" /> </td>
-                    <td><c:out value="${result.test.caption}"/></td>
-                    <td><c:out value="${result.mark}"/></td>
-                    <td><tags:datetime date="${result.dateTime}"/></td>
-                        <%--<td><c:out value="${result.dateTime}"/></td>--%>
+                    <th>№</th>
+                    <th><fmt:message key='results.test'/></th>
+                    <th><fmt:message key='results.mark'/></th>
+                    <th><fmt:message key='results.date'/></th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach items="${results}" var="result">
+                    <c:set var="count" value="${count + 1}" scope="page"/>
+
+                    <tr>
+                        <td><c:out value="${count}" /> </td>
+                        <td><c:out value="${result.test.caption}"/></td>
+                        <td><c:out value="${result.mark}"/></td>
+                        <td><tags:datetime date="${result.dateTime}"/></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:otherwise>
+    </c:choose>
 
         <div class="center">
             <form method="get" action="/testing_system/">
-                <input type="submit" value="On main page" class="main_page">
+                <input type="submit" value="<fmt:message key='general.main_page'/>" class="main_page">
             </form>
         </div>
 

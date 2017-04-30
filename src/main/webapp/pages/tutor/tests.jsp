@@ -5,14 +5,14 @@
 <html>
 <head>
     <%@ include file="../main/head.jsp"%>
-    <title>tests</title>
+    <title><fmt:message key='title.tests'/></title>
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
     <main>
         <div class="info">
             <p>
-                Dear tutor, good luck!
+                <fmt:message key='tests.tutor.title'/>
             </p>
             </div>
             <div class="tests">
@@ -32,16 +32,16 @@
                     </div>
                 </c:forEach>
                 <br>
-                <input type="button" value="Add test" onclick="showDiv()" id="add_button">
+                <input type="button" value="<fmt:message key='tests.tutor.add_test'/>" onclick="showDiv()" id="add_button">
 
                 <div id="new_test">
-                    <h2>New test</h2>
+                    <h2><fmt:message key='tests.tutor.new_test'/></h2>
                     <form method="post" action="/testing_system/tutor/add_test">
-                        <span>caption: </span><input type="text" name="caption"> <br>
-                        <span>description: </span><input type="text" name="description"> <br>
-                        <span>questions: </span> <input type="number" name="size" min="1" max="100"> <br>
-                        <input type="reset" value="cancel" onclick="hideDiv()">
-                        <input type="submit" value="ADD">
+                        <span><fmt:message key='tests.tutor.caption'/>: </span><input type="text" name="caption"> <br>
+                        <span><fmt:message key='tests.tutor.description'/>: </span><input type="text" name="description"> <br>
+                        <span><fmt:message key='tests.tutor.questions'/>: </span> <input type="number" name="size" min="1" max="100"> <br>
+                        <input type="reset" value="<fmt:message key='tests.tutor.cancel'/>" onclick="hideDiv()">
+                        <input type="submit" value="<fmt:message key='tests.tutor.add'/>">
                     </form>
                 </div>
             </div>

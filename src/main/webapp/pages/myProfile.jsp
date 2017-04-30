@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+
+<!DOCTYPE html>
+<html lang="${language}">
 <head>
     <%@ include file="main/head.jsp"%>
-    <title>My profile</title>
+    <title><fmt:message key='title.my_profile'/></title>
     <style>
         .buttons form.profile_button {
             display: none;
@@ -24,16 +26,16 @@
         <div class="other_info">
             <form method="post" action="/testing_system/user/update_email">
                 <input type="text" value="${user.email}" name="email">
-                <input type="submit">  <span class="error"> <c:out value="${email_exc}"/></span>
+                <input type="submit" value="<fmt:message key='profile.button'/>">  <span class="error"> <c:out value="${email_exc}"/></span>
             </form>
             <form method="post" action="/testing_system/user/update_pass">
                 <input type="password" value="${user.password}" name="password">
-                <input type="submit">
+                <input type="submit" value="<fmt:message key='profile.button'/>">
             </form>
         </div>
         <div>
             <form method="get" action="/testing_system/">
-                <input type="submit" value="On main page" class="main_page">
+                <input type="submit" value="<fmt:message key="general.main_page"/>" class="main_page">
             </form>
         </div>
     </div>

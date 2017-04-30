@@ -57,7 +57,7 @@
 
             <input type="hidden" name="idQuestions" value="<c:out value="${idQuestions}"/>" />
             <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>" />
-            <div class="item_submit"><input type="submit" value="SEND" class="button_send"/></div>
+            <div class="item_submit"><input type="submit" value="<fmt:message key='test.student.button'/>" class="button_send"/></div>
         </form>
 
     </div>

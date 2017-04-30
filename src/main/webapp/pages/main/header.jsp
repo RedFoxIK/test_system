@@ -11,10 +11,10 @@
         </div>
         <div class="buttons">
             <form method="get" action="/testing_system/user/my_profile" class="profile_button">
-                <input type="submit" value="My profile">
+                <input type="submit" value="<fmt:message key='general.profile'/>">
             </form>
             <form method="get" action="/testing_system/user/sign_out" class="logout_button">
-                <input type="submit" value="Log out">
+                <input type="submit" value="<fmt:message key='general.sign_out'/>">
             </form>
         </div>
     </div>

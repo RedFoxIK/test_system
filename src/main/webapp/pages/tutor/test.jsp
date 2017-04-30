@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page isELIgnored ="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -14,27 +13,28 @@
     <div class="content">
         <div class="test_data">
             <form id="test_data" method = "post" action="/testing_system/tutor/test_edit">
-                <span>Caption: </span> <input type="text" name="caption" value="${test.caption}"/> <br>
-                <span> Description: </span> <input type="text" name="description" value="${test.description}"/> <br>
-                <span> size: </span> <input type="number" name="test_size" max="100" min="1"  value="${test.size}"/> <span> questions </span> <br>
+                <span><fmt:message key='test.tutor.caption'/>: </span> <input type="text" name="caption" value="${test.caption}"/> <br>
+                <span> <fmt:message key='test.tutor.description'/>: </span> <input type="text" name="description" value="${test.description}"/> <br>
+                <span> <fmt:message key='test.tutor.size'/>: </span> <input type="number" name="test_size" max="100" min="1"  value="${test.size}"/>
+                <span> <fmt:message key='test.tutor.questions'/> </span> <br>
                 <input type="hidden" name="id_test" value="${test.id}"/>
-                <input type="submit" value="change"/>
+                <input type="submit" value="<fmt:message key='test.tutor.change'/>"/>
             </form>
         </div>
         <br> <br>
     <form method="post" id="form_delete_test" action="/testing_system/tutor/delete_test">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
-        <input type="submit" value="delete test" >
+        <input type="submit" value="<fmt:message key='test.tutor.delete_test'/>" >
     </form>
     <br>
 
     <form class="results"  method = "get" action="/testing_system/tutor/change_test_state">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
 
-        <c:set var="activate" value="deactivate"/>
+        <fmt:message key="test.tutor.deactivate" var="activate" />
         <c:set var="disable" value=""/>
         <c:if test="${not test.activated}">
-            <c:set var="activate" value="activate"/>
+            <fmt:message key="test.tutor.activate" var="activate" />
             <c:if test="${fn:length(test.questions) < test.size}">
                 <c:set var="disabled" value="disabled"/>
             </c:if>
@@ -46,7 +46,7 @@
 
     <form class="results test_result"  method = "get" action="/testing_system/tutor/results_for_test">
         <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
-        <input type="submit" value="results" class="button_results">
+        <input type="submit" value="<fmt:message key='test.tutor.results'/>" class="button_results">
     </form>
 
     <br>
@@ -76,7 +76,7 @@
         </div>
             <input type="hidden" name="id_question" value="<c:out value="${question.id}"/>">
             <input type="hidden" name="id_test"  value="<c:out value="${test.id}"/>"/>
-            <input type="submit" value="delete" class="button_delete">
+            <input type="submit" value="<fmt:message key='test.tutor.delete'/>" class="button_delete">
         </form>
     </div>
         <hr>
@@ -86,12 +86,12 @@
     <div>
         <form action="/testing_system/tutor/create_question" method="get">
             <input type="hidden" name="test" value="<c:out value="${test.id}"/>">
-            <input type="submit" value="Add question" class="add_question">
+            <input type="submit" value="<fmt:message key='test.tutor.add_question'/>" class="add_question">
         </form>
     </div>
 
     <form method="get" action="/testing_system/" class="tutor_main">
-        <input type="submit" value="On main page" class="main_page">
+        <input type="submit" value="<fmt:message key='general.main_page'/>" class="main_page">
     </form>
     </div>
 </main>

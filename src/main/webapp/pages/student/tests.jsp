@@ -5,17 +5,17 @@
 <html>
 <head>
     <%@ include file="../main/head.jsp"%>
-    <title>tests</title>
+    <title><fmt:message key='title.tests'/></title>
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
     <main>
         <div class="info">
             <p>
-                Dear student, please choose!
+                <fmt:message key='tests.student.title'/>
             </p>
             <form class="results"  method = "post" action="/testing_system/student/results">
-                <input type="submit" value="results" class="button_results">
+                <input type="submit" value="<fmt:message key='results'/>" class="button_results">
             </form>
             </div>
             <div class="tests">
