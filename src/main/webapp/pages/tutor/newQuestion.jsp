@@ -9,31 +9,42 @@
 </head>
 <body>
     <%@ include file="../main/header.jsp"%>
-    <form method="post" action="/testing_system/tutor/add_question" id="form_add_question">
-        <h1><fmt:message key='question.question'/></h1>
-        <textarea name="question" cols="40" rows="5"></textarea></p>
-        <input type="checkbox" name="mult_choice" value="yes" onclick="changeType()">
-        <span><fmt:message key='question.mult_choice'/></span> <br>
-        <h3><fmt:message key='question.answers'/>:</h3>
+    <main>
+        <div class="content">
+            <form method="post" action="/testing_system/tutor/add_question" id="form_add_question">
+                <div class="text_quest_area">
+                    <h1><fmt:message key='question.question'/></h1>
+                    <textarea name="question" cols="40" rows="5"></textarea></p>
+                    <input type="checkbox" name="mult_choice" value="yes" onclick="changeType()">
+                    <span><fmt:message key='question.mult_choice'/></span> <br>
+                </div>
+                <div class="add_quest_area">
+                    <h3><fmt:message key='question.answers'/>:</h3>
+                    <div class="new_quest_area">
 
-        <input type="checkbox" class="type_answer" name="group" value="0">
-        <input type="text" class="answer" name="0"/> <br>
+                        <input type="checkbox" class="type_answer" name="group" value="0">
+                        <input type="text" class="answer" name="0"/> <br>
 
-        <input class="type_answer" name="group" value="1">
-        <input type="text" class="answer"  name="1"/> <br>
+                        <input class="type_answer" name="group" value="1">
+                        <input type="text" class="answer"  name="1"/> <br>
+                    </div>
+                    <div class="new_quest_button">
+                        <input class="add_quest_button" type="button"  value="<fmt:message key='question.add'/>" onclick="add()">
+                        <input class="del_quest_button" type="button"  value="<fmt:message key='question.remove'/>" onclick="remove()">
+                        <input type="hidden" name="number_answers" id="number_answers" value="">
+                    </div>
+                    <div id = "other_answers"></div>
+                </div>
 
-        <div id = "other_answers"></div>
+                <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
+                <input class="add_question_button" type="button" value="<fmt:message key='question.add_question'/>" onclick="count_answers()">
+            </form>
 
-        <input type="button"  value="<fmt:message key='question.add'/>" onclick="add()">
-        <input type="button"  value="<fmt:message key='question.remove'/>" onclick="remove()">
-        <input type="hidden" name="number_answers" id="number_answers" value="">
-        <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
-        <input type="button" value="<fmt:message key='question.add_question'/>" onclick="count_answers()">
-    </form>
-
-    <form method="get" action="/testing_system/tutor/test">
-        <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
-        <input type="submit" value="<fmt:message key='question.back'/>">
-    </form>
+            <form method="get" action="/testing_system/tutor/test">
+                <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>">
+                <input class="question_back" type="submit" value="<fmt:message key='question.back'/>">
+            </form>
+        </div>
+    </main>
 </body>
 </html>

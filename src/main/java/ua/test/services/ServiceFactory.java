@@ -6,6 +6,7 @@ public class ServiceFactory {
     private final TestService testService = new TestService();
     private final ResultService resultService = new ResultService();
     private final QuestionService questionService = new QuestionService();
+    private final Validation validation = new Validation();
 
     private ServiceFactory() {}
 

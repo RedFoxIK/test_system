@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     font-size: 25px;
+    max-width:100%;
 }
 
 .big_margin_top {margin-top:100px;}
@@ -10,7 +11,7 @@
 .big_font_size {font-size:30px;}
 
 .content {
-    width: 100%;
+    width: 96%;
     max-width: 1200px;
     margin:0 auto;
 }
@@ -166,7 +167,135 @@ form input:focus {
 
 /*START REGISTRATION STYLES*/
 
+.registration_item p {width:200px;display:inline-block;}
+
+.registration_item {margin-top:50px;}
+
+.registr_item {margin:15px 30px;}
+
+.registr_error {color: red;display: inline-block;}
+
+.registr_confirm {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-left: 12%;}
+
+.registr_confirm:hover {
+    background: #66AAFF;
+    cursor:pointer;
+}
+
 /*END REGISTRATION STYLES*/
+
+
+/*ADD QUESTION*/
+
+.new_quest_area {
+    display:inline-block;
+}
+
+.new_quest_button {
+    display:inline-block;
+    vertical-align: top;
+    min-width: 270px;
+}
+
+.add_quest_button {
+    background: #6CEA53;
+    border: 2px solid #6CEA53;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin-left: 12%;
+}
+
+.add_quest_button:hover {
+    background: #8EF07A;
+    cursor:pointer;
+}
+
+.add_quest_button:focus {
+    border-color: #6CEA53;
+}
+
+.add_question_button {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-left:calc(50% - 111px);
+}
+
+.add_question_button:hover {
+    background: #66AAFF;
+    cursor:pointer;
+}
+
+.question_back {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin-top:30px;
+}
+
+.question_back:hover {
+    background: #66AAFF;
+    cursor:pointer;
+}
+
+.del_quest_button {
+    background: #FF2624;
+    border: 2px solid #FF2624;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin-left: 12%;
+}
+
+.del_quest_button:hover {
+    background: #FE5958;
+    cursor:pointer;
+}
+
+.del_quest_button:focus {
+    border-color: #FE5958;
+}
+
+.text_quest_area {
+    margin-top:50px;
+    margin-bottom:20px;
+    padding:20px;
+    border:2px solid #3496FE;
+    border-radius:20px;
+}
+
+.add_quest_area {
+    margin-top:20px;
+    margin-bottom:20px;
+    padding:20px;
+    border:2px solid #3496FE;
+    border-radius:20px;
+}
+
+
+/*ADD QUESTION*/
+
 
 /*START TEST STYLES*/
 
@@ -237,18 +366,18 @@ form input:focus {
 }
 
 .test:nth-child(5n-2) {
-     background-color: #d6633c;
-     border: outset #d6633c 2px;
+    background-color: #d6633c;
+    border: outset #d6633c 2px;
 }
 
 .test:nth-child(5n-1) {
     background-color: #7cedff;
-    border: outset #7cedff  2px;
+    border: outset #7cedff 2px;
 }
 
 .test:nth-child(5n) {
     background-color: #ffa93a;
-    border: outset #ffa93a  2px;
+    border: outset #ffa93a 2px;
 }
 
 .test:hover {
@@ -392,7 +521,8 @@ form input:focus {
     margin: 20px;
 }
 
-.other_info form input[type="submit"] {
+.other_info
+form input[type="submit"] {
     background: #3496FE;
     border: 2px solid #3496FE;
     border-radius: 10px;
@@ -406,7 +536,7 @@ form input:focus {
     background: #66AAFF;
     cursor:pointer;
 }
- /*PROFILE STYLES*/
+/*PROFILE STYLES*/
 
 /*RESULTS STYLES*/
 .table_results {
