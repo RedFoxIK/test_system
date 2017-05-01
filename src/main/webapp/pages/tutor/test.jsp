@@ -18,6 +18,7 @@
                     <span> <fmt:message key='test.tutor.description'/>: </span> <input type="text" name="description" value="${test.description}"/> <br>
                     <span> <fmt:message key='test.tutor.size'/>: </span> <input type="number" name="test_size" max="100" min="1"  value="${test.size}"/>
                     <span> <fmt:message key='test.tutor.questions'/> </span> <br>
+                    <span> <fmt:message key='tests.tutor.minutes'/> </span> <input type="number" name="minutes" max="100" min="1"  value="${test.minutes}"/>
                 </div>
                 <div class="test_change">
                     <input type="hidden" name="id_test" value="${test.id}"/>

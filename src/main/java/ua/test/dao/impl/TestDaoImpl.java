@@ -14,14 +14,14 @@ import java.util.List;
 public class TestDaoImpl implements TestDao{
     private static final Logger LOGGER = Logger.getLogger(TestDao.class);
 
-    private static final String ADD_TEST = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `author`) VALUES(?, ?, ?, ?, ?)";
-    private static final String SELECT_ALL = "SELECT id_test, caption, description, size, activated, author FROM tests";
-    private static final String SELECT_ALL_ACTIVATED = "SELECT `id_test`, `caption`,`description`, `size`, `activated`, `author` FROM tests WHERE activated = 1";
-    private static final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated`, `author` FROM tests WHERE `author` = ?";
+    private static final String ADD_TEST = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `minutes`, `author`) VALUES(?, ?, ?, ?, ?, ?)";
+    private static final String SELECT_ALL = "SELECT `id_test`, `caption`, `description`, `size`, `activated`, `minutes`, `author` FROM tests";
+    private static final String SELECT_ALL_ACTIVATED = "SELECT `id_test`, `caption`,`description`, `size`, `activated`, `minutes`, `author` FROM tests WHERE activated = 1";
+    private static final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated`, `minutes`, `author` FROM tests WHERE `author` = ?";
     private static final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
-    private static final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, author FROM tests WHERE id_test = ?";
+    private static final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, `minutes`, author FROM tests WHERE id_test = ?";
     private static final String UPDATE_STATE = "UPDATE tests set `activated` = ? WHERE `id_test` = ?";
-    private static final String UPDATE_TEST = "UPDATE tests set `caption` = ?, `description` = ?, `size` = ? WHERE `id_test` = ?";
+    private static final String UPDATE_TEST = "UPDATE tests set `caption` = ?, `description` = ?, `size` = ?, `minutes` = ? WHERE `id_test` = ?";
 
     private static final String DB_CON_ERROR = "Database connection error";
 
@@ -38,7 +38,8 @@ public class TestDaoImpl implements TestDao{
             statement.setString(2, test.getDescription());
             statement.setInt(3, test.getSize());
             statement.setBoolean(4, test.isActivated());
-            statement.setInt(5, test.getAuthor().getId());
+            statement.setInt(5, test.getMinutes());
+            statement.setInt(6, test.getAuthor().getId());
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -66,6 +67,7 @@ public class TestDaoImpl implements TestDao{
                 test.setCaption(rs.getString("caption"));
                 test.setDescription(rs.getString("description"));
                 test.setSize(rs.getInt("size"));
+                test.setMinutes(rs.getInt("minutes"));
                 test.setActivated(rs.getBoolean("activated"));
             }
         } catch (SQLException e) {
@@ -127,7 +129,6 @@ public class TestDaoImpl implements TestDao{
         try ( ConnectionWrapper connWrap = TransactionManager.getInstance().getConnectionWrapper();
               PreparedStatement statement = connWrap.prepareStatement(UPDATE_STATE) ) {
             statement.setBoolean(1, test.isActivated());
-            System.out.println(test.isActivated());
             statement.setInt(2, test.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -142,7 +143,8 @@ public class TestDaoImpl implements TestDao{
             statement.setString(1, test.getCaption());
             statement.setString(2, test.getDescription());
             statement.setInt(3, test.getSize());
-            statement.setInt(4, test.getId());
+            statement.setInt(4, test.getMinutes());
+            statement.setInt(5, test.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(DB_CON_ERROR, e);
@@ -173,6 +175,7 @@ public class TestDaoImpl implements TestDao{
             test.setDescription(rs.getString("description"));
             test.setSize(rs.getInt("size"));
             test.setActivated(rs.getBoolean("activated"));
+            test.setMinutes(rs.getInt("minutes"));
             test.getAuthor().setId(rs.getInt("author"));
             tests.add(test);
         }

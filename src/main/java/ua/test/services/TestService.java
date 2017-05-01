@@ -64,13 +64,14 @@ public class TestService {
         return test;
     }
 
-    public void addTest(String caption, String description, int size, Integer idUser) {
+    public void addTest(String caption, String description, int size, int minutes, Integer idUser) {
         Test test = new Test();
 
         test.setCaption(caption);
         test.setDescription(description);
         test.setSize(size);
         test.setActivated(false);
+        test.setMinutes(minutes);
         test.setAuthor(ServiceFactory.getInstance().getUserService().getUserById(idUser));
         testDao.addTest(test);
     }
@@ -118,13 +119,14 @@ public class TestService {
         return tests;
     }
 
-    public void editTest(int idTest, int size, String caption, String description) {
+    public void editTest(int idTest, int size, String caption, String description, int minutes) {
         Test test = new Test();
 
         test.setId(idTest);
         test.setSize(size);
         test.setCaption(caption);
         test.setDescription(description);
+        test.setMinutes(minutes);
         testDao.updateTest(test);
 
         List<Question> questions = questionDao.findByTestId(idTest);

@@ -17,10 +17,11 @@ public class AddTest implements ua.test.commands.Command {
         Integer idUser = (Integer) request.getSession().getAttribute("idUser");
         String caption = request.getParameter("caption");
         String description = request.getParameter("description");
+        int minutes = Integer.parseInt(request.getParameter("minutes"));
         Integer size = Integer.valueOf(request.getParameter("size"));
         List<Test> tests;
 
-        testService.addTest(caption, description, size, idUser);
+        testService.addTest(caption, description, size, minutes, idUser);
         tests = testService.getTestsByUserId(idUser);
         request.setAttribute("tests", tests);
         response.sendRedirect("/testing_system/");

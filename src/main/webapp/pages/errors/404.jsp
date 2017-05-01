@@ -17,7 +17,7 @@
         <form method="get" action="/testing_system/">
             <input type="submit" value="On main page" class="main_page">
         </form>
-    </div>
+        </div>
     </div>
 </main>
 

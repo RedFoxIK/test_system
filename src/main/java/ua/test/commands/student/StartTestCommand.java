@@ -25,7 +25,7 @@ public class StartTestCommand implements Command {
         test = testService.shuffleQuestions(test);
         request.setAttribute("test", test);
         request.getSession().setAttribute("userTest", test);
-        request.getSession().setAttribute("timeTest", LocalDateTime.now().plusMinutes(1).withNano(0));
+        request.getSession().setAttribute("timeTest", LocalDateTime.now().plusMinutes(test.getMinutes()).withNano(0));
 
         response.sendRedirect("/testing_system/student/test");
     }

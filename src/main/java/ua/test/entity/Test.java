@@ -9,6 +9,7 @@ public class Test {
     boolean activated;
     private String caption;
     private String description;
+    private int minutes;
     private User author;
     private List<Question> questions;
 
@@ -70,6 +71,14 @@ public class Test {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
     }
 
     public List<Question> getQuestions() {
