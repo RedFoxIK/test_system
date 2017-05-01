@@ -58,20 +58,35 @@ public class ConnectionWrapper implements AutoCloseable {
             try {
                 conn.close();
             } catch (SQLException e) {
-                LOGGER.error("Transaction probably active");
+                LOGGER.error(DB_CON_ERROR, e);
             }
         }
     }
 
-    public PreparedStatement prepareStatement(String sql, int returnGeneratedKeys) throws SQLException {
-        return this.conn.prepareStatement(sql, returnGeneratedKeys);
+    public PreparedStatement prepareStatement(String sql, int returnGeneratedKeys) {
+        try {
+            return this.conn.prepareStatement(sql, returnGeneratedKeys);
+        } catch (SQLException e) {
+            LOGGER.error(DB_CON_ERROR, e);
+        }
+        return null;
     }
 
-    public PreparedStatement prepareStatement(String sql) throws SQLException {
-        return this.conn.prepareStatement(sql);
+    public PreparedStatement prepareStatement(String sql) {
+        try {
+            return this.conn.prepareStatement(sql);
+        } catch (SQLException e) {
+            LOGGER.error(DB_CON_ERROR, e);
+        }
+        return null;
     }
 
-    public Statement createStatement() throws SQLException {
-        return this.conn.createStatement();
+    public Statement createStatement() {
+        try {
+            return this.conn.createStatement();
+        } catch (SQLException e) {
+            LOGGER.error(DB_CON_ERROR, e);
+        }
+        return null;
     }
 }

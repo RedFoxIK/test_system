@@ -25,7 +25,7 @@ public class CommandHandler {
     }
 
     public Command getUnexpectedCommand(HttpServletRequest request) {
-        HttpSession httpSession = ((HttpServletRequest) request).getSession(false);
+        HttpSession httpSession = request.getSession(false);
         String uri = request.getRequestURI();
 
         if ( httpSession == null || httpSession.getAttribute("idUser") == null ) {
@@ -33,10 +33,10 @@ public class CommandHandler {
                 return CommandFactory.getInstance().getCommand(HOME_PAGE);
             }
         }
-
-        if ( request.getSession().getAttribute("userTest") != null ) {
-            if ( !(uri.equals(START_TEST_URI) || uri.equals(TEST_URI) || uri.equals(END_TEST_URI)) )
+        if ( httpSession.getAttribute("userTest") != null ) {
+            if ( !(uri.equals(START_TEST_URI) || uri.equals(TEST_URI) || uri.equals(END_TEST_URI)) ) {
                 return CommandFactory.getInstance().getCommand(TEST_URI);
+            }
         }
         return null;
     }

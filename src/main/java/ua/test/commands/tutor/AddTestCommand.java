@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class AddTest implements ua.test.commands.Command {
+public class AddTestCommand implements ua.test.commands.Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TestService testService = ServiceFactory.getInstance().getTestService();

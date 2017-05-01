@@ -19,9 +19,7 @@ public class FirstCommand implements Command {
             request.getRequestDispatcher("/pages/signIn.jsp").forward(request, response);
             return;
         }
-
         User user = ServiceFactory.getInstance().getUserService().getUserById(userId);
-
         if ( user.getRole() == Role.STUDENT ) {
             request.setAttribute("tests", ServiceFactory.getInstance().getTestService().findAllActivatedTests());
             request.getRequestDispatcher("/pages/student/tests.jsp").forward(request, response);

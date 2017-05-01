@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddQuestion implements ua.test.commands.Command {
+public class AddQuestionCommand implements ua.test.commands.Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idTest = Integer.parseInt(request.getParameter("id_test"));

@@ -40,23 +40,20 @@ public class CommandFactory {
         tempMap.put(Links.TEST_RESULT_PAGE, new ShowTestResultCommand());
 
         tempMap.put(Links.TUTOR_TEST_PAGE, new ShowTutorTestCommand());
-        tempMap.put(Links.CREATE_QUESTION_PAGE, new CreateQuestion());
-        tempMap.put(Links.ADD_QUESTION_PAGE, new AddQuestion());
-        tempMap.put(Links.DELETE_QUESTION_PAGE, new DeleteQuestion());
+        tempMap.put(Links.CREATE_QUESTION_PAGE, new CreateQuestionCommand());
+        tempMap.put(Links.ADD_QUESTION_PAGE, new AddQuestionCommand());
+        tempMap.put(Links.DELETE_QUESTION_PAGE, new DeleteQuestionCommand());
         tempMap.put(Links.RESULTS_FOR_TEST_PAGE, new ResultForTestCommand());
-        tempMap.put(Links.CHANGE_STATE_TEST_PAGE, new ChangeTestState());
-        tempMap.put(Links.ADD_TEST_PAGE, new AddTest());
+        tempMap.put(Links.CHANGE_STATE_TEST_PAGE, new ChangeTestStateCommand());
+        tempMap.put(Links.ADD_TEST_PAGE, new AddTestCommand());
         tempMap.put(Links.EDIT_TEST_PAGE, new EditTestCommand());
-        tempMap.put(Links.DELETE_TEST_PAGE, new DeleteTest());
+        tempMap.put(Links.DELETE_TEST_PAGE, new DeleteTestCommand());
 
         commands = Collections.unmodifiableMap(tempMap);
     }
 
     public Command getCommand(HttpServletRequest request) throws IOException {
-        Command command = CommandHandler.getInstance().getUnexpectedCommand(request);
-
-        return command != null ? command : commands.get(request.getRequestURI());
-//        return commands.get(request.getRequestURI());
+        return commands.get(request.getRequestURI());
     }
 
     Command getCommand(String uri) {
