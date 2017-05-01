@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +25,8 @@ public class StartTestCommand implements Command {
         test = testService.shuffleQuestions(test);
         request.setAttribute("test", test);
         request.getSession().setAttribute("userTest", test);
+        request.getSession().setAttribute("timeTest", LocalDateTime.now().plusMinutes(1).withNano(0));
+
         response.sendRedirect("/testing_system/student/test");
     }
 }

@@ -9,52 +9,43 @@
     <schema id="3" parent="1" name="information_schema"/>
     <schema id="4" parent="1" name="mysql"/>
     <schema id="5" parent="1" name="performance_schema"/>
-    <table id="6" parent="2" name="answers"/>
-    <table id="7" parent="2" name="questions"/>
-    <table id="8" parent="2" name="results"/>
-    <table id="9" parent="2" name="tests"/>
-    <table id="10" parent="2" name="users"/>
-    <column id="11" parent="6" name="id_answer">
+    <schema id="6" parent="1" name="sys"/>
+    <table id="7" parent="2" name="answers"/>
+    <table id="8" parent="2" name="questions"/>
+    <table id="9" parent="2" name="results"/>
+    <table id="10" parent="2" name="tests"/>
+    <table id="11" parent="2" name="users"/>
+    <column id="12" parent="7" name="id_answer">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="12" parent="6" name="right">
+    <column id="13" parent="7" name="right">
       <Position>3</Position>
       <DataType>tinyint(1)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="13" parent="6" name="id_question">
+    <column id="14" parent="7" name="id_question">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="6" name="text">
+    <column id="15" parent="7" name="text">
       <Position>2</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="15" parent="6" name="id_question_idx">
+    <index id="16" parent="7" name="id_question_idx">
       <ColNames>id_question</ColNames>
     </index>
-    <index id="16" parent="6" name="unique_answer">
-      <ColNames>text
-id_question</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="17" parent="6" name="PRIMARY">
+    <key id="17" parent="7" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_answer</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="18" parent="6" name="unique_answer">
-      <ColNames>text
-id_question</ColNames>
-      <UnderlyingIndexName>unique_answer</UnderlyingIndexName>
-    </key>
-    <foreign-key id="19" parent="6" name="id_question">
+    <foreign-key id="18" parent="7" name="id_question">
       <ColNames>id_question</ColNames>
       <RefSchemaName>testing_system</RefSchemaName>
       <RefTableName>questions</RefTableName>
@@ -62,206 +53,206 @@ id_question</ColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="20" parent="7" name="id_question">
+    <column id="19" parent="8" name="id_question">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="21" parent="7" name="id_test">
+    <column id="20" parent="8" name="id_test">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="22" parent="7" name="text">
+    <column id="21" parent="8" name="text">
       <Position>2</Position>
       <DataType>varchar(300)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="23" parent="7" name="mult_choice">
+    <column id="22" parent="8" name="mult_choice">
       <Position>3</Position>
       <DataType>tinyint(4)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <index id="24" parent="7" name="id_test_idx">
+    <index id="23" parent="8" name="id_test_idx">
       <ColNames>id_test</ColNames>
     </index>
-    <key id="25" parent="7" name="PRIMARY">
+    <key id="24" parent="8" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_question</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="26" parent="7" name="id_test">
+    <foreign-key id="25" parent="8" name="id_test">
       <ColNames>id_test</ColNames>
       <RefSchemaName>testing_system</RefSchemaName>
       <RefTableName>tests</RefTableName>
       <RefColNames>id_test</RefColNames>
     </foreign-key>
-    <column id="27" parent="8" name="id_result">
+    <column id="26" parent="9" name="id_result">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="28" parent="8" name="id_user">
+    <column id="27" parent="9" name="id_user">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="29" parent="8" name="id_test">
+    <column id="28" parent="9" name="id_test">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="30" parent="8" name="date">
+    <column id="29" parent="9" name="date">
       <Position>5</Position>
       <DataType>timestamp|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <column id="31" parent="8" name="mark">
+    <column id="30" parent="9" name="mark">
       <Position>4</Position>
       <DataType>double|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="32" parent="8" name="id_test_result_idx">
+    <index id="31" parent="9" name="id_test_result_idx">
       <ColNames>id_test</ColNames>
     </index>
-    <index id="33" parent="8" name="user_id_result_idx">
+    <index id="32" parent="9" name="user_id_result_idx">
       <ColNames>id_user</ColNames>
     </index>
-    <key id="34" parent="8" name="PRIMARY">
+    <key id="33" parent="9" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_result</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="35" parent="8" name="user_id_result">
+    <foreign-key id="34" parent="9" name="user_id_result">
       <ColNames>id_user</ColNames>
       <RefSchemaName>testing_system</RefSchemaName>
       <RefTableName>users</RefTableName>
       <RefColNames>id_user</RefColNames>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <foreign-key id="36" parent="8" name="test_id_result">
+    <foreign-key id="35" parent="9" name="test_id_result">
       <ColNames>id_test</ColNames>
       <RefSchemaName>testing_system</RefSchemaName>
       <RefTableName>tests</RefTableName>
       <RefColNames>id_test</RefColNames>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <column id="37" parent="9" name="id_test">
+    <column id="36" parent="10" name="id_test">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="38" parent="9" name="caption">
+    <column id="37" parent="10" name="caption">
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="39" parent="9" name="description">
+    <column id="38" parent="10" name="description">
       <Position>3</Position>
       <DataType>varchar(300)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="40" parent="9" name="author">
+    <column id="39" parent="10" name="author">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="41" parent="9" name="size">
+    <column id="40" parent="10" name="size">
       <Position>4</Position>
       <DataType>int(3)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="42" parent="9" name="activated">
+    <column id="41" parent="10" name="activated">
       <Position>5</Position>
       <DataType>tinyint(4)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <index id="43" parent="9" name="author_idx">
+    <index id="42" parent="10" name="author_idx">
       <ColNames>author</ColNames>
     </index>
-    <index id="44" parent="9" name="unique_caption_author">
+    <index id="43" parent="10" name="unique_caption_author">
       <ColNames>caption
 author</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="45" parent="9" name="PRIMARY">
+    <key id="44" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_test</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="46" parent="9" name="unique_caption_author">
+    <key id="45" parent="10" name="unique_caption_author">
       <ColNames>caption
 author</ColNames>
       <UnderlyingIndexName>unique_caption_author</UnderlyingIndexName>
     </key>
-    <foreign-key id="47" parent="9" name="author">
+    <foreign-key id="46" parent="10" name="author">
       <ColNames>author</ColNames>
       <RefSchemaName>testing_system</RefSchemaName>
       <RefTableName>users</RefTableName>
       <RefColNames>id_user</RefColNames>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <column id="48" parent="10" name="id_user">
+    <column id="47" parent="11" name="id_user">
       <Position>1</Position>
       <DataType>int(10)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="49" parent="10" name="login">
+    <column id="48" parent="11" name="login">
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="50" parent="10" name="name">
+    <column id="49" parent="11" name="name">
       <Position>4</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="51" parent="10" name="surname">
+    <column id="50" parent="11" name="surname">
       <Position>5</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="52" parent="10" name="email">
+    <column id="51" parent="11" name="email">
       <Position>6</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="53" parent="10" name="password">
+    <column id="52" parent="11" name="password">
       <Position>3</Position>
       <DataType>varchar(16)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="54" parent="10" name="role">
+    <column id="53" parent="11" name="role">
       <Position>7</Position>
       <DataType>enum(&apos;TUTOR&apos;, &apos;STUDENT&apos;)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="55" parent="10" name="email_UNIQUE">
+    <index id="54" parent="11" name="email_UNIQUE">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="56" parent="10" name="login_UNIQUE">
+    <index id="55" parent="11" name="login_UNIQUE">
       <ColNames>login</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="57" parent="10" name="PRIMARY">
+    <key id="56" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_user</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="58" parent="10" name="login_UNIQUE">
+    <key id="57" parent="11" name="login_UNIQUE">
       <ColNames>login</ColNames>
       <UnderlyingIndexName>login_UNIQUE</UnderlyingIndexName>
     </key>
-    <key id="59" parent="10" name="email_UNIQUE">
+    <key id="58" parent="11" name="email_UNIQUE">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>email_UNIQUE</UnderlyingIndexName>
     </key>

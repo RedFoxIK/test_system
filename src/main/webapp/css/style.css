@@ -88,7 +88,6 @@ p.error {
 
 .answer, .type_answer {
     display: inline-block;
-    float: top;
 }
 
 .buttons form input:hover {
@@ -194,6 +193,10 @@ form input:focus {
 
 
 /*ADD QUESTION*/
+
+.new_quest_area input[type="text"] {
+    width:550px;
+}
 
 .new_quest_area {
     display:inline-block;

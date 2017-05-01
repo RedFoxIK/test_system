@@ -30,7 +30,7 @@
                         <input type="password" id="password" name="password" class="password" maxlength="10" required/>
                         <br>
 
-                        <input type="submit" class="submit" value="<fmt:message key='sign_in.sign_in'/>">
+                        <input type="submit" class="submit" value="<fmt:message key='sign_in.sign_in'/>" pattern="[a-zA-Z0-9]{4, 20}">
                     </form>
 
                     <form class="registration" action="${pageContext.request.contextPath}/pages/registration.jsp" method="get">

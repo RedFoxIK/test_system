@@ -15,7 +15,9 @@
     <c:set var="count" value="0" scope="page" />
     
     <div class="content">
-        <form method="post" action="/testing_system/student/test_end">
+        <div id="timer">
+        </div>
+        <form method="post" action="/testing_system/student/test_end" id="send_test">
 
             <div class="test_area">
 
@@ -25,7 +27,7 @@
                         <c:set var="count" value="${count + 1}" scope="page"/>
 
                         <div data-name="block${count}">
-                            <h1><c:out value="${question.text}"/> </h1>
+                            <h1><pre><c:out value="${question.text}"/></pre></h1>
 
                             <c:set var="type" value="radio" scope="page" />
                             <c:if test="${question.multChoice}">
@@ -57,11 +59,10 @@
 
             <input type="hidden" name="idQuestions" value="<c:out value="${idQuestions}"/>" />
             <input type="hidden" name="id_test" value="<c:out value="${test.id}"/>" />
-            <div class="item_submit"><input type="submit" value="<fmt:message key='test.student.button'/>" class="button_send"/></div>
+            <div class="item_submit"><input type="submit" value="<fmt:message key='test.student.button'/>" class="button_send" onclick="sendTest()"/></div>
         </form>
-
+        <input type="hidden" id="seconds" value="<c:out value="${timeTest}"/>"/>
     </div>
-
 </main>
 </body>
 </html>

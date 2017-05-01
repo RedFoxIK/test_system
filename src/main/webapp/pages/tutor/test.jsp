@@ -56,7 +56,7 @@
     <div class="content">
         <form method="post" action="/testing_system/tutor/delete_question">
         <div class="question tutor_question">
-            <h3> <c:out value="${question.text}"/> </h3>
+            <h3><pre><c:out value="${question.text}"/></pre></h3>
 
             <c:set var="type" value="radio" scope="page" />
             <c:if test="${question.multChoice}">
@@ -70,8 +70,7 @@
                     </c:if>
 
                     <input type="<c:out value="${type}"/>" disabled="true" <c:out value="${checked}"/> ">
-                    <span> <c:out value="${answer.text}"/> </span> <br>
-
+                    <span><pre><c:out value="${answer.text}"/></pre></span> <br>
             </c:forEach>
         </div>
             <input type="hidden" name="id_question" value="<c:out value="${question.id}"/>">
@@ -90,9 +89,9 @@
         </form>
     </div>
 
-    <form method="get" action="/testing_system/" class="tutor_main">
-        <input type="submit" value="<fmt:message key='general.main_page'/>" class="main_page">
-    </form>
+        <form method="get" action="/testing_system/" class="tutor_main">
+            <input type="submit" value="<fmt:message key='general.main_page'/>" class="main_page">
+        </form>
     </div>
 </main>
 </body>

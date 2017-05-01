@@ -25,6 +25,7 @@ public class EndTestCommand implements Command {
         double mark;
 
         request.getSession().removeAttribute("userTest");
+        request.getSession().removeAttribute("timeTest");
         for ( Question question: questions ) {
             Integer questionId = question.getId();
             String[] answersArray = request.getParameterValues(questionId.toString());

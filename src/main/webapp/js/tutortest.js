@@ -57,3 +57,4 @@ function count_answers() {
         alert("You must select at least one right answer!!!")
     }
 }
+
