@@ -88,6 +88,7 @@ p.error {
 
 .answer, .type_answer {
     display: inline-block;
+    float: top;
 }
 
 .buttons form input:hover {
@@ -144,6 +145,8 @@ p.error {
     width:200px;
     height:35px;
 }
+
+.log_in input.submit , .log_in .registration input {font-size:18px;}
 
 .text_log_in {
     font-size: 20px;
@@ -567,33 +570,101 @@ div.tests .not_activated {
 
 #new_test {
     display: none;
+    border:2px solid #3496FE;
+    padding:10px;
+    border-radius:20px;
+    width:96%;
+    max-width:600px;
+    margin:0 auto;
 }
 
-#new_test span {
+#new_test span, #new_test h2{
     color: black;
+}
+
+.new_test_item {
+    width:450px;
+    margin:5px auto;
+    text-align: left;
+}
+
+.new_test_item span {
+    width:120px;
+    display: inline-block;
+}
+
+.new_test_item input[type="number"] {
+    position:relative;
+    left:-6px;
+}
+
+#new_test .add_test_button {
+    background: #6CEA53;
+    border: 2px solid #6CEA53 !important;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    outline: none;
+}
+
+#new_test .add_test_button:hover {
+    background: #8EF07A;
+    cursor:pointer;
+}
+
+#new_test .add_test_button:focus, #new_test .add_test_button:active {
+    border-color: #6CEA53 !important;
+    outline: none;
+}
+
+#new_test .cans_test_button {
+    background: #FF2624;
+    border: 2px solid #FF2624;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    margin-left: 12%;
+}
+
+#new_test .cans_test_button:hover {
+    background: #FE5958;
+    cursor:pointer;
+}
+
+#new_test .cans_test_button:focus, #new_test .cans_test_button:active {
+    border-color: #FE5958;
 }
 
 /*TUTOR*/
 
 .button_delete {
-    background: #3496FE;
-    border: 2px solid #3496FE;
+    background: #FF2624;
+    border: 2px solid #FF2624;
     border-radius: 10px;
     padding: 5px;
     font-size: 18px;
     font-weight: bold;
     color: white;
     display: inline-block;
+    outline: none;
 }
 
 .button_delete:hover {
-    background: #66AAFF;
+    background: #FE5958;
     cursor:pointer;
+}
+
+.button_delete:focus, .button_delete:active {
+    border-color: #FE5958;
+    outline: none;
 }
 
 .test_result {
     width:100%;
-    text-align: right;
 }
 
 .test_result .button_results {
@@ -607,8 +678,8 @@ div.tests .not_activated {
 }
 
 .add_question {
-    background: #3496FE;
-    border: 2px solid #3496FE;
+    background: #6CEA53;
+    border: 2px solid #6CEA53;
     border-radius: 10px;
     padding: 5px;
     font-size: 18px;
@@ -616,14 +687,148 @@ div.tests .not_activated {
     color: white;
     display: inline-block;
     margin:15px 0;
+    outline: none;
 }
 
 .add_question:hover {
-    background: #66AAFF;
+    background: #8EF07A;
     cursor:pointer;
+}
+
+.add_question:focus, .add_question:active {
+    border-color: #6CEA53 !important;
+    outline: none;
 }
 
 .tutor_main {
     text-align:center;
 }
+
+.add_test_button {
+    background: #6CEA53;
+    border: 2px solid #6CEA53 !important;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    outline: none;
+}
+
+.add_test_button:hover {
+    background: #8EF07A;
+    cursor:pointer;
+}
+
+.add_test_button:focus, .add_test_button:active {
+    border-color: #6CEA53 !important;
+    outline: none;
+}
+
+.test_data {
+    width:96%;
+    max-width:800px;
+    display:inline-block;
+    border:2px solid #3496FE;
+    padding:20px;
+    border-radius:20px;
+    margin:50px 0;
+    vertical-align: middle;
+}
+
+.test_data .test_text {
+    display:inline-block;
+    width:calc(100% - 150px);
+    vertical-align:middle;
+}
+
+.test_data .test_text span {
+    width:120px;
+    display:inline-block;
+    margin: 5px 0;
+}
+
+.change_test {
+    background: #FCFD53;
+    border: 2px solid #FCFD53;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    display: inline-block;
+    margin:15px 0;
+    outline: none;
+}
+
+.change_test:hover {
+    background: #FEFF8A;
+    cursor:pointer;
+}
+
+.change_test:focus, .change_test:active {
+    border-color: #FCFD53;
+    outline: none;
+}
+
+.activate_button {
+    background: #3496FE;
+    border: 2px solid #3496FE;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    display: inline-block;
+    margin:15px 0;
+}
+
+input.activate_button:disabled {
+    background:rgba(84, 84, 84, 0.3);
+    border-color:rgba(84, 84, 84, 0.3);
+}
+
+.activate_button:hover {
+    background: #66AAFF;
+    cursor:pointer;
+}
+
+.test_data .test_change {
+    display:inline-block;
+    width:140px;
+}
+
+.change_test_buttons {
+    display:inline-block;
+    text-align: center;
+    padding: 10px;
+    margin-left: 55px;
+}
+
+.change_test_buttons .delete_test {
+    background: #FF2624;
+    border: 2px solid #FF2624;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+.change_test_buttons .delete_test:hover {
+    background: #FE5958;
+    cursor:pointer;
+}
+
+.change_test_buttons .delete_test:focus, .change_test_buttons .delete_test:active {
+    border-color: #FE5958;
+}
+
 /*TUTOR*/
+
+/*ERROR*/
+
+.image_error {position:relative;width:400px;height:400px;max-width:100%;margin:0 auto;}
+
+.image_error p {position: absolute;top: 100px;right: -40px;text-align: center;width: 250px;}
+
+/*ERROR*/

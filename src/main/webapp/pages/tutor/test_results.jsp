@@ -9,12 +9,13 @@
     <title> <fmt:message key='title.test_results'/> </title>
 </head>
 <body>
-    <%@ include file="../main/header.jsp"%>
+<%@ include file="../main/header.jsp"%>
 
-    <main>
+<main>
+    <div class="content center">
         <c:choose>
             <c:when test="${empty results}">
-                <h3><fmt:message key='results_for_test.none'/></h3>
+                <h3 class="big_margin_top"><fmt:message key='results_for_test.none'/></h3>
             </c:when>
             <c:otherwise>
                 <c:set var="count" value="0" scope="page" />
@@ -42,6 +43,7 @@
                 <input type="submit" value="<fmt:message key='general.main_page'/>" class="main_page">
             </form>
         </div>
-    </main>
+    </div>
+</main>
 </body>
 </html>

@@ -8,10 +8,18 @@
 </head>
 <body>
 <%@ include file="../main/header.jsp"%>
-<p>404</p>
+<main>
+    <div class="content error_page center">
+        <div class="image_error">
+            <p>* <fmt:message key='page_not_found'/></p>
+            <img src="${pageContext.request.contextPath}/img/404.png">
+        </div>
+        <form method="get" action="/testing_system/">
+            <input type="submit" value="On main page" class="main_page">
+        </form>
+    </div>
+    </div>
+</main>
 
-<form method="get" action="/testing_system/">
-    <input type="submit" value="On main page" class="main_page">
-</form>
 </body>
 </html>
