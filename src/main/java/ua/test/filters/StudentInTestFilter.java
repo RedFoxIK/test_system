@@ -24,7 +24,6 @@ public class StudentInTestFilter implements Filter {
         HttpSession httpSession = ((HttpServletRequest) request).getSession(false);
         String uri = ((HttpServletRequest) request).getRequestURI();
 
-        System.out.println("Filter works!");
         if ( httpSession != null && httpSession.getAttribute("userTest") != null ) {
             if ( !( uri.equals(START_TEST_URI) || uri.equals(END_TEST_URI) || uri.equals(TEST_URI) ) ) {
                 ((HttpServletResponse) response).sendRedirect("/testing_system/student/test");
