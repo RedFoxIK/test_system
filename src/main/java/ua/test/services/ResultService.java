@@ -20,8 +20,6 @@ import java.util.Map;
 public class ResultService {
     ResultDao resultDao = DaoFactory.getInstance().getResultDao();
     TestDao testDao = DaoFactory.getInstance().getTestDao();
-    AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
-
 
     ResultService() {}
 
@@ -40,7 +38,8 @@ public class ResultService {
 
         for ( Integer questionId: testResult.keySet() ) {
             List<String> userAnswers = testResult.get(questionId);
-            List<Answer> answers = answerDao.findRightByQuestionId(questionId);
+            List<Answer> answers = DaoFactory.getInstance().getAnswerDao()
+                    .findRightByQuestionId(questionId);
 
             if ( isRightAnswer(userAnswers, answers) ) {
                 rightAnswers += 1;
@@ -62,6 +61,16 @@ public class ResultService {
         result.setId(id);
     }
 
+    public List<Result> getResultsByTestId(int testId) {
+        UserDao userDao = DaoFactory.getInstance().getUserDao();
+        List<Result> results = resultDao.findByTestId(testId);
+
+        for ( Result result: results ) {
+            User user = userDao.findById(result.getUser().getId());
+            result.setUser(user);
+        }
+        return  results;
+    }
 
     private boolean isRightAnswer(List<String> userAnswers, List<Answer> answers) {
         if ( userAnswers == null || answers == null ) {
@@ -83,16 +92,5 @@ public class ResultService {
     private double getPercent(double rightAnswers, int answers) {
         double result = (rightAnswers / answers) * 100;
         return Math.round(result * 100.0) / 100.0;
-    }
-
-    public List<Result> getResultsByTestId(int testId) {
-        UserDao userDao = DaoFactory.getInstance().getUserDao();
-        List<Result> results = resultDao.findByTestId(testId);
-
-        for ( Result result: results ) {
-            User user = userDao.findById(result.getUser().getId());
-            result.setUser(user);
-        }
-        return  results;
     }
 }

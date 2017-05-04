@@ -7,8 +7,6 @@ import ua.test.entity.Role;
 import ua.test.entity.User;
 
 public class UserService {
-    UserDao userDao = DaoFactory.getInstance().getUserDao();
-
     UserService() {}
 
     public int createUser(String login, String password, String name, String surname, String email ) {
@@ -20,30 +18,30 @@ public class UserService {
         user.setName(name);
         user.setSurname(surname);
         user.setRole(Role.STUDENT);
-        return userDao.addUser(user);
+        return DaoFactory.getInstance().getUserDao().addUser(user);
     }
 
     public User getUserById(int id) {
-        return userDao.findById(id);
+        return DaoFactory.getInstance().getUserDao().findById(id);
     }
 
     public User getByLoginAndPassword(String login, String email) {
-        return userDao.findByLogin(login, email);
+        return DaoFactory.getInstance().getUserDao().findByLogin(login, email);
     }
 
     public boolean isSuchEmail(String email) {
-        return userDao.isSuchEmail(email);
+        return DaoFactory.getInstance().getUserDao().isSuchEmail(email);
     }
 
     public boolean isSuchLogin(String login) {
-        return userDao.isSuchLogin(login);
+        return DaoFactory.getInstance().getUserDao().isSuchLogin(login);
     }
 
     public boolean changePassword(int idUser, String password) {
-        return userDao.updatePassword(idUser, password);
+        return DaoFactory.getInstance().getUserDao().updatePassword(idUser, password);
     }
 
     public boolean changeEmail(Integer idUser, String email) {
-        return userDao.updateEmail(idUser, email);
+        return DaoFactory.getInstance().getUserDao().updateEmail(idUser, email);
     }
 }

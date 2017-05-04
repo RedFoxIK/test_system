@@ -1,6 +1,7 @@
 package ua.test.commands.general;
 
 import ua.test.commands.Command;
+import ua.test.constants.Links;
 import ua.test.services.ServiceFactory;
 import ua.test.services.UserService;
 
@@ -23,6 +24,6 @@ public class ChangeUserEmailCommand implements Command {
         } else {
             userService.changeEmail(idUser, email);
         }
-        response.sendRedirect("/testing_system/user/my_profile");
+        response.sendRedirect(Links.Uri.PROFILE_PAGE);
     }
 }

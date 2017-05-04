@@ -19,7 +19,7 @@ public class GuestsFilter implements Filter {
         HttpSession httpSession = ((HttpServletRequest) request).getSession(false);
 
         if ( httpSession == null || httpSession.getAttribute("idUser") == null ) {
-            ((HttpServletResponse) response).sendRedirect(Links.HOME_PAGE);
+            ((HttpServletResponse) response).sendRedirect(Links.Uri.HOME_PAGE);
         } else {
                 filterChain.doFilter(request, response);
         }

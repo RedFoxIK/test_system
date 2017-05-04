@@ -14,8 +14,8 @@
         <div class="test_data">
             <form id="test_data" method = "post" action="/testing_system/tutor/test_edit">
                 <div class="test_text">
-                    <span> <fmt:message key='test.tutor.caption'/>: </span> <input type="text" name="caption" value="${test.caption}"/> <br>
-                    <span> <fmt:message key='test.tutor.description'/>: </span> <input type="text" name="description" value="${test.description}"/> <br>
+                    <span> <fmt:message key='test.tutor.caption'/>: </span> <input type="text" id="caption" name="caption"  value="${test.caption}"/> <br>
+                    <span> <fmt:message key='test.tutor.description'/>: </span> <textarea id="description" rows="3" cols="30" name="description" value="${test.description}"></textarea> <br>
                     <span> <fmt:message key='test.tutor.size'/>: </span> <input type="number" name="test_size" max="100" min="1"  value="${test.size}"/>
                     <span> <fmt:message key='test.tutor.questions'/> </span> <br>
                     <span> <fmt:message key='tests.tutor.minutes'/> </span> <input type="number" name="minutes" max="100" min="1"  value="${test.minutes}"/>

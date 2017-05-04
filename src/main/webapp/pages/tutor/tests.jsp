@@ -40,7 +40,7 @@
                 <div class="new_test_item"><span><fmt:message key='tests.tutor.caption'/>: </span><input type="text" name="caption"> <br></div>
                 <div class="new_test_item"><span><fmt:message key='tests.tutor.description'/>: </span><input type="text" name="description"> <br></div>
                 <div class="new_test_item"><span><fmt:message key='tests.tutor.questions'/>: </span> <input type="number" name="size" min="1" max="100"> <br></div>
-                <div class="new_test_item"><span><fmt:message key='tests.tutor.minutes'/>: </span> <input type="number" name="size" min="1" max="100"> <br></div>
+                <div class="new_test_item"><span><fmt:message key='tests.tutor.minutes'/>: </span> <input type="number" name="minutes" min="1" max="100"> <br></div>
                 <input class="add_test_button" type="submit" value="<fmt:message key='tests.tutor.add'/>">
                 <input class="cans_test_button" type="reset" value="<fmt:message key='tests.tutor.cancel'/>" onclick="hideDiv()">
 

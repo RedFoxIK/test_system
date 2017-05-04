@@ -14,7 +14,7 @@
             <form method="post" action="/testing_system/tutor/add_question" id="form_add_question">
                 <div class="text_quest_area">
                     <h1><fmt:message key='question.question'/></h1>
-                    <textarea name="question" cols="40" rows="5"></textarea></p>
+                    <textarea name="question"  rows="5"></textarea></p>
                     <input type="checkbox" name="mult_choice" value="yes" onclick="changeType()">
                     <span><fmt:message key='question.mult_choice'/></span> <br>
                 </div>

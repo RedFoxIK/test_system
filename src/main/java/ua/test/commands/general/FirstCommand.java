@@ -1,6 +1,7 @@
 package ua.test.commands.general;
 
 import ua.test.commands.Command;
+import ua.test.constants.Links;
 import ua.test.entity.Role;
 import ua.test.entity.User;
 import ua.test.services.ServiceFactory;
@@ -11,14 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class FirstCommand implements Command {
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer userId = (Integer) request.getSession().getAttribute("idUser");
 
         if ( userId == null ) {
-            request.getRequestDispatcher("/pages/signIn.jsp").forward(request, response);
+            request.getRequestDispatcher(Links.Jsp.SIGN_IN_PAGE).forward(request, response);
             return;
         }
+
         User user = ServiceFactory.getInstance().getUserService().getUserById(userId);
         if ( user.getRole() == Role.STUDENT ) {
             request.setAttribute("tests", ServiceFactory.getInstance().getTestService().findAllActivatedTests());

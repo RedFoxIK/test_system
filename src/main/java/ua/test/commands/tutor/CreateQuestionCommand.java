@@ -15,6 +15,6 @@ public class CreateQuestionCommand implements Command {
         Integer idTest = Integer.valueOf(request.getParameter("test"));
         Test test = ServiceFactory.getInstance().getTestService().getTestById(idTest);
         request.setAttribute("test", test);
-        request.getRequestDispatcher("/pages/tutor/newQuestion.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/tutor/new_question.jsp").forward(request, response);
     }
 }

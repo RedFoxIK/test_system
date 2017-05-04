@@ -2,10 +2,6 @@ package ua.test.services;
 
 import ua.test.connection.TransactionManager;
 import ua.test.dao.DaoFactory;
-import ua.test.dao.impl.AnswerDaoImp;
-import ua.test.dao.impl.QuestionDaoImpl;
-import ua.test.dao.impl.TestDaoImpl;
-import ua.test.dao.impl.UserDaoImpl;
 import ua.test.dao.interfaces.AnswerDao;
 import ua.test.dao.interfaces.QuestionDao;
 import ua.test.dao.interfaces.TestDao;
@@ -14,13 +10,10 @@ import ua.test.entity.Answer;
 import ua.test.entity.Question;
 import ua.test.entity.Test;
 import ua.test.entity.User;
-import ua.test.exceptions.TestCannotBeActivatedException;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class TestService {
     UserDao userDao = DaoFactory.getInstance().getUserDao();
@@ -31,11 +24,11 @@ public class TestService {
     TestService() {}
 
     public List<Test> getAllTests() {
-        return testDao.findAll();
+        return DaoFactory.getInstance().getTestDao().findAll();
     }
 
     public List<Question> getQuestionsByTestId(int testId) {
-        List<Question> questions = questionDao.findByTestId(testId);
+        List<Question> questions = DaoFactory.getInstance().getQuestionDao().findByTestId(testId);
 
         for ( Question question: questions ) {
             int id = question.getId();
@@ -45,7 +38,7 @@ public class TestService {
     }
 
     public Test getTestById(int testId) {
-        Test test = testDao.findById(testId);
+        Test test = DaoFactory.getInstance().getTestDao().findById(testId);
         List<Question> questions = ServiceFactory.getInstance().getTestService().getQuestionsByTestId(testId);
         test.setQuestions(questions);
         return test;
@@ -121,6 +114,7 @@ public class TestService {
 
     public void editTest(int idTest, int size, String caption, String description, int minutes) {
         Test test = new Test();
+        List<Question> questions;
 
         test.setId(idTest);
         test.setSize(size);
@@ -129,7 +123,7 @@ public class TestService {
         test.setMinutes(minutes);
         testDao.updateTest(test);
 
-        List<Question> questions = questionDao.findByTestId(idTest);
+        questions = questionDao.findByTestId(idTest);
         if ( questions.size() < size ) {
             test.setActivated(false);
             testDao.updateState(test);

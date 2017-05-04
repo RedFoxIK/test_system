@@ -832,3 +832,12 @@ input.activate_button:disabled {
 .image_error p {position: absolute;top: 100px;right: -40px;text-align: center;width: 250px;}
 
 /*ERROR*/
+
+#description {
+    vertical-align: middle;
+    width: 400px;
+}
+
+#caption {
+    width: 400px;
+}

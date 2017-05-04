@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EndTestCommand implements Command {
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Test test = (Test) request.getSession().getAttribute("userTest");

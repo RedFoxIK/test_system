@@ -1,6 +1,7 @@
 package ua.test.commands.general;
 
 import ua.test.commands.Command;
+import ua.test.constants.Links;
 import ua.test.entity.User;
 import ua.test.services.ServiceFactory;
 
@@ -15,6 +16,6 @@ public class ShowMyProfileCommand implements Command {
         Integer idUser = (Integer) request.getSession().getAttribute("idUser");
         User user = ServiceFactory.getInstance().getUserService().getUserById(idUser);
         request.setAttribute("user", user);
-        request.getRequestDispatcher("/pages/myProfile.jsp").forward(request, response);
+        request.getRequestDispatcher(Links.Jsp.MY_PROFILE_PAGE).forward(request, response);
     }
 }

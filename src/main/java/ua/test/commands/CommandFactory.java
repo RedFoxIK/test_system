@@ -24,30 +24,30 @@ public class CommandFactory {
     private CommandFactory(){
         Map<String, Command> tempMap = new HashMap<>();
 
-        tempMap.put(Links.HOME_PAGE, new FirstCommand());
-        tempMap.put(Links.SIGN_IN_PAGE, new SigInCommand());
-        tempMap.put(Links.REGISTRATION_PAGE, new RegistrationCommand());
-        tempMap.put(Links.SIGN_OUT_PAGE, new SignOutCommand());
-        tempMap.put(Links.TESTS_PAGE, new ShowTestsCommand());
-        tempMap.put(Links.PROFILE_PAGE, new ShowMyProfileCommand());
-        tempMap.put(Links.CHANGE_PASSWORD_PAGE, new ChangeUserPasswordCommand());
-        tempMap.put(Links.CHANGE_EMAIL_PAGE, new ChangeUserEmailCommand());
+        tempMap.put(Links.Uri.HOME_PAGE, new FirstCommand());
+        tempMap.put(Links.Uri.SIGN_IN_PAGE, new SigInCommand());
+        tempMap.put(Links.Uri.REGISTRATION_PAGE, new RegistrationCommand());
+        tempMap.put(Links.Uri.SIGN_OUT_PAGE, new SignOutCommand());
+        tempMap.put(Links.Uri.TESTS_PAGE, new ShowTestsCommand());
+        tempMap.put(Links.Uri.PROFILE_PAGE, new ShowMyProfileCommand());
+        tempMap.put(Links.Uri.CHANGE_PASSWORD_PAGE, new ChangeUserPasswordCommand());
+        tempMap.put(Links.Uri.CHANGE_EMAIL_PAGE, new ChangeUserEmailCommand());
 
-        tempMap.put(Links.START_TEST_PAGE, new StartTestCommand());
-        tempMap.put(Links.STUDENT_TEST_PAGE, new ShowTestCommand());
-        tempMap.put(Links.ALL_STUDENT_RESULTS_PAGE, new ShowAllResultsCommand());
-        tempMap.put(Links.END_TEST_PAGE, new EndTestCommand());
-        tempMap.put(Links.TEST_RESULT_PAGE, new ShowTestResultCommand());
+        tempMap.put(Links.Uri.START_TEST_PAGE, new StartTestCommand());
+        tempMap.put(Links.Uri.STUDENT_TEST_PAGE, new ShowTestCommand());
+        tempMap.put(Links.Uri.ALL_STUDENT_RESULTS_PAGE, new ShowAllResultsCommand());
+        tempMap.put(Links.Uri.END_TEST_PAGE, new EndTestCommand());
+        tempMap.put(Links.Uri.TEST_RESULT_PAGE, new ShowTestResultCommand());
 
-        tempMap.put(Links.TUTOR_TEST_PAGE, new ShowTutorTestCommand());
-        tempMap.put(Links.CREATE_QUESTION_PAGE, new CreateQuestionCommand());
-        tempMap.put(Links.ADD_QUESTION_PAGE, new AddQuestionCommand());
-        tempMap.put(Links.DELETE_QUESTION_PAGE, new DeleteQuestionCommand());
-        tempMap.put(Links.RESULTS_FOR_TEST_PAGE, new ResultForTestCommand());
-        tempMap.put(Links.CHANGE_STATE_TEST_PAGE, new ChangeTestStateCommand());
-        tempMap.put(Links.ADD_TEST_PAGE, new AddTestCommand());
-        tempMap.put(Links.EDIT_TEST_PAGE, new EditTestCommand());
-        tempMap.put(Links.DELETE_TEST_PAGE, new DeleteTestCommand());
+        tempMap.put(Links.Uri.TUTOR_TEST_PAGE, new ShowTutorTestCommand());
+        tempMap.put(Links.Uri.CREATE_QUESTION_PAGE, new CreateQuestionCommand());
+        tempMap.put(Links.Uri.ADD_QUESTION_PAGE, new AddQuestionCommand());
+        tempMap.put(Links.Uri.DELETE_QUESTION_PAGE, new DeleteQuestionCommand());
+        tempMap.put(Links.Uri.RESULTS_FOR_TEST_PAGE, new ResultForTestCommand());
+        tempMap.put(Links.Uri.CHANGE_STATE_TEST_PAGE, new ChangeTestStateCommand());
+        tempMap.put(Links.Uri.ADD_TEST_PAGE, new AddTestCommand());
+        tempMap.put(Links.Uri.EDIT_TEST_PAGE, new EditTestCommand());
+        tempMap.put(Links.Uri.DELETE_TEST_PAGE, new DeleteTestCommand());
 
         commands = Collections.unmodifiableMap(tempMap);
     }

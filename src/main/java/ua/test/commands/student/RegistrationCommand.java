@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class RegistrationCommand implements Command {
     private final UserService userService = ServiceFactory.getInstance().getUserService();
-    private final TestService testService = ServiceFactory.getInstance().getTestService();
 
     private final String PASS_EXC = "*passwords are not equals!!!";
     private final String LOGIN_EXC = "*such login already registered!";

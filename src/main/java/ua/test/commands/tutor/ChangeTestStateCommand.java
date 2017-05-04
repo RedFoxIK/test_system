@@ -1,7 +1,6 @@
 package ua.test.commands.tutor;
 
 import ua.test.entity.Test;
-import ua.test.exceptions.TestCannotBeActivatedException;
 import ua.test.services.ServiceFactory;
 import ua.test.services.TestService;
 
