@@ -53,11 +53,4 @@ public class Question {
         return answers;
     }
 
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", text='" + text + '\'' + "answers" + answers +
-                '}';
-    }
 }

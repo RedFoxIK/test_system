@@ -3,6 +3,7 @@ package ua.test.servlet;
 import org.apache.log4j.Logger;
 import ua.test.commands.Command;
 import ua.test.commands.CommandFactory;
+import ua.test.constants.Links;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,9 +27,8 @@ public class ServletDispatcher extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Command command = CommandFactory.getInstance().getCommand(request);
 
-        LOGGER.info(request.getRequestURI());
         if ( command == null ) {
-            request.getRequestDispatcher("/pages/errors/404.jsp").forward(request, response);
+            request.getRequestDispatcher(Links.Jsp.ERROR404_PAGE).forward(request, response);
             return;
         }
         command.execute(request, response);

@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Test {
     private int id;
-    int size;
-    boolean activated;
+    private int size;
+    private boolean activated;
     private String caption;
     private String description;
     private int minutes;
@@ -85,13 +85,4 @@ public class Test {
         return questions;
     }
 
-    @Override
-    public String toString() {
-        return "Test{" +
-                "id=" + id +
-                ", caption='" + caption + '\'' +
-                ", description='" + description + '\'' +
-                ", author=" + author +
-                '}';
-    }
 }

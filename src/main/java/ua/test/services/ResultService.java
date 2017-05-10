@@ -18,13 +18,11 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultService {
-    ResultDao resultDao = DaoFactory.getInstance().getResultDao();
-    TestDao testDao = DaoFactory.getInstance().getTestDao();
-
     ResultService() {}
 
     public List<Result> getResultsByUserId(int id) {
-        List<Result> results = resultDao.findByUserId(id);
+        List<Result> results = DaoFactory.getInstance().getResultDao().findByUserId(id);
+        TestDao testDao = DaoFactory.getInstance().getTestDao();
 
         for ( Result result: results ) {
             Test test = testDao.findById(result.getTest().getId());
@@ -63,7 +61,7 @@ public class ResultService {
 
     public List<Result> getResultsByTestId(int testId) {
         UserDao userDao = DaoFactory.getInstance().getUserDao();
-        List<Result> results = resultDao.findByTestId(testId);
+        List<Result> results = DaoFactory.getInstance().getResultDao().findByTestId(testId);
 
         for ( Result result: results ) {
             User user = userDao.findById(result.getUser().getId());

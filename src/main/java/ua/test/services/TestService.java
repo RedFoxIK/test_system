@@ -16,10 +16,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class TestService {
-    UserDao userDao = DaoFactory.getInstance().getUserDao();
-    TestDao testDao = DaoFactory.getInstance().getTestDao();
-    QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
-    AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
 
     TestService() {}
 
@@ -29,6 +25,7 @@ public class TestService {
 
     public List<Question> getQuestionsByTestId(int testId) {
         List<Question> questions = DaoFactory.getInstance().getQuestionDao().findByTestId(testId);
+        AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
 
         for ( Question question: questions ) {
             int id = question.getId();
@@ -45,7 +42,7 @@ public class TestService {
     }
 
     public List<Test> getTestsByUserId(int id) {
-        return testDao.findByUserId(id);
+        return DaoFactory.getInstance().getTestDao().findByUserId(id);
     }
 
 
@@ -53,7 +50,7 @@ public class TestService {
         Test test = getTestById(idTest);
 
         test.setActivated(!test.isActivated());
-        testDao.updateState(test);
+        DaoFactory.getInstance().getTestDao().updateState(test);
         return test;
     }
 
@@ -66,7 +63,7 @@ public class TestService {
         test.setActivated(false);
         test.setMinutes(minutes);
         test.setAuthor(ServiceFactory.getInstance().getUserService().getUserById(idUser));
-        testDao.addTest(test);
+        DaoFactory.getInstance().getTestDao().addTest(test);
     }
 
     public void deleteTestById(int idTest) {
@@ -74,6 +71,9 @@ public class TestService {
         TransactionManager.getInstance().beginTransaction();
         Test test = getTestById(idTest);
         List<Question> questions = test.getQuestions();
+        QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
+        AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
+
         for ( Question question: questions ) {
             List<Answer> answers = question.getAnswers();
 
@@ -83,7 +83,7 @@ public class TestService {
             questionDao.deleteById(question.getId());
         }
         answerDao.deleteById(idTest);
-        testDao.deleteById(idTest);
+        DaoFactory.getInstance().getTestDao().deleteById(idTest);
         TransactionManager.getInstance().commit();
     }
 
@@ -103,7 +103,8 @@ public class TestService {
     }
 
     public List<Test> findAllActivatedTests() {
-        List<Test> tests =  testDao.findAllActivated();
+        List<Test> tests =  DaoFactory.getInstance().getTestDao().findAllActivated();
+        UserDao userDao = DaoFactory.getInstance().getUserDao();
 
         for (Test test: tests) {
             User user = userDao.findById(test.getAuthor().getId());
@@ -114,6 +115,7 @@ public class TestService {
 
     public void editTest(int idTest, int size, String caption, String description, int minutes) {
         Test test = new Test();
+        TestDao testDao = DaoFactory.getInstance().getTestDao();
         List<Question> questions;
 
         test.setId(idTest);
@@ -123,7 +125,7 @@ public class TestService {
         test.setMinutes(minutes);
         testDao.updateTest(test);
 
-        questions = questionDao.findByTestId(idTest);
+        questions = DaoFactory.getInstance().getQuestionDao().findByTestId(idTest);
         if ( questions.size() < size ) {
             test.setActivated(false);
             testDao.updateState(test);

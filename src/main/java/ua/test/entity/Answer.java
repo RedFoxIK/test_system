@@ -30,12 +30,4 @@ public class Answer {
     public void setRight(boolean right) {
         this.right = right;
     }
-
-    @Override
-    public String toString() {
-        return "Answer{" +
-                "id=" + id +
-                ", text='" + text + '\'' +
-                ", right=" + right + "}";
-    }
 }
