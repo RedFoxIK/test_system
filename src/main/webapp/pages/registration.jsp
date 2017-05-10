@@ -51,7 +51,11 @@
                 <input type="email" name="email" value="<c:out value="${email}"/>" maxlength="30">
                 <span class="registr_error"><c:out value="${email_exc}"/></span>
             </div>
-            <br>
+
+            <label for="tutor">I want to be a tutor: </label>
+            <input type="checkbox" id="tutor" name="tutor"> <br/>
+
+            <br/>
             <input class="registr_confirm" type="submit" value="<fmt:message key='registration.registration'/>">
         </form>
     </div>

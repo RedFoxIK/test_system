@@ -15,8 +15,8 @@ public class TestDaoImpl implements TestDao{
     private static final Logger LOGGER = Logger.getLogger(TestDao.class);
 
     private static final String ADD_TEST = "INSERT INTO tests(`caption`, `description`, `size`, `activated`, `minutes`, `author`) VALUES(?, ?, ?, ?, ?, ?)";
-    private static final String SELECT_ALL = "SELECT `id_test`, `caption`, `description`, `size`, `activated`, `minutes`, `author` FROM tests";
-    private static final String SELECT_ALL_ACTIVATED = "SELECT `id_test`, `caption`,`description`, `size`, `activated`, `minutes`, `author` FROM tests WHERE activated = 1";
+    private static final String SELECT_ALL = "SELECT `id_test`, `caption`, `description`, `size`, `activated`, `minutes`, `author` FROM tests ORDER BY `caption`";
+    private static final String SELECT_ALL_ACTIVATED = "SELECT `id_test`, `caption`,`description`, `size`, `activated`, `minutes`, `author` FROM tests WHERE activated = 1 ORDER BY `caption`";
     private static final String SELECT_BY_USER_ID = "SELECT `id_test`, `caption`, `description`, `size`, `activated`, `minutes`, `author` FROM tests WHERE `author` = ?";
     private static final String DELETE_BY_ID = "DELETE FROM tests WHERE id_test = ?";
     private static final String FIND_BY_ID = "SELECT id_test, caption, description, size, activated, `minutes`, author FROM tests WHERE id_test = ?";

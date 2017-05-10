@@ -30,15 +30,14 @@ function initializeTimer() {
     var seconds = (endDate - currentDate) / 1000;
 
     if (seconds > 0) {
-        var minutes = seconds/60; // определяем количество минут до истечения таймера
-        var hours = minutes/60; // определяем количество часов до истечения таймера
-        minutes = (hours - Math.floor(hours)) * 60; // подсчитываем кол-во оставшихся минут в текущем часе
-        hours = Math.floor(hours); // целое количество часов до истечения таймера
-        seconds = Math.floor((minutes - Math.floor(minutes)) * 60); // подсчитываем кол-во оставшихся секунд в текущей минуте
-        minutes = Math.floor(minutes); // округляем до целого кол-во оставшихся минут в текущем часе
+        var minutes = seconds/60;
+        var hours = minutes/60;
+        minutes = (hours - Math.floor(hours)) * 60;
+        hours = Math.floor(hours);
+        seconds = Math.floor((minutes - Math.floor(minutes)) * 60);
+        minutes = Math.floor(minutes);
 
-        setTimePage(hours,minutes,seconds); // выставляем начальные значения таймера
-
+        setTimePage(hours,minutes,seconds);
         function secOut() {
             if (seconds == 0) {
                 if (minutes == 0) {
@@ -59,15 +58,15 @@ function initializeTimer() {
             else {
                 seconds--;
             }
-            setTimePage(hours,minutes,seconds); // обновляем значения таймера на странице
+            setTimePage(hours,minutes,seconds);
         }
-        timerId = setInterval(secOut, 1000) // устанавливаем вызов функции через каждую секунду
+        timerId = setInterval(secOut, 1000);
     } else {
         sendTest();
     }
 }
 
-function setTimePage(h,m,s) { // функция выставления таймера на странице
+function setTimePage(h,m,s) {
     var element = document.getElementById("timer");
     element.innerHTML = "";
     if ( h < 10 ) {
@@ -84,7 +83,7 @@ function setTimePage(h,m,s) { // функция выставления тайм�
     element.innerHTML += s;
 };
 
-function sendTest() { // функция, вызываемая по истчению времени
+function sendTest() {
     showMess = false;
     document.forms["send_test"].submit();
 };

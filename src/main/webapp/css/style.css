@@ -55,6 +55,8 @@ main {
 }
 
 .error {
+    font-size: 18px;
+    font-style: italic;
     color: red;
     display: block;
 }
@@ -197,7 +199,7 @@ form input:focus {
 
 /*ADD QUESTION*/
 
-.new_quest_area input[type="text"] {
+.answer {
     width:550px;
 }
 
@@ -840,4 +842,17 @@ input.activate_button:disabled {
 
 #caption {
     width: 400px;
+}
+
+label[for="tutor"] {
+    margin-left: 30px;
+    margin-right: 7px;
+    font-size: 24px;
+    font-style: italic;
+    color: grey;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    vertical-align: bottom;
+    zoom: 2;
 }

@@ -4,6 +4,7 @@ import ua.test.commands.Command;
 import ua.test.services.ServiceFactory;
 import ua.test.services.TestService;
 import ua.test.services.UserService;
+import ua.test.utils.Validation;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ public class RegistrationCommand implements Command {
     private final String PASS_EXC = "*passwords are not equals!!!";
     private final String LOGIN_EXC = "*such login already registered!";
     private final String EMAIL_EXC = "*such email already registered!";
+    private final String EMAIL_IS_NOT_VALID = "*Email is not valid";
 
 
     @Override
@@ -26,6 +28,7 @@ public class RegistrationCommand implements Command {
         String email = request.getParameter("email");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
+        boolean isStudent = request.getParameter("tutor") == null;
 
         if ( outputError(request, password, passwordRe, login, email) ) {
             request.setAttribute("login", login);
@@ -34,7 +37,7 @@ public class RegistrationCommand implements Command {
             request.setAttribute("email", email);
             request.getRequestDispatcher("/pages/registration.jsp").forward(request, response);
         } else {
-            int idUser = userService.createUser(login, password, name, surname, email);
+            int idUser = userService.createUser(login, password, name, surname, email, isStudent);
             request.getSession().setAttribute("idUser", idUser);
             response.sendRedirect("/testing_system/");
         }
@@ -54,6 +57,10 @@ public class RegistrationCommand implements Command {
         }
         if ( userService.isSuchEmail(email) ) {
             request.setAttribute("email_exc", EMAIL_EXC);
+            result = true;
+        }
+        if ( !Validation.isEmailValid(email) ) {
+            request.setAttribute("email_exc", EMAIL_IS_NOT_VALID);
             result = true;
         }
         return result;

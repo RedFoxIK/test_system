@@ -27,7 +27,7 @@
                         <c:set var="count" value="${count + 1}" scope="page"/>
 
                         <div data-name="block${count}">
-                            <h1><pre><c:out value="${question.text}"/></pre></h1>
+                            <h1><p><c:out value="${question.text}"/></p></h1>
 
                             <c:set var="type" value="radio" scope="page" />
                             <c:if test="${question.multChoice}">
@@ -48,13 +48,10 @@
                 <c:set var="number_questions" value="${fn:length(test.questions)}"/>
 
                 <div class="item_number_question">
-
                     <c:forEach begin="1" end="${number_questions}" varStatus="loop">
                         <input type="button" value="<c:out value="${loop.count}"/>" data-target="block${loop.count}" class="number_question">
                     </c:forEach>
-
                 </div>
-
             </div>
 
             <input type="hidden" name="idQuestions" value="<c:out value="${idQuestions}"/>" />

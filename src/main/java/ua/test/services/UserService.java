@@ -9,7 +9,7 @@ import ua.test.entity.User;
 public class UserService {
     UserService() {}
 
-    public int createUser(String login, String password, String name, String surname, String email ) {
+    public int createUser(String login, String password, String name, String surname, String email, boolean isStudent) {
         User user = new User();
 
         user.setLogin(login);
@@ -17,7 +17,11 @@ public class UserService {
         user.setEmail(email);
         user.setName(name);
         user.setSurname(surname);
-        user.setRole(Role.STUDENT);
+        if ( isStudent ) {
+            user.setRole(Role.STUDENT);
+        } else {
+            user.setRole(Role.TUTOR);
+        }
         return DaoFactory.getInstance().getUserDao().addUser(user);
     }
 
