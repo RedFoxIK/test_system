@@ -33,6 +33,19 @@ public class QuestionService {
         addQuestion(idTest, question);
     }
 
+    public void deleteQuestion(int idQuestion) {
+        TransactionManager.getInstance().beginTransaction();
+        AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
+        QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
+        List<Answer> answers = answerDao.findByQuestionId(idQuestion);
+
+        for (Answer answer: answers) {
+            answerDao.deleteById(answer.getId());
+        }
+        questionDao.deleteById(idQuestion);
+        TransactionManager.getInstance().commit();
+    }
+
     private void addQuestion(int idTest, Question question) {
         QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
         AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
@@ -47,18 +60,4 @@ public class QuestionService {
         }
         TransactionManager.getInstance().commit();
     }
-
-    public void deleteQuestion(int idQuestion) {
-        TransactionManager.getInstance().beginTransaction();
-        AnswerDao answerDao = DaoFactory.getInstance().getAnswerDao();
-        QuestionDao questionDao = DaoFactory.getInstance().getQuestionDao();
-        List<Answer> answers = answerDao.findByQuestionId(idQuestion);
-
-        for (Answer answer: answers) {
-            answerDao.deleteById(answer.getId());
-        }
-        questionDao.deleteById(idQuestion);
-        TransactionManager.getInstance().commit();
-    }
-
 }

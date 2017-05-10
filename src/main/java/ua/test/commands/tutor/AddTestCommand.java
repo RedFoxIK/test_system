@@ -23,9 +23,15 @@ public class AddTestCommand implements ua.test.commands.Command {
         Integer size = Integer.valueOf(request.getParameter("size"));
         List<Test> tests;
 
-        testService.addTest(caption, description, size, minutes, idUser);
-        tests = testService.getTestsByUserId(idUser);
-        request.setAttribute("tests", tests);
-        response.sendRedirect("/testing_system/");
+        if ( !Validation.isTestDurationValid(minutes) || !Validation.isTestSizeValid(size) ||
+                Validation.isEmtyText(caption) ) {
+            request.setAttribute("add_test_exc", Messages.TEST_ADD_EXC);
+            request.getRequestDispatcher("/").forward(request, response);
+        } else {
+            testService.addTest(caption, description, size, minutes, idUser);
+            tests = testService.getTestsByUserId(idUser);
+            request.setAttribute("tests", tests);
+            response.sendRedirect("/testing_system/");
+        }
     }
 }

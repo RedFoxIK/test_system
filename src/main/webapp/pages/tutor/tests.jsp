@@ -16,6 +16,8 @@
         </p>
     </div>
     <div class="tests">
+        <p class="error"> <c:out value="${add_test_exc}"/></p>
+
         <c:forEach items="${tests}" var="test">
 
             <c:set var="not_activated" value=""/>
@@ -42,14 +44,13 @@
                 <div class="new_test_item"><span><fmt:message key='tests.tutor.questions'/>: </span> <input type="number" name="size" min="1" max="100" required><br></div>
                 <div class="new_test_item"><span><fmt:message key='tests.tutor.minutes'/>: </span> <input type="number" name="minutes" min="1" max="100" required><br></div>
                 <input class="add_test_button" type="submit" value="<fmt:message key='tests.tutor.add'/>">
-                <input class="cans_test_button" type="reset" value="<fmt:message key='tests.tutor.cancel'/>" onclick="hideDiv()">
-
+                <input class="canc_test_button" type="reset" value="<fmt:message key='tests.tutor.cancel'/>" onclick="hideDiv()">
             </form>
         </div>
     </div>
 
 
-    <form id="hidden_form" method="get" action="/testing_system/tutor/test">
+    <form id="hidden_form" method="post" action="/testing_system/tutor/test">
         <input type="hidden" name="id_test"  value="<c:out value="${test.id}"/>" id="id_test"/>
     </form>
 </main>

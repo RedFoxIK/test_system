@@ -621,7 +621,7 @@ div.tests .not_activated {
     outline: none;
 }
 
-#new_test .cans_test_button {
+#new_test .canc_test_button {
     background: #FF2624;
     border: 2px solid #FF2624;
     border-radius: 10px;
@@ -632,12 +632,12 @@ div.tests .not_activated {
     margin-left: 12%;
 }
 
-#new_test .cans_test_button:hover {
+#new_test .canc_test_button:hover {
     background: #FE5958;
     cursor:pointer;
 }
 
-#new_test .cans_test_button:focus, #new_test .cans_test_button:active {
+#new_test .canc_test_button:focus, #new_test .canc_test_button:active {
     border-color: #FE5958;
 }
 

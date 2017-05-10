@@ -12,9 +12,10 @@
     <main>
         <div class="content">
             <form method="post" action="/testing_system/tutor/add_question" id="form_add_question">
+                <p class="error"> <c:out value="${create_question_exc}"/></p>
                 <div class="text_quest_area">
                     <h1><fmt:message key='question.question'/></h1>
-                    <textarea name="question"  rows="5" cols="40"></textarea></p>
+                    <textarea name="question"  rows="5" cols="40" required></textarea></p>
                     <input type="checkbox" name="mult_choice" value="yes" onclick="changeType()">
                     <span><fmt:message key='question.mult_choice'/></span> <br>
                 </div>
@@ -23,10 +24,10 @@
                     <div class="new_quest_area">
 
                         <input type="checkbox" class="type_answer" name="group" value="0">
-                        <input type="text" class="answer" name="0"/> <br>
+                        <input type="text" class="answer" name="0" required/> <br>
 
                         <input class="type_answer" name="group" value="1">
-                        <input type="text" class="answer"  name="1"/> <br>
+                        <input type="text" class="answer"  name="1" required/> <br>
                     </div>
                     <div class="new_quest_button">
                         <input class="add_quest_button" type="button"  value="<fmt:message key='question.add'/>" onclick="add()">

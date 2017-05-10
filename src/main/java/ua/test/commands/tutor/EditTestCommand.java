@@ -1,6 +1,8 @@
 package ua.test.commands.tutor;
 
+import ua.test.constants.Messages;
 import ua.test.services.ServiceFactory;
+import ua.test.utils.Validation;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +18,15 @@ public class EditTestCommand implements ua.test.commands.Command {
         String description = request.getParameter("description");
         int minutes = Integer.parseInt(request.getParameter("minutes"));
 
-        ServiceFactory.getInstance().getTestService().editTest(idTest, size, caption, description, minutes);
-        response.sendRedirect("/testing_system/tutor/test?id_test="+idTest);
+
+        if ( !Validation.isTestDurationValid(minutes) || !Validation.isTestSizeValid(size) ||
+                Validation.isEmtyText(caption) ) {
+            request.setAttribute("test", idTest);
+            request.setAttribute("change_test_exc", Messages.TEST_CHANGE_EXC);
+            request.getRequestDispatcher("/tutor/test").forward(request, response);
+        } else {
+            ServiceFactory.getInstance().getTestService().editTest(idTest, size, caption, description, minutes);
+            response.sendRedirect("/testing_system/tutor/test?id_test="+idTest);
+        }
     }
 }

@@ -26,7 +26,7 @@ function add() {
     var type = input[0].type;
     var index = input.length;
     var answer = '<div class="test_item"><input type="' + type + '" value="'+index+'" class="type_answer"  name="group"> ' +
-        '<input type="text" class="answer" name="'+index+'"></div>';
+        '<input type="text" class="answer" name="'+index+'" required></div>';
     document.getElementById('other_answers').innerHTML += answer;
 };
 

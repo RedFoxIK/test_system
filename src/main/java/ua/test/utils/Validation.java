@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 public class Validation {
     public static final int MAX_TEST_TIME = 90;
     public static final int MAX_TEST_SIZE = 100;
-    public static final String PASSWORD_PATTERN = "/S{5,10}";
     public static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 

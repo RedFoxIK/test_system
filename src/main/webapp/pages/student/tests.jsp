@@ -29,7 +29,7 @@
                     </div>
                 </c:forEach>
             </div>
-        <form id="hidden_form" method="get" action="/testing_system/student/start_test">
+        <form id="hidden_form" method="post" action="/testing_system/student/start_test">
             <input name="id_test" type="hidden" value="" id="id_test"/>
         </form>
     </main>

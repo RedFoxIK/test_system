@@ -79,13 +79,15 @@ public class ResultService {
         if ( userAnswers.size() != answers.size() ) {
             return false;
         }
+
         for (Answer answer: answers) {
             Integer id = answer.getId();
 
-            if ( !userAnswers.contains(id.toString()) ) {
+            if ( !userAnswers.contains(id.toString()) && !userAnswers.contains(id)  ) {
                 return false;
             }
         }
+
         return true;
     }
 
